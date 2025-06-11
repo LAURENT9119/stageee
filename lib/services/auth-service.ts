@@ -1,3 +1,4 @@
+
 import { createClient } from "@/lib/supabase/client"
 
 export class AuthService {
@@ -43,7 +44,11 @@ export class AuthService {
 
   async getUserProfile(userId: string) {
     try {
-      const { data, error } = await this.supabase.from("users").select("*").eq("id", userId).single()
+      const { data, error } = await this.supabase
+        .from("users")
+        .select("*")
+        .eq("id", userId)
+        .single()
 
       if (error) throw error
       return { profile: data, error: null }

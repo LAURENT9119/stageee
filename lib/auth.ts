@@ -1,39 +1,40 @@
 
-import { createServerClient } from "@supabase/ssr"
-import { cookies } from "next/headers"
+import { createServerSupabaseClient } from '@/lib/supabase/server'
+import { redirect } from 'next/navigation'
 
-export async function createClient() {
-  const cookieStore = cookies()
-
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value
-        },
-      },
-    }
-  )
-}
-
-export async function getCurrentUser() {
-  const supabase = await createClient()
-  
-  try {
-    const { data: { user }, error } = await supabase.auth.getUser()
-    if (error) throw error
-    return user
-  } catch (error) {
-    return null
-  }
+export async function getUser() {
+  const supabase = await createServerSupabaseClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  return user
 }
 
 export async function requireAuth() {
-  const user = await getCurrentUser()
+  const user = await getUser()
   if (!user) {
-    throw new Error("Authentication required")
+    redirect('/auth/login')
   }
   return user
+}
+
+export async function requireRole(allowedRoles: string[]) {
+  const user = await requireAuth()
+  const supabase = await createServerSupabaseClient()
+  
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single()
+
+  if (!profile || !allowedRoles.includes(profile.role)) {
+    redirect('/')
+  }
+  
+  return { user, profile }
+}
+
+export async function getServerSession() {
+  const supabase = await createServerSupabaseClient()
+  const { data: { session } } = await supabase.auth.getSession()
+  return session
 }

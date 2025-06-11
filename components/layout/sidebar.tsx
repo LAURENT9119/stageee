@@ -5,7 +5,7 @@ import type React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-import { Icons } from "@/components/icons"
+import { Icons } from "@/components/ui/icons"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import type { SidebarNavItem } from "@/types"

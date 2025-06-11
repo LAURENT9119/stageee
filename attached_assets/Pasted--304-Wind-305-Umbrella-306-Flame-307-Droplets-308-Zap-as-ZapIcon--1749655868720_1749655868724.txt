@@ -1,0 +1,620 @@
+ 304 |   Wind,
+ 305 |   Umbrella,
+ 306 |   Flame,
+ 307 |   Droplets,
+ 308 |   Zap as ZapIcon,
+ 309 |   Lightbulb,
+ 310 |   Flashlight,
+ 311 |   Candle,
+ 312 |   Battery as BatteryIcon,
+ 313 |   BatteryLow,
+ 314 |   Plug,
+ 315 |   Unplug,
+ 316 |   Power as PowerIcon,
+ 317 |   PowerOff,
+ 318 |   RotateCcw as RotateIcon,
+ 319 |   RefreshCw,
+ 320 |   RotateCw as RotateRightIcon,
+ 321 |   ArrowUp,
+ 322 |   ArrowDown,
+ 323 |   ArrowLeft,
+     :   ^^^^|^^^^
+     :       `-- exported more than once
+ 324 |   ArrowRight,
+ 325 |   ArrowUpDown,
+ 326 |   ArrowLeftRight,
+     `----
+
+Error:
+  > Exported identifiers must be unique
+
+  x the name `ArrowRight` is exported multiple times
+     ,-[C:\Users\depaye\Downloads\stageee\stageee\components\ui\icons.tsx:55:1]
+  55 |   ChevronDown,
+  56 |   ChevronRight,
+  57 |   ArrowLeft,
+  58 |   ArrowRight,
+     :   ^^^^^|^^^^
+     :        `-- previous exported here
+  59 |   User,
+  60 |   Mail,
+  61 |   Phone,
+  62 |   MapPin,
+  63 |   Building,
+  64 |   GraduationCap,
+  65 |   Briefcase,
+  66 |   Clock,
+  67 |   CheckCircle,
+  68 |   XCircle,
+  69 |   AlertCircle,
+  70 |   Info,
+  71 |   LogOut,
+  72 |   Menu,
+  73 |   X
+  74 | }
+  75 | import { LucideProps } from "lucide-react"
+  76 |
+  77 | export type Icon = React.ForwardRefExoticComponent<
+  78 |   Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  79 | >
+  80 |
+  81 | // Réexport des icônes lucide-react couramment utilisées
+  82 | export {
+  83 |   ChevronLeft,
+  84 |   ChevronRight,
+  85 |   ChevronUp,
+  86 |   ChevronDown,
+  87 |   ChevronsUpDown,
+  88 |   Check,
+  89 |   X,
+  90 |   Plus,
+  91 |   Minus,
+  92 |   Search,
+  93 |   Settings,
+  94 |   User,
+  95 |   Users,
+  96 |   Mail,
+  97 |   Phone,
+  98 |   Calendar,
+  99 |   Clock,
+ 100 |   FileText,
+ 101 |   Download,
+ 102 |   Upload,
+ 103 |   Edit,
+ 104 |   Trash2,
+ 105 |   Eye,
+ 106 |   EyeOff,
+ 107 |   Home,
+ 108 |   Menu,
+ 109 |   MoreVertical,
+ 110 |   Filter,
+ 111 |   SortAsc,
+ 112 |   SortDesc,
+ 113 |   Bell,
+ 114 |   AlertCircle,
+ 115 |   CheckCircle,
+ 116 |   XCircle,
+ 117 |   Info,
+ 118 |   Loader2,
+ 119 |   ExternalLink,
+ 120 |   Copy,
+ 121 |   Share,
+ 122 |   Save,
+ 123 |   Refresh,
+ 124 |   LogOut,
+ 125 |   LogIn,
+ 126 |   UserPlus,
+ 127 |   Building,
+ 128 |   GraduationCap,
+ 129 |   FileCheck,
+ 130 |   Users2,
+ 131 |   BarChart3,
+ 132 |   PieChart,
+ 133 |   TrendingUp,
+ 134 |   Calendar as CalendarIcon,
+ 135 |   FileSpreadsheet,
+ 136 |   Building2,
+ 137 |   School,
+ 138 |   BookOpen,
+ 139 |   Award,
+ 140 |   Star,
+ 141 |   MapPin,
+ 142 |   Globe,
+ 143 |   Briefcase,
+ 144 |   Target,
+ 145 |   Zap,
+ 146 |   Shield,
+ 147 |   Lock,
+ 148 |   Unlock,
+ 149 |   Key,
+ 150 |   Database,
+ 151 |   Server,
+ 152 |   Cloud,
+ 153 |   Download as DownloadIcon,
+ 154 |   Upload as UploadIcon,
+ 155 |   Link,
+ 156 |   Unlink,
+ 157 |   Image,
+ 158 |   Video,
+ 159 |   Music,
+ 160 |   Archive,
+ 161 |   Folder,
+ 162 |   FolderOpen,
+ 163 |   File,
+ 164 |   Files,
+ 165 |   HardDrive,
+ 166 |   Wifi,
+ 167 |   WifiOff,
+ 168 |   Signal,
+ 169 |   Battery,
+ 170 |   Power,
+ 171 |   Monitor,
+ 172 |   Smartphone,
+ 173 |   Tablet,
+ 174 |   Laptop,
+ 175 |   Camera,
+ 176 |   Mic,
+ 177 |   MicOff,
+ 178 |   Volume2,
+ 179 |   VolumeX,
+ 180 |   Play,
+ 181 |   Pause,
+ 182 |   Square,
+ 183 |   SkipBack,
+ 184 |   SkipForward,
+ 185 |   Repeat,
+ 186 |   Shuffle,
+ 187 |   Heart,
+ 188 |   ThumbsUp,
+ 189 |   ThumbsDown,
+ 190 |   MessageCircle,
+ 191 |   Send,
+ 192 |   Reply,
+ 193 |   Forward,
+ 194 |   MoreHorizontal,
+ 195 |   Grid,
+ 196 |   List,
+ 197 |   Columns,
+ 198 |   Maximize,
+ 199 |   Minimize,
+ 200 |   ZoomIn,
+ 201 |   ZoomOut,
+ 202 |   RotateCcw,
+ 203 |   RotateCw,
+ 204 |   Move,
+ 205 |   Crop,
+ 206 |   Scissors,
+ 207 |   PaintBucket,
+ 208 |   Palette,
+ 209 |   Brush,
+ 210 |   Pencil,
+ 211 |   Eraser,
+ 212 |   Type,
+ 213 |   Bold,
+ 214 |   Italic,
+ 215 |   Underline,
+ 216 |   AlignLeft,
+ 217 |   AlignCenter,
+ 218 |   AlignRight,
+ 219 |   AlignJustify,
+ 220 |   IndentIncrease,
+ 221 |   IndentDecrease,
+ 222 |   Quote,
+ 223 |   Code,
+ 224 |   Terminal,
+ 225 |   Bug,
+ 226 |   Wrench,
+ 227 |   Hammer,
+ 228 |   Screwdriver,
+ 229 |   Package,
+ 230 |   Gift,
+ 231 |   ShoppingCart,
+ 232 |   CreditCard,
+ 233 |   DollarSign,
+ 234 |   Euro,
+ 235 |   PoundSterling,
+ 236 |   Percent,
+ 237 |   Calculator,
+ 238 |   TrendingDown,
+ 239 |   Activity,
+ 240 |   Pulse,
+ 241 |   Cpu,
+ 242 |   HardDriveIcon,
+ 243 |   MemoryStick,
+ 244 |   Bluetooth,
+ 245 |   Usb,
+ 246 |   Printer,
+ 247 |   Scanner,
+ 248 |   Headphones,
+ 249 |   Speaker,
+ 250 |   Radio,
+ 251 |   Tv,
+ 252 |   GameController,
+ 253 |   Gamepad2,
+ 254 |   Dices,
+ 255 |   Puzzle,
+ 256 |   Trophy,
+ 257 |   Medal,
+ 258 |   Flag,
+ 259 |   Bookmark,
+ 260 |   Tag,
+ 261 |   Tags,
+ 262 |   Hash,
+ 263 |   AtSign,
+ 264 |   Percent as PercentIcon,
+ 265 |   DollarSign as DollarIcon,
+ 266 |   Euro as EuroIcon,
+ 267 |   PoundSterling as PoundIcon,
+ 268 |   Bitcoin,
+ 269 |   Banknote,
+ 270 |   Coins,
+ 271 |   Wallet,
+ 272 |   CreditCard as CreditCardIcon,
+ 273 |   Receipt,
+ 274 |   ShoppingBag,
+ 275 |   Store,
+ 276 |   Storefront,
+ 277 |   Package2,
+ 278 |   Truck,
+ 279 |   Plane,
+ 280 |   Car,
+ 281 |   Bus,
+ 282 |   Train,
+ 283 |   Bike,
+ 284 |   Walk,
+ 285 |   MapPin as MapPinIcon,
+ 286 |   Navigation,
+ 287 |   Compass,
+ 288 |   Map,
+ 289 |   Route,
+ 290 |   Milestone,
+ 291 |   Signpost,
+ 292 |   Tent,
+ 293 |   TreePine,
+ 294 |   Mountain,
+ 295 |   Waves,
+ 296 |   Sun,
+ 297 |   Moon,
+ 298 |   Cloud as CloudIcon,
+ 299 |   CloudRain,
+ 300 |   CloudSnow,
+ 301 |   CloudLightning,
+ 302 |   Snowflake,
+ 303 |   Thermometer,
+ 304 |   Wind,
+ 305 |   Umbrella,
+ 306 |   Flame,
+ 307 |   Droplets,
+ 308 |   Zap as ZapIcon,
+ 309 |   Lightbulb,
+ 310 |   Flashlight,
+ 311 |   Candle,
+ 312 |   Battery as BatteryIcon,
+ 313 |   BatteryLow,
+ 314 |   Plug,
+ 315 |   Unplug,
+ 316 |   Power as PowerIcon,
+ 317 |   PowerOff,
+ 318 |   RotateCcw as RotateIcon,
+ 319 |   RefreshCw,
+ 320 |   RotateCw as RotateRightIcon,
+ 321 |   ArrowUp,
+ 322 |   ArrowDown,
+ 323 |   ArrowLeft,
+ 324 |   ArrowRight,
+     :   ^^^^^|^^^^
+     :        `-- exported more than once
+ 325 |   ArrowUpDown,
+ 326 |   ArrowLeftRight,
+ 327 |   ArrowBigUp,
+     `----
+
+Error:
+  > Exported identifiers must be unique
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/rh/page.tsx
+
+
+> Build failed because of webpack errors
+ ELIFECYCLE  Command failed with exit code 1.
+PS C:\Users\depaye\Downloads\stageee\stageee>  pnpm build
+
+> my-v0-project@0.1.0 build C:\Users\depaye\Downloads\stageee\stageee
+> next build
+
+ ⚠ Disabling outputFileTracing will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
+  ▲ Next.js 14.2.16
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+ ⚠ Compiled with warnings
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'auth' is not exported from '@/lib/auth' (imported as 'auth').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/export-menu.tsx
+Attempted import error: 'exportService' is not exported from '@/lib/services/api' (imported as 'exportService').
+
+Import trace for requested module:
+./components/ui/export-menu.tsx
+./app/admin/reports/page.tsx
+
+./components/ui/export-menu.tsx
+Attempted import error: 'exportService' is not exported from '@/lib/services/api' (imported as 'exportService').
+
+Import trace for requested module:
+./components/ui/export-menu.tsx
+./app/admin/reports/page.tsx
+
+./components/ui/icons.tsx
+export 'Refresh' (reexported as 'Refresh') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, 
+Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Screwdriver' (reexported as 'Screwdriver') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, 
+Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Pulse' (reexported as 'Pulse') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, 
+Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Scanner' (reexported as 'Scanner') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, 
+Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'GameController' (reexported as 'GameController') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Storefront' (reexported as 'Storefront') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Walk' (reexported as 'Walk') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, 
+Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, 
+LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Candle' (reexported as 'Candle') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, 
+CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./app/api/dashboard/route.ts
+Attempted import error: 'createServerSupabaseClient' is not exported from '@/lib/services/server-auth-service' (imported as 'createServerSupabaseClient').    
+
+Import trace for requested module:
+./app/api/dashboard/route.ts
+
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (100kiB) impacts deserialization performance (consider using Buffer instead and decode when 
+needed)
+ ⚠ Compiled with warnings
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'auth' is not exported from '@/lib/auth' (imported as 'auth').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/layout/sidebar.tsx
+Attempted import error: 'Icons' is not exported from '@/components/ui/icons' (imported as 'Icons').
+
+Import trace for requested module:
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/export-menu.tsx
+Attempted import error: 'exportService' is not exported from '@/lib/services/api' (imported as 'exportService').
+
+Import trace for requested module:
+./components/ui/export-menu.tsx
+./app/admin/reports/page.tsx
+
+./components/ui/export-menu.tsx
+Attempted import error: 'exportService' is not exported from '@/lib/services/api' (imported as 'exportService').
+
+Import trace for requested module:
+./components/ui/export-menu.tsx
+./app/admin/reports/page.tsx
+
+./components/ui/icons.tsx
+export 'Refresh' (reexported as 'Refresh') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, 
+Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Screwdriver' (reexported as 'Screwdriver') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, 
+Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Pulse' (reexported as 'Pulse') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, 
+Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Scanner' (reexported as 'Scanner') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, 
+Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'GameController' (reexported as 'GameController') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Storefront' (reexported as 'Storefront') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Walk' (reexported as 'Walk') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, 
+Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, 
+LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+./components/ui/icons.tsx
+export 'Candle' (reexported as 'Candle') was not found in '__barrel_optimize__?names=Activity,AlertCircle,AlignCenter,AlignJustify,AlignLeft,AlignRight,Archive,ArrowBigDown,ArrowBigLeft,ArrowBigRight,ArrowBigUp,ArrowDown,ArrowLeft,ArrowLeftRight,ArrowRight,ArrowUp,ArrowUpDown,AtSign,Award,Banknote,BarChart3,Battery,BatteryLow,Bell,Bike,Bitcoin,Bluetooth,Bold,BookOpen,Bookmark,Briefcase,Brush,Bug,Building,Building2,Bus,Calculator,Calendar,Camera,Candle,Car,Check,CheckCircle,ChevronDown,ChevronLeft,ChevronRight,ChevronUp,ChevronsUpDown,Clock,Cloud,CloudLightning,CloudRain,CloudSnow,Code,Coins,Columns,Compass,Copy,Cpu,CreditCard,Crop,Database,Dices,DollarSign,Download,Droplets,Edit,Eraser,Euro,ExternalLink,Eye,EyeOff,File,FileCheck,FileSpreadsheet,FileText,Files,Filter,Flag,Flame,Flashlight,Folder,FolderOpen,Forward,GameController,Gamepad2,Gift,Globe,GraduationCap,Grid,Hammer,HardDrive,Hash,Headphones,Heart,Home,Image,IndentDecrease,IndentIncrease,Info,Italic,Key,Laptop,Lightbulb,Link,List,Loader2,Lock,LogIn,LogOut,Mail,Map,MapPin,Maximize,Medal,MemoryStick,Menu,MessageCircle,Mic,MicOff,Milestone,Minimize,Minus,Monitor,Moon,MoreHorizontal,MoreVertical,Mountain,Move,Music,Navigation,Package,Package2,PaintBucket,Palette,Pause,Pencil,Percent,Phone,PieChart,Plane,Play,Plug,Plus,PoundSterling,Power,PowerOff,Printer,Pulse,Puzzle,Quote,Radio,Receipt,Refresh,RefreshCw,Repeat,Reply,RotateCcw,RotateCw,Route,Save,Scanner,School,Scissors,Screwdriver,Search,Send,Server,Settings,Share,Shield,ShoppingBag,ShoppingCart,Shuffle,Signal,Signpost,SkipBack,SkipForward,Smartphone,Snowflake,SortAsc,SortDesc,Speaker,Square,Star,Store,Storefront,Sun,Tablet,Tag,Tags,Target,Tent,Terminal,Thermometer,ThumbsDown,ThumbsUp,Train,Trash2,TreePine,TrendingDown,TrendingUp,Trophy,Truck,Tv,Type,Umbrella,Underline,Unlink,Unlock,Unplug,Upload,Usb,User,UserPlus,Users,Users2,Video,Volume2,VolumeX,Walk,Wallet,Waves,Wifi,WifiOff,Wind,Wrench,X,XCircle,Zap,ZoomIn,ZoomOut!=!lucide-react' (possible exports: Activity, AlertCircle, AlignCenter, AlignJustify, AlignLeft, AlignRight, Archive, ArrowBigDown, ArrowBigLeft, ArrowBigRight, ArrowBigUp, ArrowDown, ArrowLeft, ArrowLeftRight, ArrowRight, ArrowUp, ArrowUpDown, AtSign, Award, Banknote, BarChart3, Battery, BatteryLow, Bell, Bike, Bitcoin, Bluetooth, Bold, BookOpen, Bookmark, Briefcase, Brush, Bug, Building, Building2, Bus, Calculator, Calendar, Camera, Car, Check, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, ChevronsUpDown, Clock, Cloud, CloudLightning, CloudRain, 
+CloudSnow, Code, Coins, Columns, Compass, Copy, Cpu, CreditCard, Crop, Database, Dices, DollarSign, Download, Droplets, Edit, Eraser, Euro, ExternalLink, Eye, EyeOff, File, FileCheck, FileSpreadsheet, FileText, Files, Filter, Flag, Flame, Flashlight, Folder, FolderOpen, Forward, Gamepad2, Gift, Globe, GraduationCap, Grid, Hammer, HardDrive, Hash, Headphones, Heart, Home, Image, IndentDecrease, IndentIncrease, Info, Italic, Key, Laptop, Lightbulb, Link, List, Loader2, Lock, LogIn, LogOut, Mail, Map, MapPin, Maximize, Medal, MemoryStick, Menu, MessageCircle, Mic, MicOff, Milestone, Minimize, Minus, Monitor, Moon, MoreHorizontal, MoreVertical, Mountain, Move, Music, Navigation, Package, Package2, PaintBucket, Palette, Pause, Pencil, Percent, Phone, PieChart, Plane, Play, Plug, Plus, PoundSterling, Power, PowerOff, Printer, Puzzle, Quote, Radio, Receipt, RefreshCw, Repeat, Reply, RotateCcw, RotateCw, Route, Save, School, Scissors, Search, Send, Server, Settings, Share, Shield, ShoppingBag, ShoppingCart, Shuffle, Signal, Signpost, SkipBack, SkipForward, Smartphone, Snowflake, SortAsc, SortDesc, Speaker, Square, Star, Store, Sun, Tablet, Tag, Tags, Target, Tent, Terminal, Thermometer, ThumbsDown, ThumbsUp, Train, Trash2, TreePine, TrendingDown, TrendingUp, Trophy, Truck, Tv, Type, Umbrella, Underline, Unlink, Unlock, Unplug, Upload, Usb, User, UserPlus, Users, Users2, Video, Volume2, VolumeX, Wallet, Waves, Wifi, WifiOff, Wind, Wrench, X, XCircle, Zap, ZoomIn, ZoomOut)
+
+Import trace for requested module:
+./components/ui/icons.tsx
+./components/layout/sidebar.tsx
+./app/admin/profile/page.tsx
+
+ ✓ Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data  ...Error: supabaseKey is required.
+    at new SupabaseClient (C:\Users\depaye\Downloads\stageee\stageee\node_modules\.pnpm\@supabase+supabase-js@2.50.0\node_modules\@supabase\supabase-js\dist\main\SupabaseClient.js:45:19)
+    at createClient (C:\Users\depaye\Downloads\stageee\stageee\node_modules\.pnpm\@supabase+supabase-js@2.50.0\node_modules\@supabase\supabase-js\dist\main\index.js:38:12)
+    at 65314 (C:\Users\depaye\Downloads\stageee\stageee\.next\server\app\api\auth\register\route.js:1:582)
+    at t (C:\Users\depaye\Downloads\stageee\stageee\.next\server\webpack-runtime.js:1:142)
+    at t (C:\Users\depaye\Downloads\stageee\stageee\.next\server\app\api\auth\register\route.js:1:2898)
+    at C:\Users\depaye\Downloads\stageee\stageee\.next\server\app\api\auth\register\route.js:1:2931
+    at t.X (C:\Users\depaye\Downloads\stageee\stageee\.next\server\webpack-runtime.js:1:1270)
+    at C:\Users\depaye\Downloads\stageee\stageee\.next\server\app\api\auth\register\route.js:1:2911
+    at Object.<anonymous> (C:\Users\depaye\Downloads\stageee\stageee\.next\server\app\api\auth\register\route.js:1:2959)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+
+> Build error occurred
+Error: Failed to collect page data for /api/auth/register
+    at C:\Users\depaye\Downloads\stageee\stageee\node_modules\.pnpm\next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0\node_modules\next\dist\build\utils.js:1268:15
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  type: 'Error'
+}
+   Collecting page data  . ELIFECYCLE  Command failed with exit code 1.
+PS C:\Users\depaye\Downloads\stageee\stageee> 

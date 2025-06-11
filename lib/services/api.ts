@@ -1,4 +1,3 @@
-
 import type { User, Demande, Document, Stagiaire } from "../mock-data"
 
 // Configuration API
@@ -377,4 +376,27 @@ export const exportApiService = {
     const params = new URLSearchParams({ ...filters, format: "pdf" })
     return apiRequest(`/export/${type}?${params}`)
   },
+}
+
+// Export Service
+export const exportService = {
+  async exportData(type: string, format: string = 'csv'): Promise<Blob> {
+    return apiRequest(`/export/${type}?format=${format}`, {
+      method: 'GET',
+    })
+  },
+
+  async exportStagiaires(filters?: any): Promise<Blob> {
+    const params = new URLSearchParams(filters)
+    return apiRequest(`/export/stagiaires?${params}`, {
+      method: 'GET',
+    })
+  },
+
+  async exportDemandes(filters?: any): Promise<Blob> {
+    const params = new URLSearchParams(filters)
+    return apiRequest(`/export/demandes?${params}`, {
+      method: 'GET',
+    })
+  }
 }

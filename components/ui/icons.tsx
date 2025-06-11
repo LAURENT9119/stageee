@@ -461,7 +461,7 @@ export {
 }
 
 // Export par défaut de toutes les icônes pour compatibilité
-const Icons = {
+export const Icons = {
   ChevronLeft,
   ChevronRight,
   ChevronUp,

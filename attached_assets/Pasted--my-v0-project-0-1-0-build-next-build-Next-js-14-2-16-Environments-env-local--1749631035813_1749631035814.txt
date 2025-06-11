@@ -1,0 +1,55 @@
+
+> my-v0-project@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.16
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+request to https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap failed, reason: getaddrinfo ENOTFOUND 2176
+
+Retrying 1/3...
+request to https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap failed, reason: getaddrinfo ENOTFOUND 2176
+
+Retrying 2/3...
+request to https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap failed, reason: getaddrinfo ENOTFOUND 2176
+
+Retrying 3/3...
+FetchError: request to https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap failed, reason: getaddrinfo ENOTFOUND 2176
+    at ClientRequest.<anonymous> (C:\Users\depaye\Downloads\bridge-stagiaires-app (1)\node_modules\.pnpm\next@14.2.16_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\node-fetch\index.js:1:66160)
+    at ClientRequest.emit (node:events:519:28)
+    at onerror (C:\Users\depaye\Downloads\bridge-stagiaires-app (1)\node_modules\.pnpm\next@14.2.16_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\http-proxy-agent\index.js:1:2359)
+    at callbackError (C:\Users\depaye\Downloads\bridge-stagiaires-app (1)\node_modules\.pnpm\next@14.2.16_react-dom@18.3.1_react@18.3.1__react@18.3.1\node_modules\next\dist\compiled\http-proxy-agent\index.js:1:2609)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5) {
+  type: 'system',
+  errno: 'ENOTFOUND',
+  code: 'ENOTFOUND'
+}
+Failed to compile.
+
+app\layout.tsx
+`next/font` error:
+Failed to fetch `Inter` from Google Fonts.
+
+./app/admin/stagiaires/[id]/page.tsx
+Module not found: Can't resolve '@/lib/mock-data'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/stagiaire/demande/[id]/page.tsx
+Module not found: Can't resolve '@/lib/mock-data'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/tuteur/demandes/[id]/page.tsx
+Module not found: Can't resolve '@/lib/mock-data'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/tuteur/evaluations/new/page.tsx
+Module not found: Can't resolve '@/lib/mock-data'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors

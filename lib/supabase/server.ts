@@ -44,4 +44,4 @@ export async function createServerSupabaseClient() {
 }
 
 // Export alternatif pour compatibilité
-export const createClient = createServerSupabaseClient
+export const createClient = createServerSupabaseClientt

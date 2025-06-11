@@ -3,6 +3,8 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ['@supabase/supabase-js']
   },
+  outputFileTracing: false,
+  swcMinify: true,
   images: {
     domains: ['localhost'],
     remotePatterns: [

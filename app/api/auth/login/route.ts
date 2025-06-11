@@ -12,7 +12,18 @@ export async function POST(request: Request) {
     })
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 401 })
+      let errorMessage = "Identifiants incorrects"
+      
+      // Personnaliser le message selon le type d'erreur
+      if (error.message.includes("Invalid login credentials")) {
+        errorMessage = "Email ou mot de passe incorrect"
+      } else if (error.message.includes("Email not confirmed")) {
+        errorMessage = "Veuillez confirmer votre email avant de vous connecter"
+      } else if (error.message.includes("Too many requests")) {
+        errorMessage = "Trop de tentatives de connexion. Veuillez réessayer plus tard"
+      }
+      
+      return NextResponse.json({ error: errorMessage }, { status: 401 })
     }
 
     // Récupérer les informations utilisateur complètes

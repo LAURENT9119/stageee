@@ -1,4 +1,5 @@
 
+
 import { createClient } from "@/lib/supabase/client"
 
 export class AuthService {
@@ -52,7 +53,7 @@ export class AuthService {
       return { user, error: null }
     } catch (error) {
       return { user: null, error: error as Error }
-    }
+    }  
   }
 
   async getUserProfile(userId: string) {

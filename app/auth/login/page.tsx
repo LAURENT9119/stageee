@@ -29,7 +29,19 @@ export default function LoginPage() {
       const result = await authService.signIn(email, password)
 
       if (result.error) {
-        setError(result.error.message)
+        let errorMessage = "Une erreur est survenue lors de la connexion"
+        
+        // Personnaliser le message d'erreur
+        if (result.error.message.includes("Invalid login credentials") || 
+            result.error.message.includes("Email or password")) {
+          errorMessage = "Email ou mot de passe incorrect"
+        } else if (result.error.message.includes("Email not confirmed")) {
+          errorMessage = "Veuillez confirmer votre email avant de vous connecter"
+        } else if (result.error.message.includes("Too many requests")) {
+          errorMessage = "Trop de tentatives. Veuillez réessayer dans quelques minutes"
+        }
+        
+        setError(errorMessage)
         return
       }
 

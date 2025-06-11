@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
-import { ThemeProvider } from "@/lib/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider"
 import { NotificationCenter } from "@/components/ui/notifications"
 
 // Removed Google Fonts import due to network issues in build

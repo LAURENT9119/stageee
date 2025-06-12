@@ -1,0 +1,554 @@
+
+up to date, audited 292 packages in 2s
+
+42 packages are looking for funding
+  run `npm fund` for details
+
+1 critical severity vulnerability
+
+To address all issues, run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> my-v0-project@0.1.0 dev
+> next dev --hostname 0.0.0.0 --port 3000
+
+  ▲ Next.js 14.2.16
+  - Local:        http://localhost:3000
+  - Network:      http://0.0.0.0:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ⚠ Disabling outputFileTracing will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
+ ✓ Ready in 2.3s
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 1797ms (143 modules)
+ ⨯ Error [TypeError]: Invalid URL
+    at new URL (node:internal/url:806:29)
+    at new SupabaseClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js:57:25)
+    at createClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/index.js:62:12)
+    at createServerClient (webpack-internal:///(middleware)/./node_modules/@supabase/ssr/dist/module/createServerClient.js:19:87)
+    at Object.middleware [as handler] (webpack-internal:///(middleware)/./middleware.ts:22:87)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:197:31)
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/async-storage/request-async-storage-wrapper.js:105:24)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:188:122)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:115:36)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NoopTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18108)
+    at ProxyTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18869)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:103)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.trace (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:28)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:182:84)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.withPropagatedContext (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:63:28)
+    at propagator (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:68:19)
+    at adapter (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:178:22)
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 3.8s (254 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (100kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ⨯ Error [TypeError]: Invalid URL
+    at new URL (node:internal/url:806:29)
+    at new SupabaseClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js:57:25)
+    at createClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/index.js:62:12)
+    at createServerClient (webpack-internal:///(middleware)/./node_modules/@supabase/ssr/dist/module/createServerClient.js:19:87)
+    at Object.middleware [as handler] (webpack-internal:///(middleware)/./middleware.ts:22:87)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:197:31)
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/async-storage/request-async-storage-wrapper.js:105:24)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:188:122)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:115:36)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NoopTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18108)
+    at ProxyTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18869)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:103)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.trace (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:28)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:182:84)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.withPropagatedContext (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:63:28)
+    at propagator (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:68:19)
+    at adapter (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:178:22)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 8.7s (732 modules)
+ GET /_next/static/chunks/react-refresh.js 404 in 9804ms
+ ✓ Compiled in 1200ms (447 modules)
+ GET /_next/static/chunks/main.js 404 in 20ms
+ GET /_next/static/chunks/pages/_app.js 404 in 17ms
+ GET /_next/static/chunks/pages/_error.js 404 in 25ms
+ ⨯ Error [TypeError]: Invalid URL
+    at new URL (node:internal/url:806:29)
+    at new SupabaseClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js:57:25)
+    at createClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/index.js:62:12)
+    at createServerClient (webpack-internal:///(middleware)/./node_modules/@supabase/ssr/dist/module/createServerClient.js:19:87)
+    at Object.middleware [as handler] (webpack-internal:///(middleware)/./middleware.ts:22:87)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:197:31)
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/async-storage/request-async-storage-wrapper.js:105:24)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:188:122)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:115:36)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NoopTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18108)
+    at ProxyTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18869)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:103)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.trace (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:28)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:182:84)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.withPropagatedContext (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:63:28)
+    at propagator (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:68:19)
+    at adapter (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:178:22)
+ ⨯ Error: Cannot find module './9161.js'
+Require stack:
+- /home/runner/workspace/.next/server/webpack-runtime.js
+- /home/runner/workspace/.next/server/app/_not-found/page.js
+- /home/runner/workspace/node_modules/next/dist/server/require.js
+- /home/runner/workspace/node_modules/next/dist/server/load-components.js
+- /home/runner/workspace/node_modules/next/dist/build/utils.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-server.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at /home/runner/workspace/node_modules/next/dist/server/require-hook.js:55:36
+    at Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at __webpack_require__.f.require (/home/runner/workspace/.next/server/webpack-runtime.js:198:28)
+    at /home/runner/workspace/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/home/runner/workspace/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/home/runner/workspace/.next/server/webpack-runtime.js:162:22)
+    at /home/runner/workspace/.next/server/pages/_document.js:1:340
+    at Object.<anonymous> (/home/runner/workspace/.next/server/pages/_document.js:1:383)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at requirePage (/home/runner/workspace/node_modules/next/dist/server/require.js:109:84)
+    at /home/runner/workspace/node_modules/next/dist/server/load-components.js:72:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/load-components.js:71:33)
+    at async DevServer.findPageComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/next-server.js:709:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/runner/workspace/.next/server/webpack-runtime.js',
+    '/home/runner/workspace/.next/server/app/_not-found/page.js',
+    '/home/runner/workspace/node_modules/next/dist/server/require.js',
+    '/home/runner/workspace/node_modules/next/dist/server/load-components.js',
+    '/home/runner/workspace/node_modules/next/dist/build/utils.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-server.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+ ⨯ Error [TypeError]: Invalid URL
+    at new URL (node:internal/url:806:29)
+    at new SupabaseClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js:57:25)
+    at createClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/index.js:62:12)
+    at createServerClient (webpack-internal:///(middleware)/./node_modules/@supabase/ssr/dist/module/createServerClient.js:19:87)
+    at Object.middleware [as handler] (webpack-internal:///(middleware)/./middleware.ts:22:87)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:197:31)
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/async-storage/request-async-storage-wrapper.js:105:24)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:188:122)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:115:36)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NoopTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18108)
+    at ProxyTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18869)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:103)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.trace (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:28)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:182:84)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.withPropagatedContext (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:63:28)
+    at propagator (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:68:19)
+    at adapter (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:178:22)
+ ⨯ Error: Cannot find module './9161.js'
+Require stack:
+- /home/runner/workspace/.next/server/webpack-runtime.js
+- /home/runner/workspace/.next/server/app/_not-found/page.js
+- /home/runner/workspace/node_modules/next/dist/server/require.js
+- /home/runner/workspace/node_modules/next/dist/server/load-components.js
+- /home/runner/workspace/node_modules/next/dist/build/utils.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-server.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at /home/runner/workspace/node_modules/next/dist/server/require-hook.js:55:36
+    at Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at __webpack_require__.f.require (/home/runner/workspace/.next/server/webpack-runtime.js:198:28)
+    at /home/runner/workspace/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/home/runner/workspace/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/home/runner/workspace/.next/server/webpack-runtime.js:162:22)
+    at /home/runner/workspace/.next/server/pages/_document.js:1:340
+    at Object.<anonymous> (/home/runner/workspace/.next/server/pages/_document.js:1:383)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at requirePage (/home/runner/workspace/node_modules/next/dist/server/require.js:109:84)
+    at /home/runner/workspace/node_modules/next/dist/server/load-components.js:72:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/load-components.js:71:33)
+    at async DevServer.findPageComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/next-server.js:709:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/runner/workspace/.next/server/webpack-runtime.js',
+    '/home/runner/workspace/.next/server/app/_not-found/page.js',
+    '/home/runner/workspace/node_modules/next/dist/server/require.js',
+    '/home/runner/workspace/node_modules/next/dist/server/load-components.js',
+    '/home/runner/workspace/node_modules/next/dist/build/utils.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-server.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+ ✓ Compiled in 995ms (445 modules)
+ ✓ Compiled in 310ms (445 modules)
+ ✓ Compiled in 245ms (445 modules)
+ ✓ Compiled in 246ms (445 modules)
+ ✓ Compiled in 533ms (445 modules)
+ ⨯ Error [TypeError]: Invalid URL
+    at new URL (node:internal/url:806:29)
+    at new SupabaseClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js:57:25)
+    at createClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/index.js:62:12)
+    at createServerClient (webpack-internal:///(middleware)/./node_modules/@supabase/ssr/dist/module/createServerClient.js:19:87)
+    at Object.middleware [as handler] (webpack-internal:///(middleware)/./middleware.ts:22:87)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:197:31)
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/async-storage/request-async-storage-wrapper.js:105:24)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:188:122)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:115:36)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NoopTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18108)
+    at ProxyTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18869)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:103)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.trace (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:28)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:182:84)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.withPropagatedContext (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:63:28)
+    at propagator (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:68:19)
+    at adapter (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:178:22)
+ ⨯ Error: Cannot find module './9161.js'
+Require stack:
+- /home/runner/workspace/.next/server/webpack-runtime.js
+- /home/runner/workspace/.next/server/app/_not-found/page.js
+- /home/runner/workspace/node_modules/next/dist/server/require.js
+- /home/runner/workspace/node_modules/next/dist/server/load-components.js
+- /home/runner/workspace/node_modules/next/dist/build/utils.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-server.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at /home/runner/workspace/node_modules/next/dist/server/require-hook.js:55:36
+    at Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at __webpack_require__.f.require (/home/runner/workspace/.next/server/webpack-runtime.js:198:28)
+    at /home/runner/workspace/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/home/runner/workspace/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/home/runner/workspace/.next/server/webpack-runtime.js:162:22)
+    at /home/runner/workspace/.next/server/pages/_document.js:1:340
+    at Object.<anonymous> (/home/runner/workspace/.next/server/pages/_document.js:1:383)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at requirePage (/home/runner/workspace/node_modules/next/dist/server/require.js:109:84)
+    at /home/runner/workspace/node_modules/next/dist/server/load-components.js:72:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/load-components.js:71:33)
+    at async DevServer.findPageComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/next-server.js:709:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/runner/workspace/.next/server/webpack-runtime.js',
+    '/home/runner/workspace/.next/server/app/_not-found/page.js',
+    '/home/runner/workspace/node_modules/next/dist/server/require.js',
+    '/home/runner/workspace/node_modules/next/dist/server/load-components.js',
+    '/home/runner/workspace/node_modules/next/dist/build/utils.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-server.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+ ⨯ Error [TypeError]: Invalid URL
+    at new URL (node:internal/url:806:29)
+    at new SupabaseClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js:57:25)
+    at createClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/index.js:62:12)
+    at createServerClient (webpack-internal:///(middleware)/./node_modules/@supabase/ssr/dist/module/createServerClient.js:19:87)
+    at Object.middleware [as handler] (webpack-internal:///(middleware)/./middleware.ts:22:87)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:197:31)
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/async-storage/request-async-storage-wrapper.js:105:24)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:188:122)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:115:36)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NoopTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18108)
+    at ProxyTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18869)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:103)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.trace (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:28)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:182:84)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.withPropagatedContext (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:63:28)
+    at propagator (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:68:19)
+    at adapter (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:178:22)
+ ⨯ Error: Cannot find module './9161.js'
+Require stack:
+- /home/runner/workspace/.next/server/webpack-runtime.js
+- /home/runner/workspace/.next/server/app/_not-found/page.js
+- /home/runner/workspace/node_modules/next/dist/server/require.js
+- /home/runner/workspace/node_modules/next/dist/server/load-components.js
+- /home/runner/workspace/node_modules/next/dist/build/utils.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-server.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at /home/runner/workspace/node_modules/next/dist/server/require-hook.js:55:36
+    at Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at __webpack_require__.f.require (/home/runner/workspace/.next/server/webpack-runtime.js:198:28)
+    at /home/runner/workspace/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/home/runner/workspace/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/home/runner/workspace/.next/server/webpack-runtime.js:162:22)
+    at /home/runner/workspace/.next/server/pages/_document.js:1:340
+    at Object.<anonymous> (/home/runner/workspace/.next/server/pages/_document.js:1:383)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at requirePage (/home/runner/workspace/node_modules/next/dist/server/require.js:109:84)
+    at /home/runner/workspace/node_modules/next/dist/server/load-components.js:72:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/load-components.js:71:33)
+    at async DevServer.findPageComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/next-server.js:709:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/runner/workspace/.next/server/webpack-runtime.js',
+    '/home/runner/workspace/.next/server/app/_not-found/page.js',
+    '/home/runner/workspace/node_modules/next/dist/server/require.js',
+    '/home/runner/workspace/node_modules/next/dist/server/load-components.js',
+    '/home/runner/workspace/node_modules/next/dist/build/utils.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-server.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+ ⨯ Error [TypeError]: Invalid URL
+    at new URL (node:internal/url:806:29)
+    at new SupabaseClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js:57:25)
+    at createClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/index.js:62:12)
+    at createServerClient (webpack-internal:///(middleware)/./node_modules/@supabase/ssr/dist/module/createServerClient.js:19:87)
+    at Object.middleware [as handler] (webpack-internal:///(middleware)/./middleware.ts:22:87)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:197:31)
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/async-storage/request-async-storage-wrapper.js:105:24)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:188:122)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:115:36)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NoopTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18108)
+    at ProxyTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18869)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:103)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.trace (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:28)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:182:84)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.withPropagatedContext (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:63:28)
+    at propagator (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:68:19)
+    at adapter (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:178:22)
+ ⨯ Error: Cannot find module './9161.js'
+Require stack:
+- /home/runner/workspace/.next/server/webpack-runtime.js
+- /home/runner/workspace/.next/server/app/_not-found/page.js
+- /home/runner/workspace/node_modules/next/dist/server/require.js
+- /home/runner/workspace/node_modules/next/dist/server/load-components.js
+- /home/runner/workspace/node_modules/next/dist/build/utils.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-server.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at /home/runner/workspace/node_modules/next/dist/server/require-hook.js:55:36
+    at Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at __webpack_require__.f.require (/home/runner/workspace/.next/server/webpack-runtime.js:198:28)
+    at /home/runner/workspace/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/home/runner/workspace/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/home/runner/workspace/.next/server/webpack-runtime.js:162:22)
+    at /home/runner/workspace/.next/server/pages/_document.js:1:340
+    at Object.<anonymous> (/home/runner/workspace/.next/server/pages/_document.js:1:383)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at requirePage (/home/runner/workspace/node_modules/next/dist/server/require.js:109:84)
+    at /home/runner/workspace/node_modules/next/dist/server/load-components.js:72:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/load-components.js:71:33)
+    at async DevServer.findPageComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/next-server.js:709:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/runner/workspace/.next/server/webpack-runtime.js',
+    '/home/runner/workspace/.next/server/app/_not-found/page.js',
+    '/home/runner/workspace/node_modules/next/dist/server/require.js',
+    '/home/runner/workspace/node_modules/next/dist/server/load-components.js',
+    '/home/runner/workspace/node_modules/next/dist/build/utils.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-server.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+ ⨯ Error [TypeError]: Invalid URL
+    at new URL (node:internal/url:806:29)
+    at new SupabaseClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/SupabaseClient.js:57:25)
+    at createClient (webpack-internal:///(middleware)/./node_modules/@supabase/supabase-js/dist/module/index.js:62:12)
+    at createServerClient (webpack-internal:///(middleware)/./node_modules/@supabase/ssr/dist/module/createServerClient.js:19:87)
+    at Object.middleware [as handler] (webpack-internal:///(middleware)/./middleware.ts:22:87)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:197:31)
+    at AsyncLocalStorage.run (node:async_hooks:346:14)
+    at Object.wrap (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/async-storage/request-async-storage-wrapper.js:105:24)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:188:122)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:115:36)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NoopTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18108)
+    at ProxyTracer.startActiveSpan (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:18869)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:103)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.trace (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:97:28)
+    at eval (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:182:84)
+    at NoopContextManager.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:7062)
+    at ContextAPI.with (webpack-internal:///(middleware)/./node_modules/next/dist/compiled/@opentelemetry/api/index.js:2:518)
+    at NextTracerImpl.withPropagatedContext (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/lib/trace/tracer.js:63:28)
+    at propagator (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:68:19)
+    at adapter (webpack-internal:///(middleware)/./node_modules/next/dist/esm/server/web/adapter.js:178:22)
+ ⨯ Error: Cannot find module './9161.js'
+Require stack:
+- /home/runner/workspace/.next/server/webpack-runtime.js
+- /home/runner/workspace/.next/server/app/_not-found/page.js
+- /home/runner/workspace/node_modules/next/dist/server/require.js
+- /home/runner/workspace/node_modules/next/dist/server/load-components.js
+- /home/runner/workspace/node_modules/next/dist/build/utils.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js
+- /home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/router-server.js
+- /home/runner/workspace/node_modules/next/dist/server/lib/start-server.js
+    at Module._resolveFilename (node:internal/modules/cjs/loader:1225:15)
+    at /home/runner/workspace/node_modules/next/dist/server/require-hook.js:55:36
+    at Module._load (node:internal/modules/cjs/loader:1051:27)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at __webpack_require__.f.require (/home/runner/workspace/.next/server/webpack-runtime.js:198:28)
+    at /home/runner/workspace/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/home/runner/workspace/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/home/runner/workspace/.next/server/webpack-runtime.js:162:22)
+    at /home/runner/workspace/.next/server/pages/_document.js:1:340
+    at Object.<anonymous> (/home/runner/workspace/.next/server/pages/_document.js:1:383)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Module.require (node:internal/modules/cjs/loader:1311:19)
+    at mod.require (/home/runner/workspace/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:179:18)
+    at requirePage (/home/runner/workspace/node_modules/next/dist/server/require.js:109:84)
+    at /home/runner/workspace/node_modules/next/dist/server/load-components.js:72:65
+    at async Promise.all (index 0)
+    at async loadComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/load-components.js:71:33)
+    at async DevServer.findPageComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/next-server.js:709:36) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/runner/workspace/.next/server/webpack-runtime.js',
+    '/home/runner/workspace/.next/server/app/_not-found/page.js',
+    '/home/runner/workspace/node_modules/next/dist/server/require.js',
+    '/home/runner/workspace/node_modules/next/dist/server/load-components.js',
+    '/home/runner/workspace/node_modules/next/dist/build/utils.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/home/runner/workspace/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/router-server.js',
+    '/home/runner/workspace/node_modules/next/dist/server/lib/start-server.js'
+  ]
+}
+      

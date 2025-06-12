@@ -30,5 +30,4 @@ export async function getUserRole() {
 
   // Récupérer le rôle depuis les métadonnées ou la base de données
   return user.user_metadata?.role || 'stagiaire'
-}ire'
 }

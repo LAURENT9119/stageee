@@ -1,5 +1,5 @@
 
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/client'
 import type { User } from '@supabase/supabase-js'
 
 export interface AuthUser {
@@ -10,6 +10,8 @@ export interface AuthUser {
   prenom?: string
 }
 
+const supabase = createClient()
+
 export const authService = {
   async getCurrentUser(): Promise<AuthUser | null> {
     try {
@@ -18,11 +20,15 @@ export const authService = {
       if (error || !user) return null
       
       // Get user profile data
-      const { data: profile } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('users')
         .select('*')
         .eq('id', user.id)
         .single()
+      
+      if (profileError) {
+        console.warn('Profile not found, using default role')
+      }
       
       return {
         id: user.id,
@@ -62,13 +68,17 @@ export const authService = {
       
       // Create user profile
       if (data.user) {
-        await supabase
+        const { error: insertError } = await supabase
           .from('users')
           .insert([{
             id: data.user.id,
             email: data.user.email,
             ...userData
           }])
+        
+        if (insertError) {
+          console.error('Error creating user profile:', insertError)
+        }
       }
       
       return { user: data.user, error: null }
@@ -84,6 +94,20 @@ export const authService = {
       return { error: null }
     } catch (error) {
       return { error }
+    }
+  },
+
+  async getUserProfile(userId: string) {
+    try {
+      const { data: profile, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', userId)
+        .single()
+      
+      return { profile, error }
+    } catch (error) {
+      return { profile: null, error }
     }
   }
 }

@@ -1,0 +1,207 @@
+~/workspace$ npm run build
+
+> my-v0-project@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.16
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (100kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ⚠ Compiled with warnings
+
+./lib/auth.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/auth.ts
+./components/layout/sidebar.tsx
+./app/admin/reports/page.tsx
+
+./lib/services/dashboard-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/dashboard-service.ts
+./app/rh/page.tsx
+
+./lib/services/demandes-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/demandes-service.ts
+./app/admin/page.tsx
+
+./lib/services/documents-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/documents-service.ts
+./app/admin/page.tsx
+
+./lib/services/stagiaires-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/stagiaires-service.ts
+./app/admin/page.tsx
+
+./lib/services/statistics-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/statistics-service.ts
+./app/rh/statistiques/page.tsx
+
+./lib/services/users-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/users-service.ts
+./app/admin/test-crud/page.tsx
+
+./lib/auth.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/auth.ts
+./components/layout/sidebar.tsx
+./app/rh/page.tsx
+
+./lib/services/dashboard-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/dashboard-service.ts
+./app/rh/page.tsx
+
+./lib/services/demandes-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/demandes-service.ts
+./app/admin/page.tsx
+
+./lib/services/documents-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/documents-service.ts
+./app/admin/page.tsx
+
+./lib/services/stagiaires-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/stagiaires-service.ts
+./app/admin/page.tsx
+
+./lib/services/statistics-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/statistics-service.ts
+./app/rh/statistiques/page.tsx
+
+./lib/services/users-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/users-service.ts
+./app/admin/test-crud/page.tsx
+
+./app/api/auth/callback/route.ts
+Attempted import error: 'createServerSupabaseClient' is not exported from '@/lib/supabase/server' (imported as 'createServerSupabaseClient').
+
+Import trace for requested module:
+./app/api/auth/callback/route.ts
+
+./app/api/auth/login/route.ts
+Attempted import error: 'createServerSupabaseClient' is not exported from '@/lib/supabase/server' (imported as 'createServerSupabaseClient').
+
+Import trace for requested module:
+./app/api/auth/login/route.ts
+
+./lib/services/demandes-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/demandes-service.ts
+./app/api/demandes/route.ts
+
+./lib/services/documents-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/documents-service.ts
+./app/api/documents/route.ts
+
+./lib/services/evaluations-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/evaluations-service.ts
+./app/api/evaluations/route.ts
+
+./lib/services/notifications-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/notifications-service.ts
+./app/api/notifications/route.ts
+
+./lib/services/server-auth-service.ts
+export 'createServerSupabaseClient' (reexported as 'createServerSupabaseClient') was not found in '@/lib/supabase/server' (possible exports: createClient)
+
+Import trace for requested module:
+./lib/services/server-auth-service.ts
+./app/api/dashboard/route.ts
+
+./lib/services/server-auth-service.ts
+Attempted import error: 'createServerSupabaseClient' is not exported from '@/lib/supabase/server' (imported as 'createServerSupabaseClient').
+
+Import trace for requested module:
+./lib/services/server-auth-service.ts
+./app/api/dashboard/route.ts
+
+./lib/services/stagiaires-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/stagiaires-service.ts
+./app/api/stagiaires/route.ts
+
+./lib/services/statistics-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/statistics-service.ts
+./app/api/statistics/route.ts
+
+./lib/services/templates-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/templates-service.ts
+./app/api/templates/route.ts
+
+./lib/services/users-service.ts
+Attempted import error: 'createClient' is not exported from '@/lib/supabase/client' (imported as 'createClient').
+
+Import trace for requested module:
+./lib/services/users-service.ts
+./app/api/users/route.ts
+
+   Linting and checking validity of types  ...Failed to compile.
+
+./app/admin/page.tsx:34:15
+Type error: Property 'user' does not exist on type 'AuthUser | null'.
+
+  32 |     try {
+  33 |       // Vérifier l'authentification
+> 34 |       const { user: currentUser } = await authService.getCurrentUser()
+     |               ^
+  35 |       if (!currentUser) {
+  36 |         router.push("/auth/login")
+  37 |         return
+~/workspace$ 

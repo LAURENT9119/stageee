@@ -1,4 +1,7 @@
-import { createClient } from "../supabase/client"
+import { createClient } from "@/lib/supabase/client"
+
+class EvaluationsService {
+  private supabase = createClient()
 
 const supabase = createClient()
 import type { Database } from "../supabase/database.types"

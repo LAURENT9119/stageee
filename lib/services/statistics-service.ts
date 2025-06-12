@@ -1,5 +1,8 @@
 import { createClient } from "@/lib/supabase/client"
 
+class StatisticsService {
+  private supabase = createClient()
+
 const supabase = createClient()
 
 export const statisticsService = {

@@ -1,5 +1,8 @@
 import { createClient } from "@/lib/supabase/client"
 
+class UsersService {
+  private supabase = createClient()
+
 const supabase = createClient()
 
 export class UsersService {

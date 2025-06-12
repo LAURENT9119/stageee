@@ -1,4 +1,6 @@
-import { createClient } from '@supabase/supabase-js'
+
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+import type { Database } from './database.types'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key'
@@ -8,9 +10,18 @@ if (supabaseUrl === 'https://placeholder.supabase.co' || supabaseAnonKey === 'pl
   console.warn('⚠️ Supabase environment variables not properly configured. Please check your .env.local file.')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+// Créer le client Supabase avec les types
+export const supabase = createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey)
 
-// Export également une fonction createClient pour compatibilité
-export function createSupabaseClient() {
-  return supabase
+// Export de la fonction createClient pour compatibilité
+export function createClient() {
+  return createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey)
 }
+
+// Export default pour compatibilité
+export default function createSupabaseClient() {
+  return createClient()
+}
+
+// Export également createSupabaseClient pour compatibilité
+export { createSupabaseClient }

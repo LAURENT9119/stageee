@@ -31,7 +31,7 @@ export default function AdminDashboard() {
   const loadDashboardData = async () => {
     try {
       // Vérifier l'authentification
-      const { user: currentUser } = await authService.getCurrentUser()
+      const currentUser = await authService.getCurrentUser()
       if (!currentUser) {
         router.push("/auth/login")
         return

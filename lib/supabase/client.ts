@@ -1,5 +1,5 @@
 
-import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+import { createClient as supabaseCreateClient } from '@supabase/supabase-js'
 import type { Database } from './database.types'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
@@ -11,17 +11,14 @@ if (supabaseUrl === 'https://placeholder.supabase.co' || supabaseAnonKey === 'pl
 }
 
 // Créer le client Supabase avec les types
-export const supabase = createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey)
+export const supabase = supabaseCreateClient<Database>(supabaseUrl, supabaseAnonKey)
 
 // Export de la fonction createClient pour compatibilité
 export function createClient() {
-  return createSupabaseClient<Database>(supabaseUrl, supabaseAnonKey)
+  return supabaseCreateClient<Database>(supabaseUrl, supabaseAnonKey)
 }
 
 // Export default pour compatibilité
-export default function createSupabaseClient() {
+export default function() {
   return createClient()
 }
-
-// Export également createSupabaseClient pour compatibilité
-export { createSupabaseClient }

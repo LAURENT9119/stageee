@@ -1,7 +1,7 @@
-
 import { createClient } from '@/lib/supabase/client'
 
 export async function signInWithEmail(email: string, password: string) {
+  // Client déjà importé
   const supabase = createClient()
   return await supabase.auth.signInWithPassword({
     email,
@@ -10,6 +10,7 @@ export async function signInWithEmail(email: string, password: string) {
 }
 
 export async function signUpWithEmail(email: string, password: string) {
+  // Client déjà importé
   const supabase = createClient()
   return await supabase.auth.signUp({
     email,
@@ -18,17 +19,20 @@ export async function signUpWithEmail(email: string, password: string) {
 }
 
 export async function signOut() {
+  // Client déjà importé
   const supabase = createClient()
   return await supabase.auth.signOut()
 }
 
 export async function getCurrentUser() {
+  // Client déjà importé
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
   return user
 }
 
 export async function getSession() {
+  // Client déjà importé
   const supabase = createClient()
   const { data: { session } } = await supabase.auth.getSession()
   return session

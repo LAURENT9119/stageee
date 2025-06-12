@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/client"
+import { supabase } from '@/lib/supabase/client'
 
 class NotificationsService {
   private supabase = createClient()

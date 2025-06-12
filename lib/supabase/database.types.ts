@@ -352,3 +352,101 @@ export interface Database {
     }
   }
 }
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export interface Database {
+  public: {
+    Tables: {
+      users: {
+        Row: {
+          id: string
+          email: string
+          role: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          email: string
+          role?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          email?: string
+          role?: string
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      stagiaires: {
+        Row: {
+          id: string
+          user_id: string
+          nom: string
+          prenom: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          nom: string
+          prenom: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          nom?: string
+          prenom?: string
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      demandes: {
+        Row: {
+          id: string
+          stagiaire_id: string
+          type: string
+          statut: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          stagiaire_id: string
+          type: string
+          statut?: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          stagiaire_id?: string
+          type?: string
+          statut?: string
+          created_at?: string
+          updated_at?: string
+        }
+      }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+  }
+}

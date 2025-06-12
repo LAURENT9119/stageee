@@ -1,8 +1,7 @@
-
-import { createClient } from "@/lib/supabase/client"
+import { supabase } from '@/lib/supabase/client'
 
 export class AuthService {
-  private supabase = createClient()
+  private supabase = supabase
 
   async signUp(email: string, password: string, userData: any) {
     try {

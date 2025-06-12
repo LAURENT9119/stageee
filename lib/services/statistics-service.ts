@@ -1,9 +1,9 @@
-import { createClient } from "@/lib/supabase/client"
+import { supabase } from '@/lib/supabase/client'
 
 class StatisticsService {
   private supabase = createClient()
 
-const supabase = createClient()
+// Client déjà importé
 
 export const statisticsService = {
   async getStagiairesByMonth() {

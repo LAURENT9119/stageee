@@ -25,7 +25,6 @@ export function createServerSupabaseClient() {
           try {
             cookieStore.set({ name, value, ...options })
           } catch (error) {
-            // Handle cookie setting errors
             console.error('Error setting cookie:', error)
           }
         },
@@ -33,14 +32,12 @@ export function createServerSupabaseClient() {
           try {
             cookieStore.set({ name, value: '', ...options })
           } catch (error) {
-            // Handle cookie removal errors
             console.error('Error removing cookie:', error)
           }
         },
       },
-    }
+    },
   )
 }
 
-// Export par défaut
 export default createServerSupabaseClient

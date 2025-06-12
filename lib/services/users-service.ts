@@ -1,126 +1,88 @@
-import { supabase } from '@/lib/supabase/client'
-
-class UsersService {
-  private supabase = createClient()
+import { createClient } from '@/lib/supabase/client'
+import type { Database } from "../supabase/database.types"
 
 const supabase = createClient()
+
+export type User = Database["public"]["Tables"]["users"]["Row"]
+export type UserInsert = Database["public"]["Tables"]["users"]["Insert"]
+export type UserUpdate = Database["public"]["Tables"]["users"]["Update"]
 
 export class UsersService {
   private supabase = supabase
 
-  // GET - Récupérer tous les utilisateurs
-  async getAllUsers() {
-    try {
-      const { data, error } = await this.supabase.from("users").select("*").order("created_at", { ascending: false })
+  async getAll() {
+    const { data, error } = await this.supabase
+      .from('users')
+      .select('*')
+      .order('created_at', { ascending: false })
 
-      if (error) throw error
-      return data || []
-    } catch (error) {
-      console.error("Erreur lors de la récupération des utilisateurs:", error)
-      return []
-    }
+    if (error) throw error
+    return data
   }
 
-  // GET - Récupérer un utilisateur par ID
-  async getUserById(id: string) {
-    try {
-      const { data, error } = await this.supabase.from("users").select("*").eq("id", id).single()
+  async getById(id: string) {
+    const { data, error } = await this.supabase
+      .from('users')
+      .select('*')
+      .eq('id', id)
+      .single()
 
-      if (error) throw error
-      return data
-    } catch (error) {
-      console.error("Erreur lors de la récupération de l'utilisateur:", error)
-      return null
-    }
+    if (error) throw error
+    return data
   }
 
-  // GET - Récupérer les utilisateurs par rôle
-  async getUsersByRole(role: string) {
-    try {
-      const { data, error } = await this.supabase
-        .from("users")
-        .select("*")
-        .eq("role", role)
-        .order("name", { ascending: true })
+  async create(user: UserInsert) {
+    const { data, error } = await this.supabase
+      .from('users')
+      .insert(user)
+      .select()
+      .single()
 
-      if (error) throw error
-      return data || []
-    } catch (error) {
-      console.error("Erreur lors de la récupération des utilisateurs par rôle:", error)
-      return []
-    }
+    if (error) throw error
+    return data
   }
 
-  // POST - Créer un nouvel utilisateur
-  async createUser(userData: {
-    email: string
-    name: string
-    role: string
-    phone?: string
-    address?: string
-    department?: string
-    position?: string
-  }) {
-    try {
-      const { data, error } = await this.supabase
-        .from("users")
-        .insert({
-          ...userData,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        })
-        .select()
-        .single()
+  async update(id: string, updates: UserUpdate) {
+    const { data, error } = await this.supabase
+      .from('users')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single()
 
-      if (error) throw error
-      return data
-    } catch (error) {
-      console.error("Erreur lors de la création de l'utilisateur:", error)
-      throw error
-    }
+    if (error) throw error
+    return data
   }
 
-  // PUT - Mettre à jour un utilisateur
-  async updateUser(
-    id: string,
-    updates: Partial<{
-      name: string
-      phone: string
-      address: string
-      department: string
-      position: string
-    }>,
-  ) {
-    try {
-      const { data, error } = await this.supabase
-        .from("users")
-        .update({
-          ...updates,
-          updated_at: new Date().toISOString(),
-        })
-        .eq("id", id)
-        .select()
-        .single()
+  async delete(id: string) {
+    const { error } = await this.supabase
+      .from('users')
+      .delete()
+      .eq('id', id)
 
-      if (error) throw error
-      return data
-    } catch (error) {
-      console.error("Erreur lors de la mise à jour de l'utilisateur:", error)
-      throw error
-    }
+    if (error) throw error
   }
 
-  // DELETE - Supprimer un utilisateur
-  async deleteUser(id: string) {
-    try {
-      const { error } = await this.supabase.from("users").delete().eq("id", id)
+  async getByRole(role: string) {
+    const { data, error } = await this.supabase
+      .from('users')
+      .select('*')
+      .eq('role', role)
+      .order('created_at', { ascending: false })
 
-      if (error) throw error
-      return true
-    } catch (error) {
-      console.error("Erreur lors de la suppression de l'utilisateur:", error)
-      throw error
-    }
+    if (error) throw error
+    return data
+  }
+
+  async search(searchTerm: string) {
+    const { data, error } = await this.supabase
+      .from('users')
+      .select('*')
+      .or(`name.ilike.%${searchTerm}%,email.ilike.%${searchTerm}%`)
+      .order('created_at', { ascending: false })
+
+    if (error) throw error
+    return data
   }
 }
 

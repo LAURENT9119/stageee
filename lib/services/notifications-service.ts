@@ -1,75 +1,112 @@
-import { supabase } from '@/lib/supabase/client'
 
-class NotificationsService {
-  private supabase = createClient()
-
-const supabase = createClient()
+import { createClient } from '@/lib/supabase/client'
 import type { Database } from "../supabase/database.types"
 
+const supabase = createClient()
+
 export type Notification = Database["public"]["Tables"]["notifications"]["Row"]
+export type NotificationInsert = Database["public"]["Tables"]["notifications"]["Insert"]
+export type NotificationUpdate = Database["public"]["Tables"]["notifications"]["Update"]
 
-export const notificationsService = {
-  async getAll(userId: string) {
-    const { data, error } = await supabase
-      .from("notifications")
-      .select("*")
-      .eq("user_id", userId)
-      .order("date", { ascending: false })
+export class NotificationsService {
+  private supabase = supabase
 
-    if (error) throw new Error(error.message)
-
+  async getAll() {
+    const { data, error } = await this.supabase
+      .from('notifications')
+      .select('*')
+      .order('created_at', { ascending: false })
+    
+    if (error) throw error
     return data
-  },
+  }
 
-  async getUnread(userId: string) {
-    const { data, error } = await supabase
-      .from("notifications")
-      .select("*")
-      .eq("user_id", userId)
-      .eq("lu", false)
-      .order("date", { ascending: false })
-
-    if (error) throw new Error(error.message)
-
+  async getById(id: string) {
+    const { data, error } = await this.supabase
+      .from('notifications')
+      .select('*')
+      .eq('id', id)
+      .single()
+    
+    if (error) throw error
     return data
-  },
+  }
 
-  async markAsRead(id: string) {
-    const { error } = await supabase.from("notifications").update({ lu: true }).eq("id", id)
-
-    if (error) throw new Error(error.message)
-
-    return true
-  },
-
-  async markAllAsRead(userId: string) {
-    const { error } = await supabase.from("notifications").update({ lu: true }).eq("user_id", userId).eq("lu", false)
-
-    if (error) throw new Error(error.message)
-
-    return true
-  },
-
-  async delete(id: string) {
-    const { error } = await supabase.from("notifications").delete().eq("id", id)
-
-    if (error) throw new Error(error.message)
-
-    return true
-  },
-
-  async create(notification: Omit<Notification, "id" | "created_at">) {
-    const { data, error } = await supabase
-      .from("notifications")
-      .insert({
-        ...notification,
-        created_at: new Date().toISOString(),
-      })
+  async create(notification: NotificationInsert) {
+    const { data, error } = await this.supabase
+      .from('notifications')
+      .insert(notification)
       .select()
       .single()
-
-    if (error) throw new Error(error.message)
-
+    
+    if (error) throw error
     return data
-  },
+  }
+
+  async update(id: string, updates: NotificationUpdate) {
+    const { data, error } = await this.supabase
+      .from('notifications')
+      .update(updates)
+      .eq('id', id)
+      .select()
+      .single()
+    
+    if (error) throw error
+    return data
+  }
+
+  async delete(id: string) {
+    const { error } = await this.supabase
+      .from('notifications')
+      .delete()
+      .eq('id', id)
+    
+    if (error) throw error
+  }
+
+  async getByUser(userId: string) {
+    const { data, error } = await this.supabase
+      .from('notifications')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false })
+    
+    if (error) throw error
+    return data
+  }
+
+  async markAsRead(id: string) {
+    const { data, error } = await this.supabase
+      .from('notifications')
+      .update({ lu: true })
+      .eq('id', id)
+      .select()
+      .single()
+    
+    if (error) throw error
+    return data
+  }
+
+  async markAllAsRead(userId: string) {
+    const { error } = await this.supabase
+      .from('notifications')
+      .update({ lu: true })
+      .eq('user_id', userId)
+      .eq('lu', false)
+    
+    if (error) throw error
+  }
+
+  async getUnreadCount(userId: string) {
+    const { count, error } = await this.supabase
+      .from('notifications')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId)
+      .eq('lu', false)
+    
+    if (error) throw error
+    return count || 0
+  }
 }
+
+export const notificationsService = new NotificationsService()

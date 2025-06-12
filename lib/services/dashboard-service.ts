@@ -1,7 +1,7 @@
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/client'
 
 export class DashboardService {
-  private supabase = supabase
+  private supabase = createClient()
 
   async getDashboardStats(userId: string, role: string) {
     try {

@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from "@/lib/supabase/client"
 import type { Database } from "../supabase/database.types"
 
 export type Demande = Database["public"]["Tables"]["demandes"]["Row"]
@@ -7,7 +7,7 @@ export type DemandeUpdate = Database["public"]["Tables"]["demandes"]["Update"]
 export type Commentaire = Database["public"]["Tables"]["commentaires"]["Row"]
 
 export class DemandesService {
-  private supabase = supabase
+  private supabase = createClient()
 
   // GET - Récupérer toutes les demandes avec relations
   async getAllDemandes(

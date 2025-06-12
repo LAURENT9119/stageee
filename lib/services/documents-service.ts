@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from "@/lib/supabase/client"
 import type { Database } from "../supabase/database.types"
 
 export type Document = Database["public"]["Tables"]["documents"]["Row"]
@@ -6,7 +6,7 @@ export type DocumentInsert = Database["public"]["Tables"]["documents"]["Insert"]
 export type DocumentUpdate = Database["public"]["Tables"]["documents"]["Update"]
 
 export class DocumentsService {
-  private supabase = supabase
+  private supabase = createClient()
 
   // GET - Récupérer tous les documents
   async getAllDocuments(

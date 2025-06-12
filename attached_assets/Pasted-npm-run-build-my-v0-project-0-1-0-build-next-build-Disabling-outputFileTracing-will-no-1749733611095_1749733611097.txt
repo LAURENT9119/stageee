@@ -1,0 +1,270 @@
+npm run build
+
+> my-v0-project@0.1.0 build
+> next build
+
+ ⚠ Disabling outputFileTracing will not be an option in the next major version. Please report any issues you may be experiencing to https://github.com/vercel/next.js/issues
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+  ▲ Next.js 14.2.16
+  - Environments: .env.local
+  - Experiments (use with caution):
+    · esmExternals
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (100kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ⚠ Compiled with warnings
+
+./lib/services/auth-service.ts
+Attempted import error: 'supabase' is not exported from '@/lib/supabase/client' (imported as 'supabase').
+
+Import trace for requested module:
+./lib/services/auth-service.ts
+./components/layout/header.tsx
+
+./lib/services/auth-service.ts
+Attempted import error: 'supabase' is not exported from '@/lib/supabase/client' (imported as 'supabase').
+
+Import trace for requested module:
+./lib/services/auth-service.ts
+./app/rh/page.tsx
+
+   Skipping validation of types
+   Skipping linting
+ ✓ Collecting page data    
+   Generating static pages (20/48)  [====]TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546) {
+  digest: '372679696'
+}
+
+Error occurred prerendering page "/rh/profile". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+   Generating static pages (21/48)  [=== ]TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546) {
+  digest: '372679696'
+}
+   Generating static pages (22/48)  [==  ]
+Error occurred prerendering page "/admin/profile". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+   Generating static pages (29/48)  [==  ]TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546) {
+  digest: '372679696'
+}
+   Generating static pages (34/48)  [ ===]TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546) {
+  digest: '372679696'
+}
+
+Error occurred prerendering page "/admin/templates". Read more: https://nextjs.org/docs/messages/prerender-error
+
+
+Error occurred prerendering page "/stagiaire/profile". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+   Generating static pages (39/48)  [  ==]TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546) {
+  digest: '372679696'
+}
+
+Error occurred prerendering page "/tuteur/evaluations". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+   Generating static pages (42/48)  [   =]TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546) {
+  digest: '372679696'
+}
+TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546) {
+  digest: '372679696'
+}
+
+Error occurred prerendering page "/tuteur/evaluations/new". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+   Generating static pages (44/48)  [    ]
+Error occurred prerendering page "/tuteur/profile". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+   Generating static pages (47/48)  [  ==]TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546) {
+  digest: '372679696'
+}
+
+Error occurred prerendering page "/admin/reports". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: s_ is not a function
+    at s3 (/home/runner/workspace/.next/server/chunks/1897.js:1:7859)
+    at nj (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46251)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47571)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nD (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66680)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64853)
+    at nB (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67538)
+    at nM (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58560)
+    at nN (/home/runner/workspace/node_modules/.pnpm/next@14.2.16_react-dom@18.0.0_react@18.0.0__react@18.0.0/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64546)
+ ✓ Generating static pages (48/48)
+
+> Export encountered errors on following paths:
+    /admin/profile/page: /admin/profile
+    /admin/reports/page: /admin/reports
+    /admin/templates/page: /admin/templates
+    /rh/profile/page: /rh/profile
+    /stagiaire/profile/page: /stagiaire/profile
+    /tuteur/evaluations/new/page: /tuteur/evaluations/new
+    /tuteur/evaluations/page: /tuteur/evaluations
+    /tuteur/profile/page: /tuteur/profile
+npm notice
+npm notice New major version of npm available! 10.8.2 -> 11.4.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.1
+npm notice To update run: npm install -g npm@11.4.1
+npm notice
+~/workspace$ 

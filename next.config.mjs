@@ -4,7 +4,7 @@ const nextConfig = {
     serverComponentsExternalPackages: ['@supabase/supabase-js'],
     esmExternals: 'loose'
   },
-  outputFileTracing: false,
+  outputFileTracing: true,
   swcMinify: true,
   images: {
     domains: ['localhost'],
@@ -25,7 +25,7 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {

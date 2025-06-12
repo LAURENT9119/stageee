@@ -1,13 +1,11 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverComponentsExternalPackages: ['@supabase/supabase-js'],
-    esmExternals: 'loose'
+    serverComponentsExternalPackages: ['@supabase/supabase-js']
   },
-  outputFileTracing: true,
-  swcMinify: true,
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'blmyaizvefkfmwgggid.supabase.co'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -22,11 +20,12 @@ const nextConfig = {
     CUSTOM_KEY: process.env.CUSTOM_KEY,
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   typescript: {
     ignoreBuildErrors: false,
   },
+  output: 'standalone',
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {

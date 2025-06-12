@@ -1,5 +1,6 @@
-import { createBrowserClient } from "@supabase/ssr"
-import type { Database } from "./supabase/database.types"
+
+import { createClient as createBrowserClient } from '@/lib/supabase/client'
+import type { Database } from '@/lib/supabase/database.types'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -19,7 +20,6 @@ export async function getUser() {
   const { data: { user } } = await supabase.auth.getUser()
   return user
 }
-import { createClient } from '@/lib/supabase/client'
 
 export const auth = {
   async signOut() {

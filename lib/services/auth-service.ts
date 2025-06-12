@@ -1,4 +1,3 @@
-
 import { createClient } from '@/lib/supabase/client'
 import type { User } from '@supabase/supabase-js'
 
@@ -16,29 +15,36 @@ export const authService = {
   async getCurrentUser(): Promise<AuthUser | null> {
     try {
       const { data: { user }, error } = await supabase.auth.getUser()
-      
-      if (error || !user) return null
-      
-      // Get user profile data
-      const { data: profile, error: profileError } = await supabase
+
+      if (error || !user) {
+        return null
+      }
+
+      // Récupérer les informations utilisateur depuis la base de données
+      const { data: userData, error: userError } = await supabase
         .from('users')
         .select('*')
         .eq('id', user.id)
         .single()
-      
-      if (profileError) {
-        console.warn('Profile not found, using default role')
+
+      if (userError || !userData) {
+        return null
       }
-      
+
       return {
-        id: user.id,
-        email: user.email!,
-        role: profile?.role || 'stagiaire',
-        nom: profile?.nom,
-        prenom: profile?.prenom
+        id: userData.id,
+        email: userData.email,
+        nom: userData.nom,
+        prenom: userData.prenom,
+        role: userData.role,
+        avatar_url: userData.avatar_url,
+        telephone: userData.telephone,
+        date_creation: userData.date_creation,
+        derniere_connexion: userData.derniere_connexion,
+        statut: userData.statut
       }
     } catch (error) {
-      console.error('Error getting current user:', error)
+      console.error('Erreur lors de la récupération de l\'utilisateur:', error)
       return null
     }
   },
@@ -49,7 +55,7 @@ export const authService = {
         email,
         password
       })
-      
+
       if (error) throw error
       return { user: data.user, error: null }
     } catch (error) {
@@ -63,9 +69,9 @@ export const authService = {
         email,
         password
       })
-      
+
       if (error) throw error
-      
+
       // Create user profile
       if (data.user) {
         const { error: insertError } = await supabase
@@ -75,12 +81,12 @@ export const authService = {
             email: data.user.email,
             ...userData
           }])
-        
+
         if (insertError) {
           console.error('Error creating user profile:', insertError)
         }
       }
-      
+
       return { user: data.user, error: null }
     } catch (error) {
       return { user: null, error }
@@ -104,7 +110,7 @@ export const authService = {
         .select('*')
         .eq('id', userId)
         .single()
-      
+
       return { profile, error }
     } catch (error) {
       return { profile: null, error }

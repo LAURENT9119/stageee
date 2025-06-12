@@ -1,5 +1,8 @@
 import { createServerSupabaseClient } from "@/lib/supabase/server"
 
+// Export the createServerSupabaseClient function
+export { createServerSupabaseClient }
+
 // Server-side auth helper
 export async function getServerUser() {
   const supabase = createServerSupabaseClient()
@@ -27,4 +30,5 @@ export async function getUserRole() {
 
   // Récupérer le rôle depuis les métadonnées ou la base de données
   return user.user_metadata?.role || 'stagiaire'
+}ire'
 }

@@ -1,4 +1,3 @@
-
 import { createServerClient, type CookieOptions } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
@@ -20,9 +19,15 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
+    // Vérifier que les variables d'environnement sont présentes
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      console.error('Variables d\'environnement Supabase manquantes')
+      return NextResponse.redirect(new URL('/auth/login', request.url))
+    }
+
     const supabase = createServerClient(
-      supabaseUrl,
-      supabaseAnonKey,
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       {
         cookies: {
           get(name: string) {
@@ -63,7 +68,7 @@ export async function middleware(request: NextRequest) {
             })
           },
         },
-      },
+      }
     )
 
     // Vérifier l'authentification
@@ -90,7 +95,7 @@ export async function middleware(request: NextRequest) {
     // En cas d'erreur d'auth, rediriger vers login pour les routes protégées
     const protectedRoutes = ["/admin", "/rh", "/tuteur", "/stagiaire"]
     const isProtectedRoute = protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))
-    
+
     if (isProtectedRoute) {
       return NextResponse.redirect(new URL("/auth/login", request.url))
     }

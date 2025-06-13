@@ -1,4 +1,3 @@
-
 export interface ValidationResult {
   isValid: boolean
   errors: string[]
@@ -78,5 +77,33 @@ export function validateRequestBody(schema: Record<string, (value: any) => Valid
         )
       }
     }
+  }
+}
+
+export const validateEmail = (email: string): { isValid: boolean; message?: string } => {
+  if (!email) {
+    return { isValid: false, message: 'L\'email est requis' }
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const isValid = emailRegex.test(email)
+
+  return {
+    isValid,
+    message: isValid ? undefined : 'Format d\'email invalide'
+  }
+}
+
+export const validatePhone = (phone: string): { isValid: boolean; message?: string } => {
+  if (!phone) {
+    return { isValid: false, message: 'Le numéro de téléphone est requis' }
+  }
+
+  const phoneRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/
+  const isValid = phoneRegex.test(phone)
+
+  return {
+    isValid,
+    message: isValid ? undefined : 'Format de téléphone invalide (format français attendu)'
   }
 }

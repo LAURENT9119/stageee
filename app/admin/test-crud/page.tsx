@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect } from "react"
@@ -12,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Skeleton } from "@/components/ui/skeleton"
 import { AlertCircle, CheckCircle2, Trash2, Edit, Plus } from "lucide-react"
+import { api } from "@/lib/services/api"
 
 interface TestEntity {
   id: string
@@ -33,16 +35,6 @@ export default function TestCRUDPage() {
     status: "active" as "active" | "inactive"
   })
 
-  // Simulation d'une API avec localStorage
-  const saveToStorage = (data: TestEntity[]) => {
-    localStorage.setItem('test-entities', JSON.stringify(data))
-  }
-
-  const loadFromStorage = (): TestEntity[] => {
-    const stored = localStorage.getItem('test-entities')
-    return stored ? JSON.parse(stored) : []
-  }
-
   useEffect(() => {
     fetchEntities()
   }, [])
@@ -52,11 +44,11 @@ export default function TestCRUDPage() {
     setError(null)
 
     try {
-      // Simulation d'un délai d'API
-      await new Promise(resolve => setTimeout(resolve, 500))
-      const data = loadFromStorage()
-      setEntities(data)
+      // Utiliser l'API réelle au lieu du localStorage
+      const response = await api.get('/api/test-entities')
+      setEntities(response.data || [])
     } catch (err) {
+      console.error('Erreur lors du chargement:', err)
       setError("Erreur lors du chargement des données")
     } finally {
       setLoading(false)
@@ -73,21 +65,19 @@ export default function TestCRUDPage() {
     setError(null)
 
     try {
-      const newEntity: TestEntity = {
-        id: Date.now().toString(),
+      const response = await api.post('/api/test-entities', {
         name: formData.name,
         description: formData.description,
-        status: formData.status,
-        created_at: new Date().toISOString()
+        status: formData.status
+      })
+
+      if (response.data) {
+        setEntities(prev => [...prev, response.data])
+        setFormData({ name: "", description: "", status: "active" })
+        setSuccess("Entité créée avec succès")
       }
-
-      const updatedEntities = [...entities, newEntity]
-      setEntities(updatedEntities)
-      saveToStorage(updatedEntities)
-
-      setFormData({ name: "", description: "", status: "active" })
-      setSuccess("Entité créée avec succès")
     } catch (err) {
+      console.error('Erreur lors de la création:', err)
       setError("Erreur lors de la création")
     } finally {
       setLoading(false)
@@ -104,19 +94,22 @@ export default function TestCRUDPage() {
     setError(null)
 
     try {
-      const updatedEntities = entities.map(entity =>
-        entity.id === editingEntity.id
-          ? { ...entity, name: formData.name, description: formData.description, status: formData.status }
-          : entity
-      )
+      const response = await api.put(`/api/test-entities/${editingEntity.id}`, {
+        name: formData.name,
+        description: formData.description,
+        status: formData.status
+      })
 
-      setEntities(updatedEntities)
-      saveToStorage(updatedEntities)
-
-      setEditingEntity(null)
-      setFormData({ name: "", description: "", status: "active" })
-      setSuccess("Entité mise à jour avec succès")
+      if (response.data) {
+        setEntities(prev => prev.map(entity =>
+          entity.id === editingEntity.id ? response.data : entity
+        ))
+        setEditingEntity(null)
+        setFormData({ name: "", description: "", status: "active" })
+        setSuccess("Entité mise à jour avec succès")
+      }
     } catch (err) {
+      console.error('Erreur lors de la mise à jour:', err)
       setError("Erreur lors de la mise à jour")
     } finally {
       setLoading(false)
@@ -128,11 +121,11 @@ export default function TestCRUDPage() {
     setError(null)
 
     try {
-      const updatedEntities = entities.filter(entity => entity.id !== id)
-      setEntities(updatedEntities)
-      saveToStorage(updatedEntities)
+      await api.delete(`/api/test-entities/${id}`)
+      setEntities(prev => prev.filter(entity => entity.id !== id))
       setSuccess("Entité supprimée avec succès")
     } catch (err) {
+      console.error('Erreur lors de la suppression:', err)
       setError("Erreur lors de la suppression")
     } finally {
       setLoading(false)
@@ -146,6 +139,7 @@ export default function TestCRUDPage() {
       description: entity.description,
       status: entity.status
     })
+    setError(null)
   }
 
   const cancelEdit = () => {
@@ -163,7 +157,7 @@ export default function TestCRUDPage() {
     <div className="container mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Test CRUD Operations</h1>
-        <Badge variant="outline">Test Environment</Badge>
+        <Badge variant="outline">Environment de Test</Badge>
       </div>
 
       {error && (
@@ -213,6 +207,7 @@ export default function TestCRUDPage() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Nom de l'entité"
+                  required
                 />
               </div>
 
@@ -299,7 +294,7 @@ export default function TestCRUDPage() {
                           </p>
                         )}
                         <p className="text-xs text-muted-foreground mt-1">
-                          Créé le {new Date(entity.created_at).toLocaleDateString()}
+                          Créé le {new Date(entity.created_at).toLocaleDateString('fr-FR')}
                         </p>
                       </div>
                       <div className="flex space-x-2">

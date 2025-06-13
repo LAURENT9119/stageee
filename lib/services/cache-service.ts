@@ -1,4 +1,3 @@
-
 class CacheService {
   private cache = new Map<string, { data: any; timestamp: number; ttl: number }>()
 
@@ -13,7 +12,7 @@ class CacheService {
 
   get(key: string): any | null {
     const cached = this.cache.get(key)
-    
+
     if (!cached) {
       return null
     }
@@ -28,7 +27,13 @@ class CacheService {
   }
 
   clear(): void {
-    this.cache.clear()
+    try {
+      if (typeof window !== 'undefined') {
+        this.cache.clear()
+      }
+    } catch (error) {
+      console.warn('Erreur lors du nettoyage du cache:', error)
+    }
   }
 
   delete(key: string): boolean {
@@ -42,7 +47,7 @@ class CacheService {
     ttlMinutes: number = 5
   ): Promise<T> {
     const cached = this.get(key)
-    
+
     if (cached) {
       return cached
     }

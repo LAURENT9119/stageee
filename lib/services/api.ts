@@ -53,13 +53,24 @@ export interface Stagiaire {
 // Configuration API
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api"
 
-class ApiError extends Error {
+export class ApiError extends Error {
+  public readonly status: number
+  public readonly data?: any
+
   constructor(
-    public status: number,
     message: string,
+    status: number,
+    data?: any
   ) {
     super(message)
-    this.name = "ApiError"
+    this.name = 'ApiError'
+    this.status = status
+    this.data = data
+
+    // Maintenir la stack trace pour Node.js
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, ApiError)
+    }
   }
 }
 

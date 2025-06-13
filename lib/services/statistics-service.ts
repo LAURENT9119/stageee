@@ -1,64 +1,103 @@
+
 import { createClient } from '@/lib/supabase/client'
 import type { Database } from "../supabase/database.types"
 
 const supabase = createClient()
 
-export const statisticsService = {
-  async getStagiairesByMonth() {
-    const { data, error } = await supabase
-      .from('stagiaires')
-      .select('created_at, statut')
-      .order('created_at', { ascending: false })
-
-    if (error) throw error
-    return data
-  },
-
-  async getDemandesByType() {
-    const { data, error } = await supabase
-      .from('demandes')
-      .select('type, statut')
-
-    if (error) throw error
-    return data
-  },
-
-  async getStagiairesByDepartment() {
-    const { data, error } = await supabase
-      .from('stagiaires')
-      .select('departement, statut')
-
-    if (error) throw error
-    return data
-  },
-
-  async getDocumentsByType() {
-    const { data, error } = await supabase
-      .from('documents')
-      .select('type, created_at')
-
-    if (error) throw error
-    return data
-  },
-
+export class StatisticsService {
   async getDashboardStats() {
-    const [
-      stagiaires,
-      demandes,
-      documents,
-      evaluations
-    ] = await Promise.all([
-      supabase.from('stagiaires').select('id', { count: 'exact' }),
-      supabase.from('demandes').select('id', { count: 'exact' }),
-      supabase.from('documents').select('id', { count: 'exact' }),
-      supabase.from('evaluations').select('id', { count: 'exact' })
-    ])
+    try {
+      const [stagiaires, demandes, documents, users] = await Promise.all([
+        supabase.from('stagiaires').select('count(*)', { count: 'exact' }),
+        supabase.from('demandes').select('count(*)', { count: 'exact' }),
+        supabase.from('documents').select('count(*)', { count: 'exact' }),
+        supabase.from('users').select('count(*)', { count: 'exact' })
+      ])
 
-    return {
-      stagiaires: stagiaires.count || 0,
-      demandes: demandes.count || 0,
-      documents: documents.count || 0,
-      evaluations: evaluations.count || 0
+      const stagiaireActifs = await supabase
+        .from('stagiaires')
+        .select('count(*)', { count: 'exact' })
+        .eq('statut', 'actif')
+
+      const demandesEnCours = await supabase
+        .from('demandes')
+        .select('count(*)', { count: 'exact' })
+        .eq('statut', 'en_attente')
+
+      return {
+        stagiaires_total: stagiaires.count || 0,
+        stagiaires_actifs: stagiaireActifs.count || 0,
+        demandes_total: demandes.count || 0,
+        demandes_en_cours: demandesEnCours.count || 0,
+        documents_total: documents.count || 0,
+        users_total: users.count || 0
+      }
+    } catch (error) {
+      console.error('Error fetching dashboard stats:', error)
+      throw error
+    }
+  }
+
+  async getMonthlyStats(year: number, month: number) {
+    try {
+      const startDate = new Date(year, month - 1, 1).toISOString()
+      const endDate = new Date(year, month, 0).toISOString()
+
+      const [stagiaireCount, demandeCount, documentCount] = await Promise.all([
+        supabase
+          .from('stagiaires')
+          .select('count(*)', { count: 'exact' })
+          .gte('created_at', startDate)
+          .lte('created_at', endDate),
+
+        supabase
+          .from('demandes')
+          .select('count(*)', { count: 'exact' })
+          .gte('created_at', startDate)
+          .lte('created_at', endDate),
+
+        supabase
+          .from('documents')
+          .select('count(*)', { count: 'exact' })
+          .gte('created_at', startDate)
+          .lte('created_at', endDate)
+      ])
+
+      return {
+        stagiaires: stagiaireCount.count || 0,
+        demandes: demandeCount.count || 0,
+        documents: documentCount.count || 0
+      }
+    } catch (error) {
+      console.error('Error fetching monthly stats:', error)
+      throw error
+    }
+  }
+
+  async getDepartmentStats() {
+    try {
+      const { data, error } = await supabase
+        .from('stagiaires')
+        .select('departement')
+        .not('departement', 'is', null)
+
+      if (error) throw error
+
+      const departmentCounts = (data || []).reduce((acc: Record<string, number>, stagiaire) => {
+        const dept = stagiaire.departement || 'Non spécifié'
+        acc[dept] = (acc[dept] || 0) + 1
+        return acc
+      }, {})
+
+      return Object.entries(departmentCounts).map(([departement, count]) => ({
+        departement,
+        count
+      }))
+    } catch (error) {
+      console.error('Error fetching department stats:', error)
+      throw error
     }
   }
 }
+
+export const statisticsService = new StatisticsService()

@@ -1,55 +1,71 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
-import { useAppStore } from "../store"
+import { useState, useEffect, useCallback } from 'react'
 
-export function useApi<T>(apiCall: () => Promise<T>, dependencies: any[] = []) {
+interface UseApiOptions {
+  immediate?: boolean
+  onSuccess?: (data: any) => void
+  onError?: (error: any) => void
+}
+
+export function useApi<T>(
+  apiCall: () => Promise<T>,
+  dependencies: any[] = [],
+  options: UseApiOptions = {}
+) {
   const [data, setData] = useState<T | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const { addNotification } = useAppStore()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<Error | null>(null)
 
-  const fetchData = useCallback(async () => {
-    const isMounted = true
+  const { immediate = true, onSuccess, onError } = options
 
+  const execute = useCallback(async () => {
     try {
       setLoading(true)
       setError(null)
-      const result = await apiCall()
 
-      if (isMounted) {
-        setData(result)
+      const result = await apiCall()
+      setData(result)
+
+      if (onSuccess) {
+        onSuccess(result)
       }
+
+      return result
     } catch (err) {
-      if (isMounted) {
-        const errorMessage = err instanceof Error ? err.message : "Une erreur est survenue"
-        setError(errorMessage)
-        addNotification({
-          id: Date.now().toString(),
-          type: "error",
-          title: "Erreur",
-          message: errorMessage,
-          timestamp: new Date(),
-          read: false,
-        })
+      const error = err instanceof Error ? err : new Error('Unknown error occurred')
+      setError(error)
+
+      if (onError) {
+        onError(error)
       }
+
+      throw error
     } finally {
-      if (isMounted) {
-        setLoading(false)
-      }
+      setLoading(false)
     }
-  }, [apiCall, addNotification])
+  }, [apiCall, onSuccess, onError])
 
   useEffect(() => {
-    fetchData()
-
-    return () => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      const isMounted = false
+    if (immediate) {
+      execute()
     }
   }, dependencies)
 
-  return { data, loading, error, refetch: () => fetchData() }
+  const reset = useCallback(() => {
+    setData(null)
+    setError(null)
+    setLoading(false)
+  }, [])
+
+  return {
+    data,
+    loading,
+    error,
+    execute,
+    reset,
+    refetch: execute
+  }
 }
 
 export function useMutation<T, P>(apiCall: (params: P) => Promise<T>) {

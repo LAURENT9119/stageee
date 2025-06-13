@@ -1,9 +1,5 @@
 import { BaseService } from './base-service'
-import type { Database } from "../supabase/database.types"
-
-export type Stagiaire = Database["public"]["Tables"]["stagiaires"]["Row"]
-export type StagiaireInsert = Database["public"]["Tables"]["stagiaires"]["Insert"]
-export type StagiaireUpdate = Database["public"]["Tables"]["stagiaires"]["Update"]
+import type { Stagiaire, StagiaireInsert, StagiaireUpdate } from '@/lib/types'
 
 export class StagiairesService extends BaseService {
   private readonly tableName = 'stagiaires'
@@ -54,27 +50,6 @@ export class StagiairesService extends BaseService {
       actifs,
       inactifs
     }
-  }
-
-  // Méthodes héritées de BaseService (pour compatibilité)
-  async getAll() {
-    return this.getAllStagiaires()
-  }
-
-  async getById(id: string) {
-    return this.getStagiaireById(id)
-  }
-
-  async create(stagiaire: StagiaireInsert) {
-    return this.createStagiaire(stagiaire)
-  }
-
-  async update(id: string, updates: StagiaireUpdate) {
-    return this.updateStagiaire(id, updates)
-  }
-
-  async delete(id: string) {
-    return this.deleteStagiaire(id)
   }
 }
 

@@ -1,9 +1,11 @@
 
 import { createClient } from '@/lib/supabase/client'
+import type { User } from '@supabase/supabase-js'
 
-export async function getCurrentUser() {
+const supabase = createClient()
+
+export async function getCurrentUser(): Promise<User | null> {
   try {
-    const supabase = createClient()
     const { data: { user }, error } = await supabase.auth.getUser()
     
     if (error) {
@@ -18,9 +20,41 @@ export async function getCurrentUser() {
   }
 }
 
+export async function signInWithEmail(email: string, password: string) {
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+    
+    if (error) throw error
+    return { data, error: null }
+  } catch (error) {
+    console.error('Sign in error:', error)
+    return { data: null, error }
+  }
+}
+
+export async function signUpWithEmail(email: string, password: string, metadata?: any) {
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: metadata
+      }
+    })
+    
+    if (error) throw error
+    return { data, error: null }
+  } catch (error) {
+    console.error('Sign up error:', error)
+    return { data: null, error }
+  }
+}
+
 export async function signOut() {
   try {
-    const supabase = createClient()
     const { error } = await supabase.auth.signOut()
     
     if (error) {
@@ -35,8 +69,27 @@ export async function signOut() {
   }
 }
 
+export async function getSession() {
+  try {
+    const { data: { session }, error } = await supabase.auth.getSession()
+    
+    if (error) {
+      console.error('Error getting session:', error)
+      return null
+    }
+    
+    return session
+  } catch (error) {
+    console.error('Session error:', error)
+    return null
+  }
+}
+
 // Export auth object for compatibility
 export const auth = {
   getCurrentUser,
-  signOut
+  signInWithEmail,
+  signUpWithEmail,
+  signOut,
+  getSession
 }

@@ -1,9 +1,6 @@
-import { BaseService } from './base-service'
-import type { Database } from "../supabase/database.types"
 
-export type Document = Database["public"]["Tables"]["documents"]["Row"]
-export type DocumentInsert = Database["public"]["Tables"]["documents"]["Insert"]
-export type DocumentUpdate = Database["public"]["Tables"]["documents"]["Update"]
+import { BaseService } from './base-service'
+import type { Document, DocumentInsert, DocumentUpdate } from '@/lib/types'
 
 export class DocumentsService extends BaseService {
   private readonly tableName = 'documents'

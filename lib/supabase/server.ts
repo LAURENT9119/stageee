@@ -1,5 +1,4 @@
 
-
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
@@ -39,3 +38,5 @@ export function createClient() {
 // Alias pour compatibilité
 export const createServerSupabaseClient = createClient
 
+// Export par défaut
+export default createClient

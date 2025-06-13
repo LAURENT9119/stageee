@@ -1,3 +1,4 @@
+
 import { createServerClient, type CookieOptions } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
@@ -9,7 +10,7 @@ export async function middleware(request: NextRequest) {
   })
 
   // Vérifier que les variables d'environnement existent
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://blmyaizvefkfmwgggid.supabase.co'
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   // Si les variables ne sont pas configurées, laisser passer sans authentification
@@ -19,91 +20,85 @@ export async function middleware(request: NextRequest) {
   }
 
   try {
-    // Vérifier que les variables d'environnement sont présentes
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      console.error('Variables d\'environnement Supabase manquantes')
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+      cookies: {
+        get(name: string) {
+          return request.cookies.get(name)?.value
+        },
+        set(name: string, value: string, options: CookieOptions) {
+          request.cookies.set({
+            name,
+            value,
+            ...options,
+          })
+          response = NextResponse.next({
+            request: {
+              headers: request.headers,
+            },
+          })
+          response.cookies.set({
+            name,
+            value,
+            ...options,
+          })
+        },
+        remove(name: string, options: CookieOptions) {
+          request.cookies.set({
+            name,
+            value: '',
+            ...options,
+          })
+          response = NextResponse.next({
+            request: {
+              headers: request.headers,
+            },
+          })
+          response.cookies.set({
+            name,
+            value: '',
+            ...options,
+          })
+        },
+      },
+    })
+
+    // Rafraîchir la session si nécessaire
+    const { data: { user }, error } = await supabase.auth.getUser()
+
+    // Routes publiques qui ne nécessitent pas d'authentification
+    const publicRoutes = ['/auth/login', '/auth/register', '/api/auth']
+    const isPublicRoute = publicRoutes.some(route => request.nextUrl.pathname.startsWith(route))
+
+    // Si pas d'utilisateur et route privée, rediriger vers login
+    if (!user && !isPublicRoute && !request.nextUrl.pathname.startsWith('/api/')) {
       return NextResponse.redirect(new URL('/auth/login', request.url))
     }
 
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-      {
-        cookies: {
-          get(name: string) {
-            return request.cookies.get(name)?.value
-          },
-          set(name: string, value: string, options: CookieOptions) {
-            request.cookies.set({
-              name,
-              value,
-              ...options,
-            })
-            response = NextResponse.next({
-              request: {
-                headers: request.headers,
-              },
-            })
-            response.cookies.set({
-              name,
-              value,
-              ...options,
-            })
-          },
-          remove(name: string, options: CookieOptions) {
-            request.cookies.set({
-              name,
-              value: "",
-              ...options,
-            })
-            response = NextResponse.next({
-              request: {
-                headers: request.headers,
-              },
-            })
-            response.cookies.set({
-              name,
-              value: "",
-              ...options,
-            })
-          },
-        },
-      }
-    )
-
-    // Vérifier l'authentification
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-
-    // Routes protégées
-    const protectedRoutes = ["/admin", "/rh", "/tuteur", "/stagiaire"]
-    const isProtectedRoute = protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))
-
-    // Rediriger vers login si non authentifié
-    if (isProtectedRoute && !user) {
-      return NextResponse.redirect(new URL("/auth/login", request.url))
+    // Si utilisateur connecté et sur page de login, rediriger vers dashboard
+    if (user && (request.nextUrl.pathname === '/auth/login' || request.nextUrl.pathname === '/auth/register')) {
+      const userRole = user.user_metadata?.role || 'stagiaire'
+      const dashboardRoute = userRole === 'admin' ? '/admin' : 
+                           userRole === 'rh' ? '/rh' : 
+                           userRole === 'tuteur' ? '/tuteur' : '/stagiaire'
+      return NextResponse.redirect(new URL(dashboardRoute, request.url))
     }
 
-    // Rediriger vers dashboard si déjà authentifié et sur page auth
-    if (user && request.nextUrl.pathname.startsWith("/auth")) {
-      return NextResponse.redirect(new URL("/", request.url))
-    }
-
+    return response
   } catch (error) {
     console.error('Middleware error:', error)
-    // En cas d'erreur d'auth, rediriger vers login pour les routes protégées
-    const protectedRoutes = ["/admin", "/rh", "/tuteur", "/stagiaire"]
-    const isProtectedRoute = protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))
-
-    if (isProtectedRoute) {
-      return NextResponse.redirect(new URL("/auth/login", request.url))
-    }
+    return response
   }
-
-  return response
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public folder
+     */
+    '/((?!_next/static|_next/image|favicon.ico|public|images).*)',
+  ],
 }

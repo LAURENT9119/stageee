@@ -75,3 +75,62 @@ export interface Notification {
   timestamp: string
   read: boolean
 }
+
+// Types pour les statistiques spécialisées
+export interface StagiaireStats {
+  total: number
+  actifs: number
+  inactifs: number
+  par_departement: { departement: string; count: number }[]
+  par_ecole: { ecole: string; count: number }[]
+}
+
+export interface DemandeStats {
+  total: number
+  en_attente: number
+  approuvees: number
+  refusees: number
+  par_type: { type: string; count: number }[]
+}
+
+export interface DocumentStats {
+  total: number
+  par_type: { type: string; count: number }[]
+  par_format: { format: string; count: number }[]
+}
+
+// Types pour les filtres de recherche
+export interface SearchFilters {
+  statut?: string
+  departement?: string
+  periode?: string
+  type?: string
+  ecole?: string
+  tuteur_id?: string
+}
+
+// Types pour les réponses de recherche
+export interface SearchResults {
+  stagiaires: Stagiaire[]
+  demandes: Demande[]
+  documents: Document[]
+  users: User[]
+}
+
+// Types pour l'authentification
+export interface AuthResponse {
+  user?: any
+  error?: any
+}
+
+export interface LoginCredentials {
+  email: string
+  password: string
+}
+
+export interface RegisterData extends LoginCredentials {
+  nom: string
+  prenom: string
+  telephone?: string
+  role?: string
+}

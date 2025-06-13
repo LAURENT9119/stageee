@@ -1,8 +1,15 @@
-class CacheService {
-  private cache = new Map<string, { data: any; timestamp: number; ttl: number }>()
 
-  set(key: string, data: any, ttlMinutes: number = 5): void {
-    const ttl = ttlMinutes * 60 * 1000 // Convertir en millisecondes
+interface CacheItem<T> {
+  data: T
+  timestamp: number
+  ttl: number
+}
+
+class CacheService {
+  private cache = new Map<string, CacheItem<any>>()
+  private readonly DEFAULT_TTL = 5 * 60 * 1000 // 5 minutes
+
+  set<T>(key: string, data: T, ttl: number = this.DEFAULT_TTL): void {
     this.cache.set(key, {
       data,
       timestamp: Date.now(),
@@ -10,52 +17,75 @@ class CacheService {
     })
   }
 
-  get(key: string): any | null {
-    const cached = this.cache.get(key)
-
-    if (!cached) {
+  get<T>(key: string): T | null {
+    const item = this.cache.get(key)
+    
+    if (!item) {
       return null
     }
 
-    // Vérifier si le cache a expiré
-    if (Date.now() - cached.timestamp > cached.ttl) {
+    const now = Date.now()
+    const isExpired = (now - item.timestamp) > item.ttl
+
+    if (isExpired) {
       this.cache.delete(key)
       return null
     }
 
-    return cached.data
+    return item.data as T
   }
 
-  clear(): void {
-    try {
-      if (typeof window !== 'undefined') {
-        this.cache.clear()
-      }
-    } catch (error) {
-      console.warn('Erreur lors du nettoyage du cache:', error)
+  has(key: string): boolean {
+    const item = this.cache.get(key)
+    
+    if (!item) {
+      return false
     }
+
+    const now = Date.now()
+    const isExpired = (now - item.timestamp) > item.ttl
+
+    if (isExpired) {
+      this.cache.delete(key)
+      return false
+    }
+
+    return true
   }
 
   delete(key: string): boolean {
     return this.cache.delete(key)
   }
 
-  // Cache wrapper pour les appels API
-  async getCached<T>(
-    key: string, 
-    fetchFunction: () => Promise<T>, 
-    ttlMinutes: number = 5
-  ): Promise<T> {
-    const cached = this.get(key)
+  clear(): void {
+    this.cache.clear()
+  }
 
-    if (cached) {
-      return cached
+  cleanup(): void {
+    const now = Date.now()
+    
+    for (const [key, item] of this.cache.entries()) {
+      const isExpired = (now - item.timestamp) > item.ttl
+      
+      if (isExpired) {
+        this.cache.delete(key)
+      }
     }
+  }
 
-    const data = await fetchFunction()
-    this.set(key, data, ttlMinutes)
-    return data
+  getStats() {
+    return {
+      size: this.cache.size,
+      keys: Array.from(this.cache.keys())
+    }
   }
 }
 
 export const cacheService = new CacheService()
+
+// Nettoyage automatique toutes les 10 minutes
+if (typeof window !== 'undefined') {
+  setInterval(() => {
+    cacheService.cleanup()
+  }, 10 * 60 * 1000)
+}

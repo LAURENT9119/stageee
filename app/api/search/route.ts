@@ -1,13 +1,13 @@
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/services/server-auth-service'
+import { createClient } from '@/lib/supabase/server'
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = await createServerSupabaseClient()
+    const supabase = createClient()
     const { searchParams } = new URL(request.url)
     
-    const query = searchParams.get('q') || ''
+    const query = searchParams.get('q') || searchParams.get('query') || ''
     const type = searchParams.get('type') || 'all'
     const filters = {
       statut: searchParams.get('statut'),
@@ -22,97 +22,117 @@ export async function GET(request: NextRequest) {
       users: []
     }
 
+    if (!query && type === 'all') {
+      return NextResponse.json({ 
+        results, 
+        message: 'Query parameter is required' 
+      }, { status: 400 })
+    }
+
     // Recherche dans les stagiaires
     if (type === 'all' || type === 'stagiaires') {
-      let stagiaireQuery = supabase
-        .from('stagiaires')
-        .select(`
-          *,
-          users(name, email)
-        `)
+      try {
+        let stagiaireQuery = supabase
+          .from('stagiaires')
+          .select(`
+            *,
+            users(name, email)
+          `)
 
-      if (query) {
-        stagiaireQuery = stagiaireQuery.or(
-          `nom.ilike.%${query}%,prenom.ilike.%${query}%,email.ilike.%${query}%,etablissement.ilike.%${query}%`
-        )
+        if (query) {
+          stagiaireQuery = stagiaireQuery.or(
+            `nom.ilike.%${query}%,prenom.ilike.%${query}%,email.ilike.%${query}%,etablissement.ilike.%${query}%`
+          )
+        }
+
+        if (filters.statut) {
+          stagiaireQuery = stagiaireQuery.eq('statut', filters.statut)
+        }
+
+        if (filters.departement) {
+          stagiaireQuery = stagiaireQuery.eq('specialite', filters.departement)
+        }
+
+        const { data: stagiaires, error } = await stagiaireQuery.limit(20)
+        
+        if (error) {
+          console.error('Error searching stagiaires:', error)
+        } else {
+          results.stagiaires = stagiaires || []
+        }
+      } catch (error) {
+        console.error('Error in stagiaires search:', error)
       }
-
-      if (filters.statut) {
-        stagiaireQuery = stagiaireQuery.eq('statut', filters.statut)
-      }
-
-      if (filters.departement) {
-        stagiaireQuery = stagiaireQuery.eq('specialite', filters.departement)
-      }
-
-      const { data: stagiaires } = await stagiaireQuery.limit(20)
-      results.stagiaires = stagiaires || []
     }
 
     // Recherche dans les demandes
     if (type === 'all' || type === 'demandes') {
-      let demandeQuery = supabase
-        .from('demandes')
-        .select(`
-          *,
-          stagiaires(nom, prenom, email)
-        `)
+      try {
+        let demandeQuery = supabase
+          .from('demandes')
+          .select(`
+            *,
+            stagiaire:stagiaires(nom, prenom, email)
+          `)
 
-      if (query) {
-        demandeQuery = demandeQuery.or(
-          `type.ilike.%${query}%,details.ilike.%${query}%,motif.ilike.%${query}%`
-        )
+        if (query) {
+          demandeQuery = demandeQuery.or(
+            `type.ilike.%${query}%,statut.ilike.%${query}%,details.ilike.%${query}%`
+          )
+        }
+
+        const { data: demandes, error } = await demandeQuery.limit(20)
+        
+        if (error) {
+          console.error('Error searching demandes:', error)
+        } else {
+          results.demandes = demandes || []
+        }
+      } catch (error) {
+        console.error('Error in demandes search:', error)
       }
-
-      if (filters.statut) {
-        demandeQuery = demandeQuery.eq('statut', filters.statut)
-      }
-
-      const { data: demandes } = await demandeQuery.limit(20)
-      results.demandes = demandes || []
     }
 
     // Recherche dans les documents
     if (type === 'all' || type === 'documents') {
-      let documentQuery = supabase
-        .from('documents')
-        .select('*')
+      try {
+        let documentQuery = supabase
+          .from('documents')
+          .select(`
+            *,
+            stagiaire:stagiaires(nom, prenom, email)
+          `)
 
-      if (query) {
-        documentQuery = documentQuery.or(
-          `nom.ilike.%${query}%,description.ilike.%${query}%,type.ilike.%${query}%`
-        )
+        if (query) {
+          documentQuery = documentQuery.or(
+            `nom.ilike.%${query}%,description.ilike.%${query}%,type.ilike.%${query}%`
+          )
+        }
+
+        const { data: documents, error } = await documentQuery.limit(20)
+        
+        if (error) {
+          console.error('Error searching documents:', error)
+        } else {
+          results.documents = documents || []
+        }
+      } catch (error) {
+        console.error('Error in documents search:', error)
       }
-
-      const { data: documents } = await documentQuery.limit(20)
-      results.documents = documents || []
     }
 
-    // Recherche dans les utilisateurs
-    if (type === 'all' || type === 'users') {
-      let userQuery = supabase
-        .from('users')
-        .select('*')
-
-      if (query) {
-        userQuery = userQuery.or(
-          `name.ilike.%${query}%,email.ilike.%${query}%`
-        )
-      }
-
-      const { data: users } = await userQuery.limit(20)
-      results.users = users || []
-    }
-
-    return NextResponse.json({
+    return NextResponse.json({ 
       results,
-      total: Object.values(results).reduce((sum, arr) => sum + arr.length, 0),
       query,
+      type,
       filters
     })
 
-  } catch (error: any) {
-    console.error('Erreur de recherche:', error)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  } catch (error) {
+    console.error('Search API error:', error)
+    return NextResponse.json(
+      { error: 'Internal server error', message: error instanceof Error ? error.message : 'Unknown error' },
+      { status: 500 }
+    )
   }
 }

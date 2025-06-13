@@ -1,88 +1,107 @@
+
 import { createClient } from '@/lib/supabase/client'
 import type { Database } from "../supabase/database.types"
+import type { User, UserInsert, UserUpdate } from '@/lib/types'
 
 const supabase = createClient()
 
-export type User = Database["public"]["Tables"]["users"]["Row"]
-export type UserInsert = Database["public"]["Tables"]["users"]["Insert"]
-export type UserUpdate = Database["public"]["Tables"]["users"]["Update"]
-
 export class UsersService {
-  private supabase = supabase
+  async getAllUsers(): Promise<User[]> {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .order('created_at', { ascending: false })
 
-  async getAll() {
-    const { data, error } = await this.supabase
-      .from('users')
-      .select('*')
-      .order('created_at', { ascending: false })
-
-    if (error) throw error
-    return data
+      if (error) throw error
+      return data || []
+    } catch (error) {
+      console.error('Error fetching users:', error)
+      throw error
+    }
   }
 
-  async getById(id: string) {
-    const { data, error } = await this.supabase
-      .from('users')
-      .select('*')
-      .eq('id', id)
-      .single()
+  async getUserById(id: string): Promise<User | null> {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', id)
+        .single()
 
-    if (error) throw error
-    return data
+      if (error) {
+        if (error.code === 'PGRST116') return null
+        throw error
+      }
+
+      return data
+    } catch (error) {
+      console.error('Error fetching user by id:', error)
+      throw error
+    }
   }
 
-  async create(user: UserInsert) {
-    const { data, error } = await this.supabase
-      .from('users')
-      .insert(user)
-      .select()
-      .single()
+  async createUser(user: UserInsert): Promise<User> {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .insert(user)
+        .select()
+        .single()
 
-    if (error) throw error
-    return data
+      if (error) throw error
+      return data
+    } catch (error) {
+      console.error('Error creating user:', error)
+      throw error
+    }
   }
 
-  async update(id: string, updates: UserUpdate) {
-    const { data, error } = await this.supabase
-      .from('users')
-      .update(updates)
-      .eq('id', id)
-      .select()
-      .single()
+  async updateUser(id: string, updates: UserUpdate): Promise<User> {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .update(updates)
+        .eq('id', id)
+        .select()
+        .single()
 
-    if (error) throw error
-    return data
+      if (error) throw error
+      return data
+    } catch (error) {
+      console.error('Error updating user:', error)
+      throw error
+    }
   }
 
-  async delete(id: string) {
-    const { error } = await this.supabase
-      .from('users')
-      .delete()
-      .eq('id', id)
+  async deleteUser(id: string): Promise<void> {
+    try {
+      const { error } = await supabase
+        .from('users')
+        .delete()
+        .eq('id', id)
 
-    if (error) throw error
+      if (error) throw error
+    } catch (error) {
+      console.error('Error deleting user:', error)
+      throw error
+    }
   }
 
-  async getByRole(role: string) {
-    const { data, error } = await this.supabase
-      .from('users')
-      .select('*')
-      .eq('role', role)
-      .order('created_at', { ascending: false })
+  async getUsersByRole(role: string): Promise<User[]> {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('role', role)
+        .order('name')
 
-    if (error) throw error
-    return data
-  }
-
-  async search(searchTerm: string) {
-    const { data, error } = await this.supabase
-      .from('users')
-      .select('*')
-      .or(`name.ilike.%${searchTerm}%,email.ilike.%${searchTerm}%`)
-      .order('created_at', { ascending: false })
-
-    if (error) throw error
-    return data
+      if (error) throw error
+      return data || []
+    } catch (error) {
+      console.error('Error fetching users by role:', error)
+      throw error
+    }
   }
 }
 

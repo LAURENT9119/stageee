@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${origin}/`)
   } catch (error) {
     console.error('Callback error:', error)
+    const requestUrl = new URL(request.url)
     return NextResponse.redirect(`${requestUrl.origin}/auth/login?error=callback_error`)
   }
 }

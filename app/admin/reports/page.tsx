@@ -86,7 +86,7 @@ export default function ReportsPage() {
       <Header user={{ name: "ADMINISTRATEUR", role: "admin" }} />
 
       <div className="flex flex-1">
-        <Sidebar role="admin" />
+        <Sidebar />
 
         <main className="flex-1 p-6 bg-background">
           <div className="flex justify-between items-center mb-6">

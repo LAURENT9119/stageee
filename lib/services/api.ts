@@ -294,3 +294,40 @@ export const reportsApiService = {
     return apiRequest<any>(`/api/reports/request-types?period=${period}`)
   }
 }
+
+// Service d'export
+export const exportService = {
+  async exportToCSV(type: "demandes" | "stagiaires" | "documents", filters?: any): Promise<Blob> {
+    const params = new URLSearchParams()
+    if (filters) {
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          params.append(key, String(value))
+        }
+      })
+    }
+    
+    const response = await fetch(`/api/export/${type}?format=csv&${params}`)
+    if (!response.ok) {
+      throw new Error('Erreur lors de l\'export CSV')
+    }
+    return response.blob()
+  },
+
+  async exportToPDF(type: "demandes" | "stagiaires" | "documents", filters?: any): Promise<Blob> {
+    const params = new URLSearchParams()
+    if (filters) {
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          params.append(key, String(value))
+        }
+      })
+    }
+    
+    const response = await fetch(`/api/export/${type}?format=pdf&${params}`)
+    if (!response.ok) {
+      throw new Error('Erreur lors de l\'export PDF')
+    }
+    return response.blob()
+  }
+}

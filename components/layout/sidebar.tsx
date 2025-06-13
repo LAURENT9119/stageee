@@ -14,6 +14,7 @@ import { Settings } from "lucide-react"
 
 interface SidebarProps {
   items: SidebarNavItem[]
+  role?: string
 }
 
 function SidebarNav({ items }: SidebarProps) {
@@ -81,7 +82,7 @@ function SidebarMenuButton({ children, asChild }: SidebarMenuButtonProps) {
   )
 }
 
-export async function Sidebar() {
+export async function Sidebar({role}: {role?: string}) {
   const user = await auth()?.user
 
   return (
@@ -109,7 +110,7 @@ export async function Sidebar() {
           ]}
         />
       </div>
-      {user?.role === "admin" && (
+      {(role === "admin" || user?.role === "admin") && (
         <div className="flex-1 space-y-2">
           <h2 className="text-sm font-semibold tracking-tight">Section Admin</h2>
           <SidebarMenu>
@@ -145,7 +146,7 @@ export async function Sidebar() {
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
-            {user?.role === "admin" && (
+            {(role === "admin" || user?.role === "admin") && (
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link href="/admin/test-crud" className="flex items-center gap-2">

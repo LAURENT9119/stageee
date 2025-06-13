@@ -1,15 +1,13 @@
 
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/client'
 import type { Database } from "../supabase/database.types"
-
-const supabase = createClient()
 
 export type Notification = Database["public"]["Tables"]["notifications"]["Row"]
 export type NotificationInsert = Database["public"]["Tables"]["notifications"]["Insert"]
 export type NotificationUpdate = Database["public"]["Tables"]["notifications"]["Update"]
 
 export class NotificationsService {
-  private supabase = supabase
+  private supabase = createClient()
 
   async getAll() {
     const { data, error } = await this.supabase

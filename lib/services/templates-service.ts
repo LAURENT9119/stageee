@@ -1,8 +1,6 @@
 
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/client'
 import type { Database } from "../supabase/database.types"
-
-const supabase = createClient()
 
 export interface Template {
   id: string
@@ -29,7 +27,7 @@ export interface TemplateUpdate {
 }
 
 export class TemplatesService {
-  private supabase = supabase
+  private supabase = createClient()
 
   async getAll(): Promise<Template[]> {
     // Simulated data since templates table might not exist yet

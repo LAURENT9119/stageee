@@ -1,14 +1,12 @@
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from '@/lib/supabase/client'
 import type { Database } from "../supabase/database.types"
-
-const supabase = createClient()
 
 export type Evaluation = Database["public"]["Tables"]["evaluations"]["Row"]
 export type EvaluationInsert = Database["public"]["Tables"]["evaluations"]["Insert"]
 export type EvaluationUpdate = Database["public"]["Tables"]["evaluations"]["Update"]
 
 export class EvaluationsService {
-  private supabase = supabase
+  private supabase = createClient()
 
   async getAll() {
     const { data, error } = await this.supabase

@@ -10,9 +10,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
-import { mockStagiaires } from "@/lib/mock-data"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function NewEvaluationPage() {
   const user = { name: "Thomas Martin", role: "tuteur" }
@@ -20,6 +19,8 @@ export default function NewEvaluationPage() {
 
   const [stagiaireId, setStagiaireId] = useState("")
   const [commentaire, setCommentaire] = useState("")
+  const [stagiaires, setStagiaires] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   const [competences, setCompetences] = useState([
     { nom: "Travail en équipe", note: 0 },
     { nom: "Compétences techniques", note: 0 },
@@ -28,9 +29,24 @@ export default function NewEvaluationPage() {
     { nom: "Ponctualité", note: 0 },
   ])
 
-  // Filtrer les stagiaires actifs pour ce tuteur (id=3)
-  const tuteurId = "3" // Thomas Martin
-  const stagiaires = mockStagiaires.filter((s) => s.tuteurId === tuteurId && s.statut === "actif")
+  useEffect(() => {
+    const loadStagiaires = async () => {
+      try {
+        // TODO: Récupérer l'ID du tuteur connecté
+        const tuteurId = "3" // Temporaire
+        const response = await fetch(`/api/stagiaires?tuteurId=${tuteurId}&statut=actif`)
+        if (response.ok) {
+          setStagiaires(await response.json())
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement des stagiaires:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    loadStagiaires()
+  }, [])
 
   const handleNoteChange = (index: number, note: number) => {
     const newCompetences = [...competences]

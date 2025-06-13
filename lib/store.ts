@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import type { User, Demande, Document, Stagiaire } from "./mock-data"
+// Types maintenant définis via Supabase ou les services spécifiques
 import type { Language } from "./i18n"
 
 interface AppState {
@@ -11,16 +11,16 @@ interface AppState {
   setLanguage: (language: Language) => void
 
   // User
-  currentUser: User | null
-  setCurrentUser: (user: User | null) => void
+  currentUser: any | null
+  setCurrentUser: (user: any | null) => void
 
   // Data
-  demandes: Demande[]
-  documents: Document[]
-  stagiaires: Stagiaire[]
-  setDemandes: (demandes: Demande[]) => void
-  setDocuments: (documents: Document[]) => void
-  setStagiaires: (stagiaires: Stagiaire[]) => void
+  demandes: any[]
+  documents: any[]
+  stagiaires: any[]
+  setDemandes: (demandes: any[]) => void
+  setDocuments: (documents: any[]) => void
+  setStagiaires: (stagiaires: any[]) => void
 
   // UI State
   isLoading: boolean

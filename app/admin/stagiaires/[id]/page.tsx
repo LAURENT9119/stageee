@@ -8,8 +8,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { mockStagiaires, mockDocuments, mockDemandes } from "@/lib/mock-data"
 import { useParams } from "next/navigation"
+import { useEffect, useState } from "react"
 import { Calendar, FileText, Mail, MapPin, Phone, School, User, Briefcase, Clock, Plus } from "lucide-react"
 import Link from "next/link"
 
@@ -17,13 +17,48 @@ export default function StagiaireDetailPage() {
   const user = { name: "ADMINISTRATEUR", role: "admin" }
   const params = useParams()
   const stagiaireId = params.id as string
+  const [stagiaire, setStagiaire] = useState<any>(null)
+  const [documents, setDocuments] = useState<any[]>([])
+  const [demandes, setDemandes] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-  // Trouver le stagiaire correspondant
-  const stagiaire = mockStagiaires.find((s) => s.id === stagiaireId)
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        // TODO: Remplacer par les vrais appels API
+        const [stagiaireRes, documentsRes, demandesRes] = await Promise.all([
+          fetch(`/api/stagiaires/${stagiaireId}`),
+          fetch(`/api/documents?stagiaireId=${stagiaireId}`),
+          fetch(`/api/demandes?stagiaireId=${stagiaireId}`)
+        ])
+        
+        if (stagiaireRes.ok) setStagiaire(await stagiaireRes.json())
+        if (documentsRes.ok) setDocuments(await documentsRes.json())
+        if (demandesRes.ok) setDemandes(await demandesRes.json())
+      } catch (error) {
+        console.error('Erreur lors du chargement des données:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    loadData()
+  }, [stagiaireId])
 
-  // Filtrer les documents et demandes pour ce stagiaire
-  const documents = mockDocuments.filter((doc) => doc.stagiaireId === stagiaireId)
-  const demandes = mockDemandes.filter((dem) => dem.stagiaireId === stagiaireId)
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header user={user} />
+        <div className="flex flex-1">
+          <Sidebar role="admin" />
+          <main className="flex-1 p-6 bg-gray-50 flex items-center justify-center">
+            <div className="text-center">Chargement...</div>
+          </main>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
 
   if (!stagiaire) {
     return (

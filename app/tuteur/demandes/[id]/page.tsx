@@ -9,10 +9,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Textarea } from "@/components/ui/textarea"
-import { mockDemandes } from "@/lib/mock-data"
 import { useParams, useRouter } from "next/navigation"
 import { Calendar, Clock, FileText, MessageSquare, User, CheckCircle, XCircle } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 
 export default function TuteurDemandeDetailPage() {
@@ -23,9 +22,40 @@ export default function TuteurDemandeDetailPage() {
 
   const [commentaire, setCommentaire] = useState("")
   const [decision, setDecision] = useState<"Validé" | "Refusé" | null>(null)
+  const [demande, setDemande] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
 
-  // Trouver la demande correspondante
-  const demande = mockDemandes.find((d) => d.id === demandeId)
+  useEffect(() => {
+    const loadDemande = async () => {
+      try {
+        const response = await fetch(`/api/demandes/${demandeId}`)
+        if (response.ok) {
+          setDemande(await response.json())
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement de la demande:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    loadDemande()
+  }, [demandeId])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Header user={user} />
+        <div className="flex flex-1">
+          <Sidebar role="tuteur" />
+          <main className="flex-1 p-6 bg-gray-50 flex items-center justify-center">
+            <div className="text-center">Chargement...</div>
+          </main>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
 
   if (!demande) {
     return (

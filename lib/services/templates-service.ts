@@ -30,32 +30,102 @@ export class TemplatesService {
   private supabase = createClient()
 
   async getAll(): Promise<Template[]> {
-    // Simulated data since templates table might not exist yet
-    return [
-      {
-        id: '1',
-        nom: 'Attestation de stage',
-        type: 'attestation',
-        contenu: 'Attestation de stage pour {{nom}} {{prenom}}...',
-        variables: ['nom', 'prenom', 'periode', 'entreprise'],
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
-      },
-      {
-        id: '2',
-        nom: 'Lettre de recommandation',
-        type: 'recommandation',
-        contenu: 'Je recommande {{nom}} {{prenom}} pour...',
-        variables: ['nom', 'prenom', 'competences', 'tuteur'],
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+    try {
+      const { data, error } = await this.supabase
+        .from('templates')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (error) {
+        console.error('Erreur lors de la récupération des templates:', error)
+        return []
       }
-    ]
+
+      return data || []
+    } catch (error) {
+      console.error('Erreur dans getAll templates:', error)
+      return []
+    }
   }
 
   async getById(id: string): Promise<Template | null> {
-    const templates = await this.getAll()
-    return templates.find(t => t.id === id) || null
+    try {
+      const { data, error } = await this.supabase
+        .from('templates')
+        .select('*')
+        .eq('id', id)
+        .single()
+
+      if (error) {
+        console.error('Erreur lors de la récupération du template:', error)
+        return null
+      }
+
+      return data
+    } catch (error) {
+      console.error('Erreur dans getById template:', error)
+      return null
+    }
+  }
+
+  async create(template: TemplateInsert): Promise<Template | null> {
+    try {
+      const { data, error } = await this.supabase
+        .from('templates')
+        .insert([template])
+        .select()
+        .single()
+
+      if (error) {
+        console.error('Erreur lors de la création du template:', error)
+        return null
+      }
+
+      return data
+    } catch (error) {
+      console.error('Erreur dans create template:', error)
+      return null
+    }
+  }
+
+  async update(id: string, template: TemplateUpdate): Promise<Template | null> {
+    try {
+      const { data, error } = await this.supabase
+        .from('templates')
+        .update(template)
+        .eq('id', id)
+        .select()
+        .single()
+
+      if (error) {
+        console.error('Erreur lors de la mise à jour du template:', error)
+        return null
+      }
+
+      return data
+    } catch (error) {
+      console.error('Erreur dans update template:', error)
+      return null
+    }
+  }
+
+  async delete(id: string): Promise<boolean> {
+    try {
+      const { error } = await this.supabase
+        .from('templates')
+        .delete()
+        .eq('id', id)
+
+      if (error) {
+        console.error('Erreur lors de la suppression du template:', error)
+        return false
+      }
+
+      return true
+    } catch (error) {
+      console.error('Erreur dans delete template:', error)
+      return false
+    }
   }
 
   async create(template: TemplateInsert): Promise<Template> {

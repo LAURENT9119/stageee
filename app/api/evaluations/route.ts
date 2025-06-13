@@ -1,17 +1,36 @@
-
 import { NextRequest, NextResponse } from 'next/server'
-import { evaluationsService } from '@/lib/services/evaluations-service'
+import { createServerSupabaseClient } from '@/lib/services/server-auth-service'
 
 export async function GET(request: NextRequest) {
   try {
+    const supabase = await createServerSupabaseClient()
     const { searchParams } = new URL(request.url)
-    const filters = {
-      stagiaireId: searchParams.get('stagiaireId') || undefined,
-      tuteurId: searchParams.get('tuteurId') || undefined,
+    const stagiaire_id = searchParams.get('stagiaire_id')
+    const tuteur_id = searchParams.get('tuteur_id')
+
+    let query = supabase
+      .from('evaluations')
+      .select(`
+        *,
+        stagiaires(nom, prenom, email),
+        users!evaluations_tuteur_id_fkey(name, email)
+      `)
+
+    if (stagiaire_id) {
+      query = query.eq('stagiaire_id', stagiaire_id)
     }
 
-    const evaluations = await evaluationsService.getAll(filters)
-    return NextResponse.json(evaluations)
+    if (tuteur_id) {
+      query = query.eq('tuteur_id', tuteur_id)
+    }
+
+    const { data, error } = await query.order('created_at', { ascending: false })
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json(data || [])
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
@@ -19,9 +38,20 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { evaluation, competences } = await request.json()
-    const newEvaluation = await evaluationsService.create(evaluation, competences)
-    return NextResponse.json(newEvaluation, { status: 201 })
+    const supabase = await createServerSupabaseClient()
+    const evaluationData = await request.json()
+
+    const { data, error } = await supabase
+      .from('evaluations')
+      .insert([evaluationData])
+      .select()
+      .single()
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json(data, { status: 201 })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }

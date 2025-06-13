@@ -32,19 +32,10 @@ export default function ReportsPage() {
   const [dashboardStats, setDashboardStats] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
-  // TODO: créer route API pour /api/reports/monthly
   const [monthlyData, setMonthlyData] = useState([])
-  
-  // TODO: créer route API pour /api/reports/departments  
   const [departmentData, setDepartmentData] = useState([])
-  
-  // TODO: créer route API pour /api/reports/performance
   const [performanceData, setPerformanceData] = useState([])
-
-  // TODO: créer route API pour /api/reports/schools
   const [topSchools, setTopSchools] = useState([])
-
-  // TODO: créer route API pour /api/reports/request-types
   const [requestTypes, setRequestTypes] = useState([])
 
   useEffect(() => {
@@ -55,26 +46,26 @@ export default function ReportsPage() {
         const stats = await response.json()
         setDashboardStats(stats)
 
-        // TODO: Implémenter ces appels quand les routes API seront créées
-        // const monthlyResponse = await fetch(`/api/reports/monthly?period=${selectedPeriod}&department=${selectedDepartment}`)
-        // const monthlyStats = await monthlyResponse.json()
-        // setMonthlyData(monthlyStats)
+        // Appels API réels maintenant disponibles
+        const monthlyResponse = await fetch(`/api/reports/monthly?period=${selectedPeriod}&department=${selectedDepartment}`)
+        const monthlyStats = await monthlyResponse.json()
+        setMonthlyData(monthlyStats)
 
-        // const deptResponse = await fetch(`/api/reports/departments?period=${selectedPeriod}`)
-        // const deptStats = await deptResponse.json()
-        // setDepartmentData(deptStats)
+        const deptResponse = await fetch(`/api/reports/departments?period=${selectedPeriod}`)
+        const deptStats = await deptResponse.json()
+        setDepartmentData(deptStats)
 
-        // const perfResponse = await fetch(`/api/reports/performance?period=${selectedPeriod}`)
-        // const perfStats = await perfResponse.json()
-        // setPerformanceData(perfStats)
+        const perfResponse = await fetch(`/api/reports/performance?period=${selectedPeriod}`)
+        const perfStats = await perfResponse.json()
+        setPerformanceData(perfStats)
 
-        // const schoolsResponse = await fetch(`/api/reports/schools?period=${selectedPeriod}`)
-        // const schoolsStats = await schoolsResponse.json()
-        // setTopSchools(schoolsStats)
+        const schoolsResponse = await fetch(`/api/reports/schools?period=${selectedPeriod}`)
+        const schoolsStats = await schoolsResponse.json()
+        setTopSchools(schoolsStats)
 
-        // const typesResponse = await fetch(`/api/reports/request-types?period=${selectedPeriod}`)
-        // const typesStats = await typesResponse.json()
-        // setRequestTypes(typesStats)
+        const typesResponse = await fetch(`/api/reports/request-types?period=${selectedPeriod}`)
+        const typesStats = await typesResponse.json()
+        setRequestTypes(typesStats)
 
       } catch (error) {
         console.error('Erreur lors de la récupération des données:', error)
@@ -208,7 +199,7 @@ export default function ReportsPage() {
                         </ResponsiveContainer>
                       ) : (
                         <div className="flex items-center justify-center h-full text-muted-foreground">
-                          Données non disponibles - TODO: créer route API /api/reports/monthly
+                          Aucune donnée disponible pour cette période
                         </div>
                       )}
                     </div>
@@ -243,7 +234,7 @@ export default function ReportsPage() {
                         </ResponsiveContainer>
                       ) : (
                         <div className="flex items-center justify-center h-full text-muted-foreground">
-                          Données non disponibles - TODO: créer route API /api/reports/departments
+                          Aucune donnée disponible pour cette période
                         </div>
                       )}
                     </div>
@@ -290,7 +281,7 @@ export default function ReportsPage() {
                   </Card>
                 )) : (
                   <div className="col-span-2 text-center text-muted-foreground">
-                    Données de performance non disponibles - TODO: créer route API /api/reports/performance
+                    Aucune donnée de performance disponible pour cette période
                   </div>
                 )}
               </div>
@@ -330,7 +321,7 @@ export default function ReportsPage() {
                       </ResponsiveContainer>
                     ) : (
                       <div className="flex items-center justify-center h-full text-muted-foreground">
-                        Données de tendances non disponibles - TODO: créer route API /api/reports/monthly
+                        Aucune donnée de tendances disponible pour cette période
                       </div>
                     )}
                   </div>
@@ -353,7 +344,7 @@ export default function ReportsPage() {
                         </div>
                       )) : (
                         <div className="text-center text-muted-foreground">
-                          Données non disponibles - TODO: créer route API /api/reports/schools
+                          Aucune donnée disponible pour cette période
                         </div>
                       )}
                     </div>
@@ -381,7 +372,7 @@ export default function ReportsPage() {
                         </div>
                       )) : (
                         <div className="text-center text-muted-foreground">
-                          Données non disponibles - TODO: créer route API /api/reports/request-types
+                          Aucune donnée disponible pour cette période
                         </div>
                       )}
                     </div>

@@ -1,3 +1,4 @@
+typescript
 "use client"
 
 import { useState, useEffect } from "react"
@@ -29,29 +30,30 @@ export default function TestCRUDPage() {
   const [currentUser, setCurrentUser] = useState<any>(null)
 
   // États pour les formulaires de test
-  const [testData, setTestData] = useState({
+  const testData = {
     user: {
-      email: "test@example.com",
-      name: "Test User",
-      role: "stagiaire",
+      name: "Jean Dupont Test",
+      email: `test.user.${Date.now()}@example.com`,
+      role: "stagiaire" as const,
       phone: "0123456789",
-      department: "IT",
     },
     stagiaire: {
       nom: "Dupont",
-      prenom: "Jean",
-      email: "jean.dupont@example.com",
+      prenom: "Jean Test",
+      email: `test.stagiaire.${Date.now()}@example.com`,
       telephone: "0123456789",
-      formation: "Informatique",
-      ecole: "Université Test",
-      periode: "6 mois",
+      etablissement: "École Test",
+      niveau_etude: "Master 2",
+      specialite: "Informatique",
+      formation: "Master Informatique",
+      ecole: "École Test",
     },
     demande: {
-      type: "conge",
-      details: "Demande de congé pour raisons personnelles",
-      duree: "5 jours",
+      type: "stage-professionnel" as const,
+      duree: "6 mois",
+      details: "Stage de test automatisé",
     },
-  })
+  }
 
   useEffect(() => {
     loadCurrentUser()

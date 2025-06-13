@@ -50,8 +50,8 @@ export interface Stagiaire {
   updated_at: string
 }
 
-// Mock data pour le développement
+// Interfaces seulement - Plus de données simulées
 export const mockUsers: User[] = []
 export const mockDemandes: Demande[] = []
 export const mockDocuments: Document[] = []
-export const mockStagiaires: Stagiaire[] = []
+export const mockStagiaires: Stagiaire[] = []]

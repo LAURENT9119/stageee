@@ -123,6 +123,10 @@ class DemandesApiService extends GenericApiService<Demande, DemandeInsert, Deman
     return apiRequest<any>(`${this.endpoint}/stats`)
   }
 
+  async getAllDemandes(filters?: Record<string, any>): Promise<Demande[]> {
+    return this.getAll(filters)
+  }
+
   async approuveDemande(id: string, commentaire?: string): Promise<Demande> {
     return apiRequest<Demande>(`${this.endpoint}/${id}/approve`, {
       method: 'POST',

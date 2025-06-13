@@ -6,11 +6,9 @@ export async function POST(
   { params }: { params: { id: string } },
 ) {
   try {
-    const { userId, role, commentaire } = await request.json();
-    const demande = await demandesService.approuverDemande(
+    const { commentaire } = await request.json();
+    const demande = await demandesService.approuveDemande(
       params.id,
-      userId,
-      role,
       commentaire,
     );
     return NextResponse.json(demande);

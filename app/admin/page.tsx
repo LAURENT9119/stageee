@@ -52,9 +52,23 @@ export default function AdminDashboard() {
       ])
 
       setStats({
-        stagiaires: stagiaireStats,
-        demandes: demandeStats,
-        documents: documentStats,
+        stagiaires: {
+          total: stagiaireStats.total || 0,
+          actifs: stagiaireStats.actifs || 0,
+          termines: stagiaireStats.inactifs || 0,
+          en_attente: 0
+        },
+        demandes: {
+          total: demandeStats.total || 0,
+          en_attente: demandeStats.en_attente || 0,
+          validees: demandeStats.approuvees || 0,
+          refusees: demandeStats.refusees || 0
+        },
+        documents: {
+          total: documentStats.total || 0,
+          par_format: {},
+          par_type: documentStats.par_type || {}
+        },
       })
 
       // Prendre les 5 dernières demandes

@@ -33,8 +33,7 @@ const nextConfig = {
     ]
   },
 
-  // Configuration pour Replit
-  allowedDevOrigins: ['.replit.dev'],
+  // Configuration pour Replit - utilisation des headers CORS
   
   // Éviter les erreurs de build
   typescript: {

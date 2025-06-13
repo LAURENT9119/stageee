@@ -90,7 +90,8 @@ export async function middleware(request: NextRequest) {
     return response
   } catch (error) {
     console.error('Middleware error:', error)
-    return response
+    // En cas d'erreur, on laisse passer la requête sans authentification
+    return NextResponse.next()
   }
 }
 

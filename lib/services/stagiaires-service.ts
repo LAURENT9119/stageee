@@ -82,6 +82,14 @@ export class StagiairesService {
     if (error) throw error
     return data
   }
+  async getStagiairesStats(): Promise<any> {
+    const { data, error } = await this.supabase
+      .from('stagiaires')
+      .select('count(*)')
+
+    if (error) throw error
+    return data
+  }
 }
 
 export const stagiairesService = new StagiairesService()

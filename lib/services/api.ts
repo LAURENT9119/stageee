@@ -273,6 +273,39 @@ export const demandesApiService = {
   },
 }
 
+// Export de l'objet api pour les tests CRUD
+export const api = {
+  testEntities: {
+    async getAll(): Promise<any[]> {
+      return apiRequest("/test-entities")
+    },
+
+    async getById(id: string): Promise<any> {
+      return apiRequest(`/test-entities/${id}`)
+    },
+
+    async create(entity: any): Promise<any> {
+      return apiRequest("/test-entities", {
+        method: "POST",
+        body: JSON.stringify(entity),
+      })
+    },
+
+    async update(id: string, entity: any): Promise<any> {
+      return apiRequest(`/test-entities/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(entity),
+      })
+    },
+
+    async delete(id: string): Promise<void> {
+      return apiRequest(`/test-entities/${id}`, { 
+        method: "DELETE" 
+      })
+    },
+  }
+}
+
 // Services Documents
 export const documentsApiService = {
   async getAll(filters?: any): Promise<Document[]> {

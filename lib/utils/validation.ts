@@ -56,8 +56,8 @@ export class Validator {
 
 // Middleware de validation pour les API routes
 export function validateRequestBody(schema: Record<string, (value: any) => ValidationResult>) {
-  return (handler: Function) => {
-    return async (request: Request, ...args: any[]) => {
+  return (handler: (request: Request, ...args: any[]) => Promise<Response>) => {
+    return async (request: Request, ...args: any[]): Promise<Response> => {
       try {
         const body = await request.json()
         const validation = Validator.validateForm(body, schema)

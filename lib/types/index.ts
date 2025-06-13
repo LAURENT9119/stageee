@@ -1,16 +1,65 @@
-export interface User {
+// API Response type
+export interface ApiResponse<T> {
+  success: boolean
+  data: T | null
+  error: string | null
+}
+
+// Search filters
+export interface SearchFilters {
+  search?: string
+  status?: string
+  department?: string
+  tuteurId?: string
+  limit?: number
+  offset?: number
+}
+
+// Statistics type
+export interface Statistics {
+  total: number
+  active: number
+  inactive: number
+  pending: number
+}
+
+// Demande types
+export interface Demande {
   id: string
-  email: string
-  full_name?: string
-  role: 'admin' | 'rh' | 'tuteur' | 'stagiaire'
+  stagiaire_id: string
+  tuteur_id: string
+  type_demande: string
+  statut: 'en_attente' | 'approuvee' | 'refusee'
+  commentaire_tuteur?: string
+  motif_refus?: string
   created_at: string
-  updated_at?: string
-  user_metadata?: {
-    role?: string
-    [key: string]: any
+  updated_at: string
+  stagiaire?: {
+    nom: string
+    prenom: string
+    email: string
+  }
+  tuteur?: {
+    name: string
+    email: string
   }
 }
 
+export interface DemandeInsert {
+  stagiaire_id: string
+  tuteur_id: string
+  type_demande: string
+  statut?: string
+}
+
+export interface DemandeUpdate {
+  statut?: string
+  commentaire_tuteur?: string
+  motif_refus?: string
+  updated_at?: string
+}
+
+// Types pour les stagiaires
 export interface Stagiaire {
   id: string
   user_id: string
@@ -37,20 +86,17 @@ export interface Stagiaire {
   tuteur?: User
 }
 
-export interface Demande {
+export interface User {
   id: string
-  stagiaire_id: string
-  type_demande: 'conge' | 'attestation' | 'prolongation' | 'stage_academique' | 'stage_professionnel'
-  status: 'en_attente' | 'approuvee' | 'rejetee'
-  date_debut?: string
-  date_fin?: string
-  motif?: string
-  justification?: string
-  commentaire_admin?: string
+  email: string
+  full_name?: string
+  role: 'admin' | 'rh' | 'tuteur' | 'stagiaire'
   created_at: string
   updated_at?: string
-  stagiaire?: Stagiaire
-  documents?: Document[]
+  user_metadata?: {
+    role?: string
+    [key: string]: any
+  }
 }
 
 export interface Document {
@@ -98,13 +144,6 @@ export interface Statistics {
   documents_recents: number
 }
 
-export interface ApiResponse<T = any> {
-  data?: T
-  error?: string
-  message?: string
-  success: boolean
-}
-
 export interface PaginatedResponse<T> extends ApiResponse<T[]> {
   pagination?: {
     page: number
@@ -112,16 +151,6 @@ export interface PaginatedResponse<T> extends ApiResponse<T[]> {
     total: number
     totalPages: number
   }
-}
-
-export interface SearchFilters {
-  query?: string
-  type?: string
-  status?: string
-  dateFrom?: string
-  dateTo?: string
-  departement?: string
-  [key: string]: any
 }
 
 export interface Template {

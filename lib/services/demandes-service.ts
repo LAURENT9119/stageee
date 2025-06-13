@@ -2,8 +2,15 @@
 import { BaseService } from './base-service'
 import type { Demande, DemandeInsert, DemandeUpdate } from '@/lib/types'
 
-export class DemandesService extends BaseService {
+export import { BaseService } from './base-service'
+import type { Demande, DemandeInsert, DemandeUpdate } from '@/lib/types'
+
+class DemandesService extends BaseService {
   private readonly tableName = 'demandes'
+
+  constructor() {
+    super()
+  }
 
   async getAllDemandes(filters?: Record<string, any>): Promise<Demande[]> {
     let query = this.supabase
@@ -96,5 +103,9 @@ export class DemandesService extends BaseService {
     return this.getAllDemandes({ tuteurId })
   }
 }
+
+// Export singleton instance
+export const demandesService = new DemandesService()
+export default demandesService
 
 export const demandesService = new DemandesService()

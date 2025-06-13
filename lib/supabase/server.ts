@@ -39,4 +39,4 @@ export function createClient() {
 export const createServerSupabaseClient = createClient
 
 // Export par défaut
-export default createClient
+export default createClientnt

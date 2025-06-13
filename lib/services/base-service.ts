@@ -1,74 +1,222 @@
-import { ApiResponse, PaginatedResponse } from '@/lib/types'
 
-export class BaseService {
-  protected baseUrl: string
+import { createClient } from '@/lib/supabase/client'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
-  constructor(baseUrl: string = '/api') {
-    this.baseUrl = baseUrl
+export abstract class BaseService {
+  protected supabase: SupabaseClient
+
+  constructor() {
+    this.supabase = createClient()
   }
 
-  protected async request<T = any>(
-    endpoint: string,
-    options: RequestInit = {}
-  ): Promise<ApiResponse<T>> {
+  protected async getById<T>(
+    tableName: string, 
+    id: string, 
+    select: string = '*'
+  ): Promise<T | null> {
     try {
-      const url = `${this.baseUrl}${endpoint}`
-      const response = await fetch(url, {
+      const { data, error } = await this.supabase
+        .from(tableName)
+        .select(select)
+        .eq('id', id)
+        .single()
+
+      if (error) {
+        console.error(`Error fetching ${tableName} by id:`, error)
+        throw new Error(`Failed to fetch ${tableName}: ${error.message}`)
+      }
+
+      return data
+    } catch (error) {
+      console.error(`Error in getById for ${tableName}:`, error)
+      throw error
+    }
+  }
+
+  protected async create<T>(tableName: string, data: any): Promise<T> {
+    try {
+      const { data: result, error } = await this.supabase
+        .from(tableName)
+        .insert(data)
+        .select()
+        .single()
+
+      if (error) {
+        console.error(`Error creating ${tableName}:`, error)
+        throw new Error(`Failed to create ${tableName}: ${error.message}`)
+      }
+
+      return result
+    } catch (error) {
+      console.error(`Error in create for ${tableName}:`, error)
+      throw error
+    }
+  }
+
+  protected async update<T>(tableName: string, id: string, updates: any): Promise<T> {
+    try {
+      const { data, error } = await this.supabase
+        .from(tableName)
+        .update(updates)
+        .eq('id', id)
+        .select()
+        .single()
+
+      if (error) {
+        console.error(`Error updating ${tableName}:`, error)
+        throw new Error(`Failed to update ${tableName}: ${error.message}`)
+      }
+
+      return data
+    } catch (error) {
+      console.error(`Error in update for ${tableName}:`, error)
+      throw error
+    }
+  }
+
+  protected async delete(tableName: string, id: string): Promise<void> {
+    try {
+      const { error } = await this.supabase
+        .from(tableName)
+        .delete()
+        .eq('id', id)
+
+      if (error) {
+        console.error(`Error deleting ${tableName}:`, error)
+        throw new Error(`Failed to delete ${tableName}: ${error.message}`)
+      }
+    } catch (error) {
+      console.error(`Error in delete for ${tableName}:`, error)
+      throw error
+    }
+  }
+
+  protected async getCount(tableName: string, filters?: Record<string, any>): Promise<number> {
+    try {
+      let query = this.supabase
+        .from(tableName)
+        .select('*', { count: 'exact', head: true })
+
+      if (filters) {
+        Object.entries(filters).forEach(([key, value]) => {
+          if (value !== undefined && value !== null) {
+            query = query.eq(key, value)
+          }
+        })
+      }
+
+      const { count, error } = await query
+
+      if (error) {
+        console.error(`Error counting ${tableName}:`, error)
+        throw new Error(`Failed to count ${tableName}: ${error.message}`)
+      }
+
+      return count || 0
+    } catch (error) {
+      console.error(`Error in getCount for ${tableName}:`, error)
+      throw error
+    }
+  }
+
+  // Méthodes pour les services API (alternative à Supabase direct)
+  protected async get<T>(endpoint: string): Promise<ApiResponse<T>> {
+    try {
+      const response = await fetch(`${this.baseUrl}${endpoint}`, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          ...options.headers,
         },
-        ...options,
       })
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}))
-        throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`)
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
 
       const data = await response.json()
-      return {
-        success: true,
-        data,
-        message: data.message
-      }
+      return { success: true, data, error: null }
     } catch (error) {
-      console.error(`API Error for ${endpoint}:`, error)
-      return {
-        success: false,
-        error: error instanceof Error ? error.message : 'Une erreur inconnue est survenue'
-      }
+      return this.handleError(error)
     }
   }
 
-  protected async get<T = any>(endpoint: string): Promise<ApiResponse<T>> {
-    return this.request<T>(endpoint, { method: 'GET' })
+  protected async post<T>(endpoint: string, body: any): Promise<ApiResponse<T>> {
+    try {
+      const response = await fetch(`${this.baseUrl}${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      return { success: true, data, error: null }
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
-  protected async post<T = any>(endpoint: string, data?: any): Promise<ApiResponse<T>> {
-    return this.request<T>(endpoint, {
-      method: 'POST',
-      body: data ? JSON.stringify(data) : undefined,
-    })
+  protected async put<T>(endpoint: string, body: any): Promise<ApiResponse<T>> {
+    try {
+      const response = await fetch(`${this.baseUrl}${endpoint}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      return { success: true, data, error: null }
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
-  protected async put<T = any>(endpoint: string, data?: any): Promise<ApiResponse<T>> {
-    return this.request<T>(endpoint, {
-      method: 'PUT',
-      body: data ? JSON.stringify(data) : undefined,
-    })
+  protected async delete<T>(endpoint: string): Promise<ApiResponse<T>> {
+    try {
+      const response = await fetch(`${this.baseUrl}${endpoint}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      const data = await response.json()
+      return { success: true, data, error: null }
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
-  protected async delete<T = any>(endpoint: string): Promise<ApiResponse<T>> {
-    return this.request<T>(endpoint, { method: 'DELETE' })
-  }
-
-  protected handleError(error: unknown): ApiResponse {
-    const message = error instanceof Error ? error.message : 'Une erreur inconnue est survenue'
-    console.error('Service Error:', error)
+  protected handleError(error: any): ApiResponse<any> {
+    console.error('Service error:', error)
     return {
       success: false,
-      error: message
+      data: null,
+      error: error instanceof Error ? error.message : 'Unknown error occurred'
     }
   }
+
+  private baseUrl: string = '/api'
+}
+
+// Types nécessaires
+export interface ApiResponse<T> {
+  success: boolean
+  data: T | null
+  error: string | null
 }

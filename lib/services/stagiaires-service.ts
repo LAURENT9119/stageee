@@ -1,9 +1,12 @@
 import { BaseService } from './base-service'
 import { Stagiaire, ApiResponse, Statistics, SearchFilters } from '@/lib/types'
 
-export class StagiairesService extends BaseService {
+export import { BaseService } from './base-service'
+import type { Stagiaire, SearchFilters, Statistics, ApiResponse } from '@/lib/types'
+
+class StagiairesService extends BaseService {
   constructor() {
-    super('/api')
+    super()
   }
 
   async getStagiaires(filters?: SearchFilters): Promise<ApiResponse<Stagiaire[]>> {
@@ -126,5 +129,9 @@ export class StagiairesService extends BaseService {
     }
   }
 }
+
+// Export singleton instance
+export const stagiaireService = new StagiairesService()
+export default stagiaireService
 
 export const stagiairesService = new StagiairesService()

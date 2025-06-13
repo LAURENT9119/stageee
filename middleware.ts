@@ -16,7 +16,12 @@ export async function middleware(request: NextRequest) {
   // Si les variables ne sont pas configurées, laisser passer sans authentification
   if (!supabaseUrl || !supabaseAnonKey) {
     console.warn('⚠️ Supabase environment variables not configured, skipping auth middleware')
-    return response
+    // En développement, on peut continuer sans auth
+    if (process.env.NODE_ENV === 'development') {
+      return response
+    }
+    // En production, rediriger vers une page d'erreur
+    return NextResponse.redirect(new URL('/auth/login?error=config_error', request.url))
   }
 
   try {

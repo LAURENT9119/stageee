@@ -1,0 +1,130 @@
+ npm run build
+
+> my-v0-project@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.30
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (100kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled successfully
+   Skipping validation of types
+   Skipping linting
+ ✓ Collecting page data    
+   Generating static pages (26/49)  [  ==]TypeError: sY is not a function
+    at s8 (/home/runner/workspace/.next/server/chunks/5748.js:1:7535)
+    at nj (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64854)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547) {
+  digest: '1864814386'
+}
+
+Error occurred prerendering page "/admin/templates". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: sY is not a function
+    at s8 (/home/runner/workspace/.next/server/chunks/5748.js:1:7535)
+    at nj (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64854)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+   Generating static pages (40/49)  [   =]TypeError: sY is not a function
+    at s8 (/home/runner/workspace/.next/server/chunks/5748.js:1:7535)
+    at nj (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64854)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547) {
+  digest: '1864814386'
+}
+
+Error occurred prerendering page "/tuteur/evaluations". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: sY is not a function
+    at s8 (/home/runner/workspace/.next/server/chunks/5748.js:1:7535)
+    at nj (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64854)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+TypeError: sY is not a function
+    at s8 (/home/runner/workspace/.next/server/chunks/5748.js:1:7535)
+    at nj (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64854)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547) {
+  digest: '1864814386'
+}
+
+Error occurred prerendering page "/admin/reports". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: sY is not a function
+    at s8 (/home/runner/workspace/.next/server/chunks/5748.js:1:7535)
+    at nj (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64854)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+TypeError: sY is not a function
+    at s8 (/home/runner/workspace/.next/server/chunks/5748.js:1:7535)
+    at nj (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64854)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547) {
+  digest: '1864814386'
+}
+
+Error occurred prerendering page "/tuteur/evaluations/new". Read more: https://nextjs.org/docs/messages/prerender-error
+
+TypeError: sY is not a function
+    at s8 (/home/runner/workspace/.next/server/chunks/5748.js:1:7535)
+    at nj (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:46252)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:47572)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nD (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:66681)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64854)
+    at nB (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:67539)
+    at nM (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:58561)
+    at nN (/home/runner/workspace/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:64547)
+ ✓ Generating static pages (49/49)
+
+> Export encountered errors on following paths:
+    /admin/reports/page: /admin/reports
+    /admin/templates/page: /admin/templates
+    /tuteur/evaluations/new/page: /tuteur/evaluations/new
+    /tuteur/evaluations/page: /tuteur/evaluations
+~/workspace$ 

@@ -1,327 +1,270 @@
-
 "use client"
 
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Skeleton } from "@/components/ui/skeleton"
-import { AlertCircle, CheckCircle2, Trash2, Edit, Plus } from "lucide-react"
-import { api } from "@/lib/services/api"
+import { Badge } from "@/components/ui/badge"
+import { Trash2, Edit, Plus } from "lucide-react"
+import { useToast } from "@/lib/hooks/use-toast"
 
 interface TestEntity {
   id: string
   name: string
   description: string
-  status: "active" | "inactive"
+  status: string
   created_at: string
 }
 
-export default function TestCRUDPage() {
+export default function TestCrudPage() {
   const [entities, setEntities] = useState<TestEntity[]>([])
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
-  const [editingEntity, setEditingEntity] = useState<TestEntity | null>(null)
+  const [loading, setLoading] = useState(true)
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    status: "active" as "active" | "inactive"
+    status: "active"
   })
+  const [editingId, setEditingId] = useState<string | null>(null)
+  const { toast } = useToast()
 
-  useEffect(() => {
-    fetchEntities()
-  }, [])
-
-  const fetchEntities = async () => {
-    setLoading(true)
-    setError(null)
-
+  // Fonction pour charger les entités
+  const loadEntities = async () => {
     try {
-      // Utiliser l'API réelle au lieu du localStorage
-      const response = await api.get('/api/test-entities')
-      setEntities(response.data || [])
-    } catch (err) {
-      console.error('Erreur lors du chargement:', err)
-      setError("Erreur lors du chargement des données")
+      setLoading(true)
+      const response = await fetch("/api/test-entities")
+      if (!response.ok) throw new Error("Erreur lors du chargement")
+      const result = await response.json()
+      setEntities(result.data || [])
+    } catch (error) {
+      console.error("Erreur:", error)
+      toast({
+        title: "Erreur",
+        description: "Impossible de charger les entités",
+        variant: "destructive"
+      })
     } finally {
       setLoading(false)
     }
   }
 
-  const createEntity = async () => {
-    if (!formData.name.trim()) {
-      setError("Le nom est requis")
-      return
-    }
-
-    setLoading(true)
-    setError(null)
-
+  // Fonction pour créer/modifier une entité
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
     try {
-      const response = await api.post('/api/test-entities', {
-        name: formData.name,
-        description: formData.description,
-        status: formData.status
+      const url = editingId ? `/api/test-entities/${editingId}` : "/api/test-entities"
+      const method = editingId ? "PUT" : "POST"
+
+      const response = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
       })
 
-      if (response.data) {
-        setEntities(prev => [...prev, response.data])
-        setFormData({ name: "", description: "", status: "active" })
-        setSuccess("Entité créée avec succès")
-      }
-    } catch (err) {
-      console.error('Erreur lors de la création:', err)
-      setError("Erreur lors de la création")
-    } finally {
-      setLoading(false)
-    }
-  }
+      if (!response.ok) throw new Error("Erreur lors de la sauvegarde")
 
-  const updateEntity = async () => {
-    if (!editingEntity || !formData.name.trim()) {
-      setError("Le nom est requis")
-      return
-    }
-
-    setLoading(true)
-    setError(null)
-
-    try {
-      const response = await api.put(`/api/test-entities/${editingEntity.id}`, {
-        name: formData.name,
-        description: formData.description,
-        status: formData.status
+      toast({
+        title: "Succès",
+        description: `Entité ${editingId ? "modifiée" : "créée"} avec succès`
       })
 
-      if (response.data) {
-        setEntities(prev => prev.map(entity =>
-          entity.id === editingEntity.id ? response.data : entity
-        ))
-        setEditingEntity(null)
-        setFormData({ name: "", description: "", status: "active" })
-        setSuccess("Entité mise à jour avec succès")
-      }
-    } catch (err) {
-      console.error('Erreur lors de la mise à jour:', err)
-      setError("Erreur lors de la mise à jour")
-    } finally {
-      setLoading(false)
+      setFormData({ name: "", description: "", status: "active" })
+      setEditingId(null)
+      loadEntities()
+    } catch (error) {
+      console.error("Erreur:", error)
+      toast({
+        title: "Erreur",
+        description: "Impossible de sauvegarder l'entité",
+        variant: "destructive"
+      })
     }
   }
 
-  const deleteEntity = async (id: string) => {
-    setLoading(true)
-    setError(null)
+  // Fonction pour supprimer une entité
+  const handleDelete = async (id: string) => {
+    if (!confirm("Êtes-vous sûr de vouloir supprimer cette entité ?")) return
 
     try {
-      await api.delete(`/api/test-entities/${id}`)
-      setEntities(prev => prev.filter(entity => entity.id !== id))
-      setSuccess("Entité supprimée avec succès")
-    } catch (err) {
-      console.error('Erreur lors de la suppression:', err)
-      setError("Erreur lors de la suppression")
-    } finally {
-      setLoading(false)
+      const response = await fetch(`/api/test-entities/${id}`, {
+        method: "DELETE"
+      })
+
+      if (!response.ok) throw new Error("Erreur lors de la suppression")
+
+      toast({
+        title: "Succès",
+        description: "Entité supprimée avec succès"
+      })
+
+      loadEntities()
+    } catch (error) {
+      console.error("Erreur:", error)
+      toast({
+        title: "Erreur",
+        description: "Impossible de supprimer l'entité",
+        variant: "destructive"
+      })
     }
   }
 
+  // Fonction pour éditer une entité
   const handleEdit = (entity: TestEntity) => {
-    setEditingEntity(entity)
     setFormData({
       name: entity.name,
       description: entity.description,
       status: entity.status
     })
-    setError(null)
+    setEditingId(entity.id)
   }
 
-  const cancelEdit = () => {
-    setEditingEntity(null)
-    setFormData({ name: "", description: "", status: "active" })
-    setError(null)
-  }
+  // Charger les entités au montage du composant
+  useEffect(() => {
+    loadEntities()
+  }, [])
 
-  const clearMessages = () => {
-    setError(null)
-    setSuccess(null)
+  if (loading) {
+    return (
+      <div className="container mx-auto p-6">
+        <Card>
+          <CardContent className="p-6">
+            <div className="text-center">Chargement...</div>
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Test CRUD Operations</h1>
-        <Badge variant="outline">Environment de Test</Badge>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">Test CRUD</h1>
+        <Button onClick={() => {
+          setFormData({ name: "", description: "", status: "active" })
+          setEditingId(null)
+        }}>
+          <Plus className="h-4 w-4 mr-2" />
+          Nouvelle entité
+        </Button>
       </div>
 
-      {error && (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>{error}</AlertDescription>
-          <Button variant="ghost" size="sm" onClick={clearMessages} className="ml-auto">
-            ×
-          </Button>
-        </Alert>
-      )}
-
-      {success && (
-        <Alert>
-          <CheckCircle2 className="h-4 w-4" />
-          <AlertDescription className="text-green-600">{success}</AlertDescription>
-          <Button variant="ghost" size="sm" onClick={clearMessages} className="ml-auto">
-            ×
-          </Button>
-        </Alert>
-      )}
-
-      <Tabs defaultValue="create" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="create">
-            <Plus className="w-4 h-4 mr-2" />
-            Créer/Modifier
-          </TabsTrigger>
-          <TabsTrigger value="list">Liste des entités</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="create" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>
-                {editingEntity ? "Modifier l'entité" : "Créer une nouvelle entité"}
-              </CardTitle>
-              <CardDescription>
-                {editingEntity ? "Modifiez les informations de l'entité" : "Remplissez le formulaire pour créer une nouvelle entité"}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Nom *</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Nom de l'entité"
-                  required
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Description de l'entité"
-                  rows={3}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="status">Statut</Label>
-                <Select 
-                  value={formData.status} 
-                  onValueChange={(value: "active" | "inactive") => setFormData({ ...formData, status: value })}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="active">Actif</SelectItem>
-                    <SelectItem value="inactive">Inactif</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="flex space-x-2">
+      {/* Formulaire */}
+      <Card>
+        <CardHeader>
+          <CardTitle>{editingId ? "Modifier" : "Créer"} une entité</CardTitle>
+          <CardDescription>
+            {editingId ? "Modifiez les informations de l'entité" : "Ajoutez une nouvelle entité de test"}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="name">Nom</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                value={formData.description}
+                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+              />
+            </div>
+            <div>
+              <Label htmlFor="status">Statut</Label>
+              <select
+                id="status"
+                value={formData.status}
+                onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
+                className="w-full p-2 border rounded"
+              >
+                <option value="active">Actif</option>
+                <option value="inactive">Inactif</option>
+              </select>
+            </div>
+            <div className="flex gap-2">
+              <Button type="submit">
+                {editingId ? "Modifier" : "Créer"}
+              </Button>
+              {editingId && (
                 <Button
-                  onClick={editingEntity ? updateEntity : createEntity}
-                  disabled={loading}
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    setFormData({ name: "", description: "", status: "active" })
+                    setEditingId(null)
+                  }}
                 >
-                  {loading ? "En cours..." : editingEntity ? "Mettre à jour" : "Créer"}
+                  Annuler
                 </Button>
-                {editingEntity && (
-                  <Button variant="outline" onClick={cancelEdit}>
-                    Annuler
-                  </Button>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="list" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Liste des entités ({entities.length})</CardTitle>
-              <CardDescription>
-                Gérez vos entités de test
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {loading && entities.length === 0 ? (
-                <div className="space-y-2">
-                  {[...Array(3)].map((_, i) => (
-                    <Skeleton key={i} className="h-20 w-full" />
-                  ))}
-                </div>
-              ) : entities.length === 0 ? (
-                <div className="text-center py-8 text-muted-foreground">
-                  Aucune entité trouvée. Créez-en une pour commencer.
-                </div>
-              ) : (
-                <div className="space-y-2">
-                  {entities.map((entity) => (
-                    <div
-                      key={entity.id}
-                      className="flex items-center justify-between p-4 border rounded-lg"
-                    >
-                      <div className="flex-1">
-                        <div className="flex items-center space-x-2">
-                          <h3 className="font-medium">{entity.name}</h3>
-                          <Badge variant={entity.status === "active" ? "default" : "secondary"}>
-                            {entity.status === "active" ? "Actif" : "Inactif"}
-                          </Badge>
-                        </div>
-                        {entity.description && (
-                          <p className="text-sm text-muted-foreground mt-1">
-                            {entity.description}
-                          </p>
-                        )}
-                        <p className="text-xs text-muted-foreground mt-1">
-                          Créé le {new Date(entity.created_at).toLocaleDateString('fr-FR')}
-                        </p>
-                      </div>
-                      <div className="flex space-x-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleEdit(entity)}
-                        >
-                          <Edit className="w-4 h-4" />
-                        </Button>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => deleteEntity(entity.id)}
-                          disabled={loading}
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
               )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+
+      {/* Liste des entités */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Entités de test</CardTitle>
+          <CardDescription>
+            {entities.length} entité{entities.length > 1 ? "s" : ""} trouvée{entities.length > 1 ? "s" : ""}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {entities.length === 0 ? (
+            <div className="text-center text-muted-foreground py-8">
+              Aucune entité trouvée
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {entities.map((entity) => (
+                <div
+                  key={entity.id}
+                  className="flex items-center justify-between p-4 border rounded-lg"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-medium">{entity.name}</h3>
+                      <Badge variant={entity.status === "active" ? "default" : "secondary"}>
+                        {entity.status}
+                      </Badge>
+                    </div>
+                    {entity.description && (
+                      <p className="text-sm text-muted-foreground">{entity.description}</p>
+                    )}
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Créé le {new Date(entity.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleEdit(entity)}
+                    >
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="destructive"
+                      onClick={() => handleDelete(entity.id)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   )
 }

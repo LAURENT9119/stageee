@@ -2,21 +2,49 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServerSupabaseClient } from '@/lib/services/server-auth-service'
 
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const supabase = await createServerSupabaseClient()
+    const { id } = params
+
+    // Pour le test, simuler la récupération d'une entité
+    const testEntity = {
+      id,
+      name: `Entité Test ${id}`,
+      description: `Description de test ${id}`,
+      status: 'active',
+      created_at: new Date().toISOString()
+    }
+
+    return NextResponse.json({ data: testEntity })
+  } catch (error: any) {
+    console.error('Erreur lors de la récupération de l\'entité:', error)
+    return NextResponse.json(
+      { error: 'Erreur lors de la récupération de l\'entité' },
+      { status: 500 }
+    )
+  }
+}
+
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
     const supabase = await createServerSupabaseClient()
-    const body = await request.json()
     const { id } = params
-
+    const body = await request.json()
+    
     const updatedEntity = {
       id,
       name: body.name,
       description: body.description || '',
       status: body.status || 'active',
-      created_at: new Date().toISOString()
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
     }
 
     // En production, vous devriez mettre à jour dans une vraie table
@@ -51,7 +79,10 @@ export async function DELETE(
     //   .delete()
     //   .eq('id', id)
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ 
+      message: 'Entité supprimée avec succès',
+      data: { id }
+    })
   } catch (error: any) {
     console.error('Erreur lors de la suppression de l\'entité:', error)
     return NextResponse.json(

@@ -5,9 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Users, FileText, Clock, CheckCircle, AlertCircle, TrendingUp } from "lucide-react"
-import { stagiairesService } from "@/lib/services/stagiaires-service"
-import { demandesService } from "@/lib/services/demandes-service"
-import { documentsService } from "@/lib/services/documents-service"
+import { stagiairesApiService, demandesApiService, documentsApiService } from "@/lib/services/api"
 import { authService } from "@/lib/services/auth-service"
 import { Skeleton } from "@/components/ui/skeleton"
 import Link from "next/link"
@@ -47,10 +45,10 @@ export default function AdminDashboard() {
 
       // Charger les statistiques en parallèle
       const [stagiaireStats, demandeStats, documentStats, demandes] = await Promise.all([
-        stagiairesService.getStagiairesStats(),
-        demandesService.getDemandesStats(),
-        documentsService.getDocumentsStats(),
-        demandesService.getAllDemandes(),
+        stagiairesApiService.getStagiairesStats(),
+        demandesApiService.getDemandesStats(),
+        documentsApiService.getDocumentsStats(),
+        demandesApiService.getAllDemandes(),
       ])
 
       setStats({

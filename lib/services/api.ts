@@ -204,6 +204,10 @@ export const stagiairesApiService = {
   async getStats(): Promise<any> {
     return apiRequest("/stagiaires/stats")
   },
+
+  async getStagiairesStats(): Promise<any> {
+    return apiRequest("/stagiaires/stats")
+  },
 }
 
 // Services Demandes
@@ -235,6 +239,10 @@ export const demandesApiService = {
     return apiRequest(`/demandes/${id}`, { method: "DELETE" })
   },
 
+  async getAllDemandes(filters?: any): Promise<Demande[]> {
+    return this.getAll(filters)
+  },
+
   async approve(id: string, userId: string, role: string, comment?: string): Promise<Demande> {
     return apiRequest(`/demandes/${id}/approve`, {
       method: "POST",
@@ -257,6 +265,10 @@ export const demandesApiService = {
   },
 
   async getStats(): Promise<any> {
+    return apiRequest("/demandes/stats")
+  },
+
+  async getDemandesStats(): Promise<any> {
     return apiRequest("/demandes/stats")
   },
 }
@@ -296,6 +308,10 @@ export const documentsApiService = {
   },
 
   async getStats(): Promise<any> {
+    return apiRequest("/documents/stats")
+  },
+
+  async getDocumentsStats(): Promise<any> {
     return apiRequest("/documents/stats")
   },
 }

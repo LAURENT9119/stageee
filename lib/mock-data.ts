@@ -1,4 +1,7 @@
 
+// Ce fichier contenait des données simulées qui ont été remplacées par des appels API réels
+// Toutes les données sont maintenant récupérées depuis la base de données via les services
+
 export interface User {
   id: string
   email: string
@@ -50,8 +53,9 @@ export interface Stagiaire {
   updated_at: string
 }
 
-// Interfaces seulement - Plus de données simulées
+// Toutes les données simulées ont été supprimées
+// Les tableaux sont maintenant vides car les données proviennent de la base de données
 export const mockUsers: User[] = []
 export const mockDemandes: Demande[] = []
 export const mockDocuments: Document[] = []
-export const mockStagiaires: Stagiaire[] = []]
+export const mockStagiaires: Stagiaire[] = []

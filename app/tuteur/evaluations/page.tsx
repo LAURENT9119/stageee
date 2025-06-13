@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Header } from "@/components/layout/header"
@@ -8,17 +9,78 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, Filter, Plus } from "lucide-react"
-import { mockStagiaires } from "@/lib/mock-data"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { authService } from "@/lib/services/auth-service"
+import { stagiairesService } from "@/lib/services/stagiaires-service"
+import { evaluationsService } from "@/lib/services/evaluations-service"
 
 export default function EvaluationsPage() {
-  const user = { name: "Thomas Martin", role: "tuteur" }
+  const [user, setUser] = useState<any>(null)
+  const [stagiaires, setStagiaires] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState("")
+  const [statusFilter, setStatusFilter] = useState("all")
+  const router = useRouter()
 
-  // Filtrer les stagiaires pour ce tuteur (id=3)
-  const tuteurId = "3" // Thomas Martin
-  const stagiaires = mockStagiaires.filter((s) => s.tuteurId === tuteurId)
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const userResult = await authService.getCurrentUser()
+        if (!userResult.user) {
+          router.push("/auth/login")
+          return
+        }
+
+        const profileResult = await authService.getUserProfile(userResult.user.id)
+        if (!profileResult.profile || profileResult.profile.role !== "tuteur") {
+          router.push("/auth/login")
+          return
+        }
+
+        setUser(profileResult.profile)
+
+        // Récupérer les stagiaires assignés à ce tuteur
+        const stagiairesData = await stagiairesService.getAll({
+          tuteurId: userResult.user.id,
+          status: statusFilter !== "all" ? statusFilter : undefined,
+        })
+        
+        // Enrichir avec les évaluations
+        const stagiairesWithEvaluations = await Promise.all(
+          (stagiairesData || []).map(async (stagiaire) => {
+            try {
+              const evaluations = await evaluationsService.getByStadiaire(stagiaire.id)
+              return { ...stagiaire, evaluations: evaluations || [] }
+            } catch (error) {
+              console.error(`Erreur lors de la récupération des évaluations pour ${stagiaire.id}:`, error)
+              return { ...stagiaire, evaluations: [] }
+            }
+          })
+        )
+
+        setStagiaires(stagiairesWithEvaluations)
+      } catch (error) {
+        console.error("Erreur lors du chargement:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadData()
+  }, [router, statusFilter])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
+          <p className="mt-4">Chargement...</p>
+        </div>
+      </div>
+    )
+  }
 
   const filteredStagiaires = stagiaires.filter((stagiaire) => {
     const matchesSearch =
@@ -26,7 +88,9 @@ export default function EvaluationsPage() {
       stagiaire.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
       stagiaire.email.toLowerCase().includes(searchTerm.toLowerCase())
 
-    return matchesSearch
+    const matchesStatus = statusFilter === "all" || stagiaire.statut === statusFilter
+
+    return matchesSearch && matchesStatus
   })
 
   return (
@@ -65,7 +129,7 @@ export default function EvaluationsPage() {
                   />
                 </div>
                 <div className="flex gap-2">
-                  <Select defaultValue="all">
+                  <Select value={statusFilter} onValueChange={setStatusFilter}>
                     <SelectTrigger className="w-[180px]">
                       <div className="flex items-center">
                         <Filter className="mr-2 h-4 w-4" />
@@ -107,7 +171,7 @@ export default function EvaluationsPage() {
                           <h3 className="font-medium">
                             {stagiaire.prenom} {stagiaire.nom}
                           </h3>
-                          <p className="text-sm text-gray-500">{stagiaire.formation}</p>
+                          <p className="text-sm text-gray-500">{stagiaire.specialite}</p>
                         </div>
                       </div>
                       <div
@@ -122,11 +186,17 @@ export default function EvaluationsPage() {
                     <div className="space-y-3 mb-4">
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-500">Période:</span>
-                        <span>{stagiaire.periode}</span>
+                        <span>
+                          {stagiaire.date_debut_stage && stagiaire.date_fin_stage
+                            ? `${new Date(stagiaire.date_debut_stage).toLocaleDateString("fr-FR")} - ${new Date(
+                                stagiaire.date_fin_stage
+                              ).toLocaleDateString("fr-FR")}`
+                            : "Non définie"}
+                        </span>
                       </div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-gray-500">Département:</span>
-                        <span>{stagiaire.departement}</span>
+                        <span className="text-gray-500">Établissement:</span>
+                        <span>{stagiaire.etablissement || "Non renseigné"}</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-gray-500">Évaluations:</span>
@@ -142,7 +212,11 @@ export default function EvaluationsPage() {
                             {[1, 2, 3, 4, 5].map((star) => (
                               <svg
                                 key={star}
-                                className={`h-4 w-4 ${star <= stagiaire.evaluations[0].noteGlobale ? "text-yellow-400" : "text-gray-300"}`}
+                                className={`h-4 w-4 ${
+                                  star <= (stagiaire.evaluations[0].note_globale || 0)
+                                    ? "text-yellow-400"
+                                    : "text-gray-300"
+                                }`}
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                               >

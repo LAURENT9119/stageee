@@ -34,3 +34,9 @@ export async function signOut() {
     return false
   }
 }
+
+// Export auth object for compatibility
+export const auth = {
+  getCurrentUser,
+  signOut
+}

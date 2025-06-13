@@ -306,6 +306,65 @@ export class DemandesService {
     }
   }
 
+  // Approuver une demande
+  async approveDemande(demandeId: string, userId: string, role: string) {
+    try {
+      const { data: demande, error } = await this.supabase
+        .from("demandes")
+        .update({ 
+          statut: "Validé",
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", demandeId)
+        .select()
+        .single()
+
+      if (error) throw error
+
+      // Créer notifications
+      await this.createNotificationsForApproval(demande, role)
+
+      return demande
+    } catch (error) {
+      console.error("Erreur lors de l'approbation:", error)
+      throw error
+    }
+  }
+
+  // Rejeter une demande
+  async rejectDemande(demandeId: string, userId: string, role: string, motif?: string) {
+    try {
+      const { data: demande, error } = await this.supabase
+        .from("demandes")
+        .update({ 
+          statut: "Refusé",
+          motif_refus: motif,
+          updated_at: new Date().toISOString()
+        })
+        .eq("id", demandeId)
+        .select()
+        .single()
+
+      if (error) throw error
+
+      // Notifier le stagiaire
+      await this.supabase.from("notifications").insert({
+        user_id: demande.stagiaire_id,
+        titre: "Demande refusée",
+        message: `Votre demande a été refusée${motif ? ` : ${motif}` : '.'}`,
+        type: "error",
+        lu: false,
+        date: new Date().toISOString(),
+        created_at: new Date().toISOString(),
+      })
+
+      return demande
+    } catch (error) {
+      console.error("Erreur lors du refus:", error)
+      throw error
+    }
+  }
+
   // Méthode privée pour créer les notifications d'approbation
   private async createNotificationsForApproval(demande: any, role: string) {
     // Notifier le stagiaire

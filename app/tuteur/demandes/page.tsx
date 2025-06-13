@@ -18,12 +18,12 @@ export default function TuteurDemandesPage() {
     async function loadData() {
       try {
         const userResult = await authService.getCurrentUser()
-        if (!userResult.user) {
+        if (!userResult) {
           router.push("/auth/login")
           return
         }
 
-        const profileResult = await authService.getUserProfile(userResult.user.id)
+        const profileResult = await authService.getUserProfile(userResult.id)
         if (!profileResult.profile || profileResult.profile.role !== "tuteur") {
           router.push("/auth/login")
           return

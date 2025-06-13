@@ -29,13 +29,13 @@ export default function AdminDashboard() {
   const loadDashboardData = async () => {
     try {
       // Vérifier l'authentification
-      const currentUser = await authService.getCurrentUser()
-      if (!currentUser) {
+      const userResult = await authService.getCurrentUser()
+      if (!userResult) {
         router.push("/auth/login")
         return
       }
 
-      const profile = await authService.getUserProfile(currentUser.id)
+      const profile = await authService.getUserProfile(userResult.id)
       if (!profile.profile || profile.profile.role !== "admin") {
         router.push("/auth/login")
         return

@@ -12,9 +12,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
+import { authService } from "@/services/auth.service"
 
 export default function NewEvaluationPage() {
-  const user = { name: "Thomas Martin", role: "tuteur" }
+  const [user, setUser] = useState<any>(null)
   const router = useRouter()
 
   const [stagiaireId, setStagiaireId] = useState("")
@@ -30,10 +31,43 @@ export default function NewEvaluationPage() {
   ])
 
   useEffect(() => {
+    async function checkAuth() {
+      try {
+        const userResult = await authService.getCurrentUser()
+        if (!userResult) {
+          router.push("/auth/login")
+          return
+        }
+
+        const profileResult = await authService.getUserProfile(userResult.id)
+        if (!profileResult.profile || profileResult.profile.role !== "tuteur") {
+          router.push("/auth/login")
+          return
+        }
+
+        setUser(profileResult.profile)
+        setLoading(false)
+      } catch (error) {
+        console.error('Auth check failed:', error)
+        router.push("/auth/login")
+      }
+    }
+
+    checkAuth()
+  }, [router])
+
+  const updateNote = (index: number, note: number) => {
+    const newCompetences = [...competences]
+    newCompetences[index].note = note
+    setCompetences(newCompetences)
+  }
+
+  useEffect(() => {
     const loadStagiaires = async () => {
       try {
-        // TODO: Récupérer l'ID du tuteur connecté
-        const tuteurId = "3" // Temporaire
+        if (!user) return
+
+        const tuteurId = user.id
         const response = await fetch(`/api/stagiaires?tuteurId=${tuteurId}&statut=actif`)
         if (response.ok) {
           setStagiaires(await response.json())
@@ -44,9 +78,11 @@ export default function NewEvaluationPage() {
         setLoading(false)
       }
     }
-    
-    loadStagiaires()
-  }, [])
+
+    if (user) {
+      loadStagiaires()
+    }
+  }, [user])
 
   const handleNoteChange = (index: number, note: number) => {
     const newCompetences = [...competences]
@@ -56,12 +92,15 @@ export default function NewEvaluationPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Simulation d'envoi
     router.push("/tuteur/evaluations?success=created")
   }
 
   const noteGlobale = competences.reduce((acc, comp) => acc + comp.note, 0) / competences.length
   const isFormValid = stagiaireId && commentaire.trim() && competences.every((comp) => comp.note > 0)
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="min-h-screen flex flex-col">

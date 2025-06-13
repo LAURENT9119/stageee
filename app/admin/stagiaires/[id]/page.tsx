@@ -285,7 +285,7 @@ export default function StagiaireDetailPage() {
                               {demande.commentaires && demande.commentaires.length > 0 && (
                                 <div className="mt-3 pt-3 border-t border-gray-200">
                                   <p className="text-xs font-medium mb-2">Commentaires</p>
-                                  {demande.commentaires.map((comment, idx) => (
+                                  {demande.commentaires.map((comment: any, idx: number) => (
                                     <div key={idx} className="mb-2 text-xs">
                                       <span className="font-medium">{comment.userName}</span>
                                       <span className="text-gray-500"> ({comment.date}): </span>
@@ -323,15 +323,15 @@ export default function StagiaireDetailPage() {
                         </div>
                       ) : (
                         <div className="space-y-6">
-                          {stagiaire.evaluations.map((evaluation) => (
+                          {stagiaire.evaluations.map((evaluation: any) => (
                             <div key={evaluation.id} className="border border-gray-200 rounded-lg p-4">
                               <div className="flex justify-between items-center mb-4">
-                                <h3 className="font-medium">Évaluation du {eval.date}</h3>
-                                <Badge className="bg-blue-100 text-blue-800">Note: {eval.noteGlobale}/5</Badge>
+                                <h3 className="font-medium">Évaluation du {evaluation.date}</h3>
+                                <Badge className="bg-blue-100 text-blue-800">Note: {evaluation.noteGlobale}/5</Badge>
                               </div>
 
                               <div className="space-y-3 mb-4">
-                                {eval.competences.map((comp, idx) => (
+                                {evaluation.competences.map((comp: any, idx: number) => (
                                   <div key={idx} className="flex items-center justify-between">
                                     <span className="text-sm">{comp.nom}</span>
                                     <div className="flex">
@@ -352,7 +352,7 @@ export default function StagiaireDetailPage() {
 
                               <div className="bg-gray-50 p-3 rounded-md">
                                 <p className="text-sm font-medium mb-1">Commentaire:</p>
-                                <p className="text-sm text-gray-600">{eval.commentaire}</p>
+                                <p className="text-sm text-gray-600">{evaluation.commentaire}</p>
                               </div>
                             </div>
                           ))}

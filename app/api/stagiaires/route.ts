@@ -11,11 +11,12 @@ export async function GET(request: NextRequest) {
     const departement = searchParams.get('departement')
 
     if (search) {
-      const stagiaires = await stagiairesService.searchStagiaires(search, {
+      const result = await stagiairesService.searchStagiaires(search, {
         statut: statut || undefined,
         departement: departement || undefined,
         tuteurId: tuteurId || undefined
       })
+      const stagiaires = result.success ? result.data : []
       return NextResponse.json(stagiaires)
     }
 
@@ -34,8 +35,12 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const stagiaireData = await request.json()
-    const stagiaire = await stagiairesService.createStagiaire(stagiaireData)
-    return NextResponse.json(stagiaire, { status: 201 })
+    const result = await stagiairesService.createStagiaire(stagiaireData)
+    if (result.success) {
+      return NextResponse.json(result.data, { status: 201 })
+    } else {
+      return NextResponse.json({ error: result.error }, { status: 500 })
+    }
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }

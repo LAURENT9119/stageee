@@ -49,11 +49,12 @@ export default function StagiairesPage() {
         setUser(profileResult.profile)
 
         // Load all stagiaires
-        const stagiairesData = await stagiairesService.getAll({
+        const stagiairesResult = await stagiairesService.getStagiaires({
           status: statusFilter !== "all" ? statusFilter : undefined,
           search: searchTerm || undefined,
           department: departmentFilter !== "all" ? departmentFilter : undefined,
         })
+        const stagiairesData = stagiairesResult.success ? stagiairesResult.data : []
         setStagiaires(stagiairesData || [])
       } catch (error) {
         console.error("Erreur lors du chargement:", error)
@@ -72,11 +73,12 @@ export default function StagiairesPage() {
       await stagiairesService.delete(stagiaireId)
 
       // Reload stagiaires
-      const stagiairesData = await stagiairesService.getAll({
+      const stagiairesResult = await stagiairesService.getStagiaires({
         status: statusFilter !== "all" ? statusFilter : undefined,
         search: searchTerm || undefined,
         department: departmentFilter !== "all" ? departmentFilter : undefined,
       })
+      const stagiairesData = stagiairesResult.success ? stagiairesResult.data : []
       setStagiaires(stagiairesData || [])
     } catch (error) {
       console.error("Erreur lors de la suppression:", error)

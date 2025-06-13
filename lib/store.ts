@@ -2,6 +2,7 @@ import { create } from "zustand"
 import { persist } from "zustand/middleware"
 // Types maintenant définis via Supabase ou les services spécifiques
 import type { Language } from "./i18n"
+import type { User, Demande, Document, Stagiaire } from "./services/api"
 
 interface AppState {
   // Theme & Language

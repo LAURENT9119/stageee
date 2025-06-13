@@ -87,7 +87,13 @@ export async function middleware(request: NextRequest) {
 
   } catch (error) {
     console.error('Middleware error:', error)
-    // En cas d'erreur, laisser passer la requête
+    // En cas d'erreur d'auth, rediriger vers login pour les routes protégées
+    const protectedRoutes = ["/admin", "/rh", "/tuteur", "/stagiaire"]
+    const isProtectedRoute = protectedRoutes.some((route) => request.nextUrl.pathname.startsWith(route))
+    
+    if (isProtectedRoute) {
+      return NextResponse.redirect(new URL("/auth/login", request.url))
+    }
   }
 
   return response

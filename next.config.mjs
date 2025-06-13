@@ -1,32 +1,38 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  env: {
-    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        fs: false,
-        net: false,
-        tls: false,
-      };
-    }
+  // Configuration pour la production
+  compress: true,
+  poweredByHeader: false,
 
-    // Ignore Supabase realtime warnings
-    config.ignoreWarnings = [
-      /Critical dependency: the request of a dependency is an expression/,
-    ];
-
-    return config;
+  // Configuration des images
+  images: {
+    domains: ['localhost'],
+    formats: ['image/webp', 'image/avif'],
   },
-};
 
-export default nextConfig
+  // Configuration des headers de sécurité
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+        ],
+      },
+    ]
+  },
+
+  // Configuration pour Replit
+  allowedDevOrigins: ['.replit.dev'],
+}

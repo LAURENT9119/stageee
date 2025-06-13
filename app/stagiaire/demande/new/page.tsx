@@ -107,10 +107,10 @@ export default function NewDemandePage() {
                 </div>
 
                 <div>
-                  <Label className="text-lg font-medium">Lettre de reccomandation</Label>
+                  <Label className="text-lg font-medium">Lettre de recommandation</Label>
                   <div className="mt-2 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                     <Upload className="mx-auto h-8 w-8 text-gray-400 mb-2" />
-                    <p className="text-gray-500">Déposer votre Lettre de reccomandation ici</p>
+                    <p className="text-gray-500">Déposer votre lettre de recommandation ici</p>
                     <Button variant="outline" size="sm" className="mt-2">
                       +
                     </Button>
@@ -125,10 +125,10 @@ export default function NewDemandePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <Label className="text-lg font-medium">Piece d'identite</Label>
+                  <Label className="text-lg font-medium">Pièce d'identité</Label>
                   <div className="mt-2 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                     <Upload className="mx-auto h-8 w-8 text-gray-400 mb-2" />
-                    <p className="text-gray-500">Déposer votre ici</p>
+                    <p className="text-gray-500">Déposer votre pièce d'identité ici</p>
                     <Button variant="outline" size="sm" className="mt-2">
                       +
                     </Button>

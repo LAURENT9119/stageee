@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
   }
 }
 import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/lib/services/server-auth-service'
+import { createServerSupabaseClient } from '@/lib/services/server-auth-service''
 
 export async function GET(request: NextRequest) {
   try {

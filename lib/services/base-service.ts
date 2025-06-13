@@ -1,123 +1,74 @@
+import { ApiResponse, PaginatedResponse } from '@/lib/types'
 
-import { createClient } from '@/lib/supabase/client'
-import type { SupabaseClient } from '@supabase/supabase-js'
-import type { Database } from '../supabase/database.types'
+export class BaseService {
+  protected baseUrl: string
 
-export abstract class BaseService {
-  protected supabase: SupabaseClient<Database>
-
-  constructor() {
-    this.supabase = createClient()
+  constructor(baseUrl: string = '/api') {
+    this.baseUrl = baseUrl
   }
 
-  protected async getAll<T>(
-    table: string,
-    select: string = '*',
-    orderBy: { column: string; ascending: boolean } = { column: 'created_at', ascending: false }
-  ): Promise<T[]> {
-    const { data, error } = await this.supabase
-      .from(table)
-      .select(select)
-      .order(orderBy.column, { ascending: orderBy.ascending })
-
-    if (error) throw error
-    return data || []
-  }
-
-  protected async getById<T>(table: string, id: string, select: string = '*'): Promise<T | null> {
-    const { data, error } = await this.supabase
-      .from(table)
-      .select(select)
-      .eq('id', id)
-      .single()
-
-    if (error) {
-      if (error.code === 'PGRST116') return null
-      throw error
-    }
-    return data
-  }
-
-  protected async create<T>(table: string, data: any): Promise<T> {
-    const { data: result, error } = await this.supabase
-      .from(table)
-      .insert(data)
-      .select()
-      .single()
-
-    if (error) throw error
-    return result
-  }
-
-  protected async update<T>(table: string, id: string, updates: any): Promise<T> {
-    const { data, error } = await this.supabase
-      .from(table)
-      .update(updates)
-      .eq('id', id)
-      .select()
-      .single()
-
-    if (error) throw error
-    return data
-  }
-
-  protected async delete(table: string, id: string): Promise<void> {
-    const { error } = await this.supabase
-      .from(table)
-      .delete()
-      .eq('id', id)
-
-    if (error) throw error
-  }
-
-  protected async getCount(table: string, filters?: Record<string, any>): Promise<number> {
-    let query = this.supabase
-      .from(table)
-      .select('id', { count: 'exact' })
-
-    if (filters) {
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          query = query.eq(key, value)
-        }
+  protected async request<T = any>(
+    endpoint: string,
+    options: RequestInit = {}
+  ): Promise<ApiResponse<T>> {
+    try {
+      const url = `${this.baseUrl}${endpoint}`
+      const response = await fetch(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+        ...options,
       })
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`)
+      }
+
+      const data = await response.json()
+      return {
+        success: true,
+        data,
+        message: data.message
+      }
+    } catch (error) {
+      console.error(`API Error for ${endpoint}:`, error)
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Une erreur inconnue est survenue'
+      }
     }
-
-    const { count, error } = await query
-
-    if (error) throw error
-    return count || 0
   }
 
-  protected async search<T>(
-    table: string,
-    searchFields: string[],
-    searchTerm: string,
-    select: string = '*',
-    filters?: Record<string, any>
-  ): Promise<T[]> {
-    let query = this.supabase.from(table).select(select)
+  protected async get<T = any>(endpoint: string): Promise<ApiResponse<T>> {
+    return this.request<T>(endpoint, { method: 'GET' })
+  }
 
-    // Appliquer les filtres de recherche
-    if (searchTerm && searchFields.length > 0) {
-      const searchConditions = searchFields
-        .map(field => `${field}.ilike.%${searchTerm}%`)
-        .join(',')
-      query = query.or(searchConditions)
+  protected async post<T = any>(endpoint: string, data?: any): Promise<ApiResponse<T>> {
+    return this.request<T>(endpoint, {
+      method: 'POST',
+      body: data ? JSON.stringify(data) : undefined,
+    })
+  }
+
+  protected async put<T = any>(endpoint: string, data?: any): Promise<ApiResponse<T>> {
+    return this.request<T>(endpoint, {
+      method: 'PUT',
+      body: data ? JSON.stringify(data) : undefined,
+    })
+  }
+
+  protected async delete<T = any>(endpoint: string): Promise<ApiResponse<T>> {
+    return this.request<T>(endpoint, { method: 'DELETE' })
+  }
+
+  protected handleError(error: unknown): ApiResponse {
+    const message = error instanceof Error ? error.message : 'Une erreur inconnue est survenue'
+    console.error('Service Error:', error)
+    return {
+      success: false,
+      error: message
     }
-
-    // Appliquer les filtres additionnels
-    if (filters) {
-      Object.entries(filters).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          query = query.eq(key, value)
-        }
-      })
-    }
-
-    const { data, error } = await query.order('created_at', { ascending: false })
-
-    if (error) throw error
-    return data || []
   }
 }

@@ -35,4 +35,14 @@ const nextConfig = {
 
   // Configuration pour Replit
   allowedDevOrigins: ['.replit.dev'],
+  
+  // Éviter les erreurs de build
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
 }
+
+export default nextConfig;

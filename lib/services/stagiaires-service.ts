@@ -1,54 +1,78 @@
+
 import { BaseService } from './base-service'
-import type { Stagiaire, StagiaireInsert, StagiaireUpdate } from '@/lib/types'
+import { Stagiaire, ApiResponse, Statistics, SearchFilters } from '@/lib/types'
 
 export class StagiairesService extends BaseService {
-  private readonly tableName = 'stagiaires'
-
-  async getAllStagiaires(): Promise<Stagiaire[]> {
-    return this.getAll<Stagiaire>(this.tableName)
+  constructor() {
+    super('/api')
   }
 
-  async getStagiaireById(id: string): Promise<Stagiaire | null> {
-    return this.getById<Stagiaire>(this.tableName, id)
+  async getStagiaires(filters?: SearchFilters): Promise<ApiResponse<Stagiaire[]>> {
+    try {
+      const params = new URLSearchParams()
+      if (filters) {
+        Object.entries(filters).forEach(([key, value]) => {
+          if (value !== undefined && value !== '') {
+            params.append(key, String(value))
+          }
+        })
+      }
+      
+      const queryString = params.toString()
+      const endpoint = queryString ? `/stagiaires?${queryString}` : '/stagiaires'
+      
+      return await this.get<Stagiaire[]>(endpoint)
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
-  async createStagiaire(stagiaire: StagiaireInsert): Promise<Stagiaire> {
-    return this.create<Stagiaire>(this.tableName, stagiaire)
+  async getStagiaire(id: string): Promise<ApiResponse<Stagiaire>> {
+    try {
+      return await this.get<Stagiaire>(`/stagiaires/${id}`)
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
-  async updateStagiaire(id: string, updates: StagiaireUpdate): Promise<Stagiaire> {
-    return this.update<Stagiaire>(this.tableName, id, updates)
+  async createStagiaire(stagiaire: Partial<Stagiaire>): Promise<ApiResponse<Stagiaire>> {
+    try {
+      return await this.post<Stagiaire>('/stagiaires', stagiaire)
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
-  async deleteStagiaire(id: string): Promise<void> {
-    return this.delete(this.tableName, id)
+  async updateStagiaire(id: string, stagiaire: Partial<Stagiaire>): Promise<ApiResponse<Stagiaire>> {
+    try {
+      return await this.put<Stagiaire>(`/stagiaires/${id}`, stagiaire)
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
-  async searchStagiaires(searchTerm: string, filters?: Record<string, any>): Promise<Stagiaire[]> {
-    const searchFields = ['nom', 'prenom', 'email', 'ecole', 'departement']
-    return this.search<Stagiaire>(this.tableName, searchFields, searchTerm, '*', filters)
+  async deleteStagiaire(id: string): Promise<ApiResponse<void>> {
+    try {
+      return await this.delete<void>(`/stagiaires/${id}`)
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
-  async getStagiairesByTuteur(tuteurId: string): Promise<Stagiaire[]> {
-    const { data, error } = await this.supabase
-      .from(this.tableName)
-      .select('*')
-      .eq('tuteur_id', tuteurId)
-      .order('created_at', { ascending: false })
-
-    if (error) throw error
-    return data || []
+  async getStagiairesStats(): Promise<ApiResponse<Statistics>> {
+    try {
+      return await this.get<Statistics>('/stagiaires/stats')
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
-  async getStagiairesStats(): Promise<any> {
-    const total = await this.getCount(this.tableName)
-    const actifs = await this.getCount(this.tableName, { statut: 'actif' })
-    const inactifs = total - actifs
-
-    return {
-      total,
-      actifs,
-      inactifs
+  async searchStagiaires(query: string): Promise<ApiResponse<Stagiaire[]>> {
+    try {
+      const params = new URLSearchParams({ q: query })
+      return await this.get<Stagiaire[]>(`/search?${params.toString()}`)
+    } catch (error) {
+      return this.handleError(error)
     }
   }
 }

@@ -66,12 +66,16 @@ export async function middleware(request: NextRequest) {
     const { data: { user }, error } = await supabase.auth.getUser()
 
     // Routes publiques qui ne nécessitent pas d'authentification
-    const publicRoutes = ['/auth/login', '/auth/register', '/api/auth']
-    const isPublicRoute = publicRoutes.some(route => request.nextUrl.pathname.startsWith(route))
+    const publicRoutes = ['/auth/login', '/auth/register', '/api/auth', '/', '/api']
+    const isPublicRoute = publicRoutes.some(route => 
+      request.nextUrl.pathname === route || request.nextUrl.pathname.startsWith(route + '/')
+    )
 
     // Si pas d'utilisateur et route privée, rediriger vers login
-    if (!user && !isPublicRoute && !request.nextUrl.pathname.startsWith('/api/')) {
-      return NextResponse.redirect(new URL('/auth/login', request.url))
+    if (!user && !isPublicRoute) {
+      const loginUrl = new URL('/auth/login', request.url)
+      loginUrl.searchParams.set('redirectTo', request.nextUrl.pathname)
+      return NextResponse.redirect(loginUrl)
     }
 
     // Si utilisateur connecté et sur page de login, rediriger vers dashboard

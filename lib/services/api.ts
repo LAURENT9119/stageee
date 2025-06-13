@@ -306,7 +306,7 @@ export const exportService = {
         }
       })
     }
-    
+
     const response = await fetch(`/api/export/${type}?format=csv&${params}`)
     if (!response.ok) {
       throw new Error('Erreur lors de l\'export CSV')
@@ -323,7 +323,7 @@ export const exportService = {
         }
       })
     }
-    
+
     const response = await fetch(`/api/export/${type}?format=pdf&${params}`)
     if (!response.ok) {
       throw new Error('Erreur lors de l\'export PDF')

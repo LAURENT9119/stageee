@@ -1,4 +1,3 @@
-
 export interface User {
   id: string
   email: string
@@ -125,12 +124,6 @@ export interface SearchFilters {
   [key: string]: any
 }
 
-export interface ExportOptions {
-  format: 'pdf' | 'excel' | 'csv'
-  filters?: SearchFilters
-  columns?: string[]
-}
-
 export interface Template {
   id: string
   nom: string
@@ -139,4 +132,24 @@ export interface Template {
   variables: string[]
   created_at: string
   updated_at?: string
+}
+
+export interface NotificationStats {
+  total: number
+  unread: number
+  byType: Record<string, number>
+}
+
+export interface ExportOptions {
+  format: 'pdf' | 'excel' | 'csv'
+  type: string
+  filters?: Record<string, any>
+}
+
+export interface StagiaireStats {
+  total: number
+  actifs: number
+  inactifs: number
+  enAttente: number
+  statsParDepartement: Record<string, number>
 }

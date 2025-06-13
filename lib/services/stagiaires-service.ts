@@ -1,4 +1,3 @@
-
 import { BaseService } from './base-service'
 import { Stagiaire, ApiResponse, Statistics, SearchFilters } from '@/lib/types'
 
@@ -17,10 +16,10 @@ export class StagiairesService extends BaseService {
           }
         })
       }
-      
+
       const queryString = params.toString()
       const endpoint = queryString ? `/stagiaires?${queryString}` : '/stagiaires'
-      
+
       return await this.get<Stagiaire[]>(endpoint)
     } catch (error) {
       return this.handleError(error)

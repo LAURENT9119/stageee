@@ -4,7 +4,7 @@ import { useState } from "react"
 import { Download, FileText, Table } from "lucide-react"
 import { Button } from "./button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu"
-import { exportService } from "@/lib/services/api"
+import { exportService } from "@/lib/services/export-service"
 import { useAppStore } from "@/lib/store"
 
 interface ExportMenuProps {

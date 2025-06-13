@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label"
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
-import { authService } from "@/services/auth.service"
+import { authService } from '@/lib/services/auth-service'
 
 export default function NewEvaluationPage() {
   const [user, setUser] = useState<any>(null)

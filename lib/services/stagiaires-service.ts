@@ -1,94 +1,80 @@
-import { createClient } from '@/lib/supabase/client'
+import { BaseService } from './base-service'
 import type { Database } from "../supabase/database.types"
 
 export type Stagiaire = Database["public"]["Tables"]["stagiaires"]["Row"]
 export type StagiaireInsert = Database["public"]["Tables"]["stagiaires"]["Insert"]
 export type StagiaireUpdate = Database["public"]["Tables"]["stagiaires"]["Update"]
 
-export class StagiairesService {
-  private supabase = createClient()
+export class StagiairesService extends BaseService {
+  private readonly tableName = 'stagiaires'
 
-  async getAll() {
-    const { data, error } = await this.supabase
-      .from('stagiaires')
-      .select('*')
-      .order('created_at', { ascending: false })
-
-    if (error) throw error
-    return data
+  async getAllStagiaires(): Promise<Stagiaire[]> {
+    return this.getAll<Stagiaire>(this.tableName)
   }
 
-  async getById(id: string) {
-    const { data, error } = await this.supabase
-      .from('stagiaires')
-      .select('*')
-      .eq('id', id)
-      .single()
-
-    if (error) throw error
-    return data
+  async getStagiaireById(id: string): Promise<Stagiaire | null> {
+    return this.getById<Stagiaire>(this.tableName, id)
   }
 
-  async create(stagiaire: StagiaireInsert) {
-    const { data, error } = await this.supabase
-      .from('stagiaires')
-      .insert(stagiaire)
-      .select()
-      .single()
-
-    if (error) throw error
-    return data
+  async createStagiaire(stagiaire: StagiaireInsert): Promise<Stagiaire> {
+    return this.create<Stagiaire>(this.tableName, stagiaire)
   }
 
-  async update(id: string, updates: StagiaireUpdate) {
-    const { data, error } = await this.supabase
-      .from('stagiaires')
-      .update(updates)
-      .eq('id', id)
-      .select()
-      .single()
-
-    if (error) throw error
-    return data
+  async updateStagiaire(id: string, updates: StagiaireUpdate): Promise<Stagiaire> {
+    return this.update<Stagiaire>(this.tableName, id, updates)
   }
 
-  async delete(id: string) {
-    const { error } = await this.supabase
-      .from('stagiaires')
-      .delete()
-      .eq('id', id)
-
-    if (error) throw error
+  async deleteStagiaire(id: string): Promise<void> {
+    return this.delete(this.tableName, id)
   }
 
-  async getByTuteur(tuteurId: string) {
+  async searchStagiaires(searchTerm: string, filters?: Record<string, any>): Promise<Stagiaire[]> {
+    const searchFields = ['nom', 'prenom', 'email', 'ecole', 'departement']
+    return this.search<Stagiaire>(this.tableName, searchFields, searchTerm, '*', filters)
+  }
+
+  async getStagiairesByTuteur(tuteurId: string): Promise<Stagiaire[]> {
     const { data, error } = await this.supabase
-      .from('stagiaires')
+      .from(this.tableName)
       .select('*')
       .eq('tuteur_id', tuteurId)
       .order('created_at', { ascending: false })
 
     if (error) throw error
-    return data
+    return data || []
   }
 
-  async search(searchTerm: string) {
-    const { data, error } = await this.supabase
-      .from('stagiaires')
-      .select('*')
-      .or(`nom.ilike.%${searchTerm}%,prenom.ilike.%${searchTerm}%,email.ilike.%${searchTerm}%`)
-      .order('created_at', { ascending: false })
-
-    if (error) throw error
-    return data
-  }
   async getStagiairesStats(): Promise<any> {
-    const { data, error } = await this.supabase
-      .from('stagiaires')
-      .select('count(*)')
+    const total = await this.getCount(this.tableName)
+    const actifs = await this.getCount(this.tableName, { statut: 'actif' })
+    const inactifs = total - actifs
 
-    if (error) throw error
-    return data
+    return {
+      total,
+      actifs,
+      inactifs
+    }
+  }
+
+  // Méthodes héritées de BaseService (pour compatibilité)
+  async getAll() {
+    return this.getAllStagiaires()
+  }
+
+  async getById(id: string) {
+    return this.getStagiaireById(id)
+  }
+
+  async create(stagiaire: StagiaireInsert) {
+    return this.createStagiaire(stagiaire)
+  }
+
+  async update(id: string, updates: StagiaireUpdate) {
+    return this.updateStagiaire(id, updates)
+  }
+
+  async delete(id: string) {
+    return this.deleteStagiaire(id)
   }
 }
 

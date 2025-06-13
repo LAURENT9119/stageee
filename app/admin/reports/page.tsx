@@ -1,3 +1,4 @@
+
 "use client"
 
 import { Header } from "@/components/layout/header"
@@ -8,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ExportMenu } from "@/components/ui/export-menu"
 import { Calendar, TrendingUp, Users, FileText } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   BarChart,
   Bar,
@@ -26,38 +27,72 @@ import {
 } from "recharts"
 
 export default function ReportsPage() {
-  const user = { name: "ADMINISTRATEUR", role: "admin" }
   const [selectedPeriod, setSelectedPeriod] = useState("2025")
   const [selectedDepartment, setSelectedDepartment] = useState("all")
+  const [dashboardStats, setDashboardStats] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
 
-  // Données simulées pour les rapports
-  const monthlyData = [
-    { month: "Jan", stagiaires: 12, demandes: 25, validees: 20, refusees: 3 },
-    { month: "Fév", stagiaires: 15, demandes: 30, validees: 25, refusees: 2 },
-    { month: "Mar", stagiaires: 18, demandes: 35, validees: 28, refusees: 4 },
-    { month: "Avr", stagiaires: 22, demandes: 40, validees: 32, refusees: 5 },
-    { month: "Mai", stagiaires: 25, demandes: 45, validees: 38, refusees: 2 },
-    { month: "Juin", stagiaires: 28, demandes: 50, validees: 42, refusees: 6 },
-  ]
+  // TODO: créer route API pour /api/reports/monthly
+  const [monthlyData, setMonthlyData] = useState([])
+  
+  // TODO: créer route API pour /api/reports/departments  
+  const [departmentData, setDepartmentData] = useState([])
+  
+  // TODO: créer route API pour /api/reports/performance
+  const [performanceData, setPerformanceData] = useState([])
 
-  const departmentData = [
-    { name: "Développement", value: 45, color: "#0088FE" },
-    { name: "Marketing", value: 25, color: "#00C49F" },
-    { name: "Finance", value: 15, color: "#FFBB28" },
-    { name: "RH", value: 10, color: "#FF8042" },
-    { name: "Design", value: 5, color: "#8884d8" },
-  ]
+  // TODO: créer route API pour /api/reports/schools
+  const [topSchools, setTopSchools] = useState([])
 
-  const performanceData = [
-    { metric: "Taux d'acceptation", value: 85, target: 80, status: "success" },
-    { metric: "Délai moyen de traitement", value: 2.5, target: 3, status: "success", unit: "jours" },
-    { metric: "Satisfaction stagiaires", value: 4.2, target: 4.0, status: "success", unit: "/5" },
-    { metric: "Taux de prolongation", value: 65, target: 70, status: "warning" },
-  ]
+  // TODO: créer route API pour /api/reports/request-types
+  const [requestTypes, setRequestTypes] = useState([])
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        // Récupération des stats du dashboard existant
+        const response = await fetch('/api/dashboard?userId=admin&role=admin')
+        const stats = await response.json()
+        setDashboardStats(stats)
+
+        // TODO: Implémenter ces appels quand les routes API seront créées
+        // const monthlyResponse = await fetch(`/api/reports/monthly?period=${selectedPeriod}&department=${selectedDepartment}`)
+        // const monthlyStats = await monthlyResponse.json()
+        // setMonthlyData(monthlyStats)
+
+        // const deptResponse = await fetch(`/api/reports/departments?period=${selectedPeriod}`)
+        // const deptStats = await deptResponse.json()
+        // setDepartmentData(deptStats)
+
+        // const perfResponse = await fetch(`/api/reports/performance?period=${selectedPeriod}`)
+        // const perfStats = await perfResponse.json()
+        // setPerformanceData(perfStats)
+
+        // const schoolsResponse = await fetch(`/api/reports/schools?period=${selectedPeriod}`)
+        // const schoolsStats = await schoolsResponse.json()
+        // setTopSchools(schoolsStats)
+
+        // const typesResponse = await fetch(`/api/reports/request-types?period=${selectedPeriod}`)
+        // const typesStats = await typesResponse.json()
+        // setRequestTypes(typesStats)
+
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchDashboardData()
+  }, [selectedPeriod, selectedDepartment])
+
+  if (loading) {
+    return <div>Chargement...</div>
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header user={user} />
+      <Header user={{ name: "ADMINISTRATEUR", role: "admin" }} />
 
       <div className="flex flex-1">
         <Sidebar role="admin" />
@@ -112,41 +147,41 @@ export default function ReportsPage() {
                     <Users className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">128</div>
-                    <p className="text-xs text-muted-foreground">+12% vs mois dernier</p>
+                    <div className="text-2xl font-bold">{dashboardStats?.stagiaires_total || 0}</div>
+                    <p className="text-xs text-muted-foreground">vs mois dernier</p>
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Demandes traitées</CardTitle>
+                    <CardTitle className="text-sm font-medium">Demandes totales</CardTitle>
                     <FileText className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">245</div>
-                    <p className="text-xs text-muted-foreground">+8% vs mois dernier</p>
+                    <div className="text-2xl font-bold">{dashboardStats?.demandes_total || 0}</div>
+                    <p className="text-xs text-muted-foreground">vs mois dernier</p>
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Taux d'acceptation</CardTitle>
+                    <CardTitle className="text-sm font-medium">Demandes en cours</CardTitle>
                     <TrendingUp className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">85%</div>
-                    <p className="text-xs text-muted-foreground">+2% vs mois dernier</p>
+                    <div className="text-2xl font-bold">{dashboardStats?.demandes_en_cours || 0}</div>
+                    <p className="text-xs text-muted-foreground">à traiter</p>
                   </CardContent>
                 </Card>
 
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Délai moyen</CardTitle>
+                    <CardTitle className="text-sm font-medium">Documents</CardTitle>
                     <Calendar className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">2.5j</div>
-                    <p className="text-xs text-muted-foreground">-0.5j vs mois dernier</p>
+                    <div className="text-2xl font-bold">{dashboardStats?.documents_total || 0}</div>
+                    <p className="text-xs text-muted-foreground">documents uploadés</p>
                   </CardContent>
                 </Card>
               </div>
@@ -159,17 +194,23 @@ export default function ReportsPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-[300px]">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={monthlyData}>
-                          <CartesianGrid strokeDasharray="3 3" />
-                          <XAxis dataKey="month" />
-                          <YAxis />
-                          <Tooltip />
-                          <Legend />
-                          <Bar dataKey="stagiaires" fill="#0088FE" name="Stagiaires" />
-                          <Bar dataKey="demandes" fill="#00C49F" name="Demandes" />
-                        </BarChart>
-                      </ResponsiveContainer>
+                      {monthlyData.length > 0 ? (
+                        <ResponsiveContainer width="100%" height="100%">
+                          <BarChart data={monthlyData}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="month" />
+                            <YAxis />
+                            <Tooltip />
+                            <Legend />
+                            <Bar dataKey="stagiaires" fill="#0088FE" name="Stagiaires" />
+                            <Bar dataKey="demandes" fill="#00C49F" name="Demandes" />
+                          </BarChart>
+                        </ResponsiveContainer>
+                      ) : (
+                        <div className="flex items-center justify-center h-full text-muted-foreground">
+                          Données non disponibles - TODO: créer route API /api/reports/monthly
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -180,25 +221,31 @@ export default function ReportsPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="h-[300px]">
-                      <ResponsiveContainer width="100%" height="100%">
-                        <RechartsPieChart>
-                          <Pie
-                            data={departmentData}
-                            cx="50%"
-                            cy="50%"
-                            labelLine={false}
-                            label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            dataKey="value"
-                          >
-                            {departmentData.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={entry.color} />
-                            ))}
-                          </Pie>
-                          <Tooltip />
-                        </RechartsPieChart>
-                      </ResponsiveContainer>
+                      {departmentData.length > 0 ? (
+                        <ResponsiveContainer width="100%" height="100%">
+                          <RechartsPieChart>
+                            <Pie
+                              data={departmentData}
+                              cx="50%"
+                              cy="50%"
+                              labelLine={false}
+                              label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                              outerRadius={80}
+                              fill="#8884d8"
+                              dataKey="value"
+                            >
+                              {departmentData.map((entry: any, index: number) => (
+                                <Cell key={`cell-${index}`} fill={entry.color} />
+                              ))}
+                            </Pie>
+                            <Tooltip />
+                          </RechartsPieChart>
+                        </ResponsiveContainer>
+                      ) : (
+                        <div className="flex items-center justify-center h-full text-muted-foreground">
+                          Données non disponibles - TODO: créer route API /api/reports/departments
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -207,7 +254,7 @@ export default function ReportsPage() {
 
             <TabsContent value="performance" className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {performanceData.map((metric, index) => (
+                {performanceData.length > 0 ? performanceData.map((metric: any, index: number) => (
                   <Card key={index}>
                     <CardHeader>
                       <CardTitle className="text-lg">{metric.metric}</CardTitle>
@@ -241,7 +288,11 @@ export default function ReportsPage() {
                       </div>
                     </CardContent>
                   </Card>
-                ))}
+                )) : (
+                  <div className="col-span-2 text-center text-muted-foreground">
+                    Données de performance non disponibles - TODO: créer route API /api/reports/performance
+                  </div>
+                )}
               </div>
             </TabsContent>
 
@@ -252,30 +303,36 @@ export default function ReportsPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="h-[400px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={monthlyData}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        <YAxis />
-                        <Tooltip />
-                        <Legend />
-                        <Line type="monotone" dataKey="stagiaires" stroke="#0088FE" strokeWidth={2} name="Stagiaires" />
-                        <Line
-                          type="monotone"
-                          dataKey="validees"
-                          stroke="#00C49F"
-                          strokeWidth={2}
-                          name="Demandes validées"
-                        />
-                        <Line
-                          type="monotone"
-                          dataKey="refusees"
-                          stroke="#FF8042"
-                          strokeWidth={2}
-                          name="Demandes refusées"
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
+                    {monthlyData.length > 0 ? (
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={monthlyData}>
+                          <CartesianGrid strokeDasharray="3 3" />
+                          <XAxis dataKey="month" />
+                          <YAxis />
+                          <Tooltip />
+                          <Legend />
+                          <Line type="monotone" dataKey="stagiaires" stroke="#0088FE" strokeWidth={2} name="Stagiaires" />
+                          <Line
+                            type="monotone"
+                            dataKey="validees"
+                            stroke="#00C49F"
+                            strokeWidth={2}
+                            name="Demandes validées"
+                          />
+                          <Line
+                            type="monotone"
+                            dataKey="refusees"
+                            stroke="#FF8042"
+                            strokeWidth={2}
+                            name="Demandes refusées"
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-muted-foreground">
+                        Données de tendances non disponibles - TODO: créer route API /api/reports/monthly
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -289,18 +346,16 @@ export default function ReportsPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {[
-                        { name: "Université Paris Tech", count: 25 },
-                        { name: "ESC Paris", count: 18 },
-                        { name: "Université Lyon 1", count: 15 },
-                        { name: "INSA Toulouse", count: 12 },
-                        { name: "Centrale Lille", count: 10 },
-                      ].map((school, index) => (
+                      {topSchools.length > 0 ? topSchools.map((school: any, index: number) => (
                         <div key={index} className="flex items-center justify-between">
                           <span className="font-medium">{school.name}</span>
                           <span className="text-muted-foreground">{school.count} stagiaires</span>
                         </div>
-                      ))}
+                      )) : (
+                        <div className="text-center text-muted-foreground">
+                          Données non disponibles - TODO: créer route API /api/reports/schools
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -311,13 +366,7 @@ export default function ReportsPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {[
-                        { type: "Stage académique", count: 45, percentage: 40 },
-                        { type: "Prolongation", count: 28, percentage: 25 },
-                        { type: "Stage professionnel", count: 22, percentage: 20 },
-                        { type: "Congé", count: 12, percentage: 10 },
-                        { type: "Attestation", count: 6, percentage: 5 },
-                      ].map((item, index) => (
+                      {requestTypes.length > 0 ? requestTypes.map((item: any, index: number) => (
                         <div key={index} className="space-y-2">
                           <div className="flex items-center justify-between">
                             <span className="font-medium">{item.type}</span>
@@ -330,7 +379,11 @@ export default function ReportsPage() {
                             ></div>
                           </div>
                         </div>
-                      ))}
+                      )) : (
+                        <div className="text-center text-muted-foreground">
+                          Données non disponibles - TODO: créer route API /api/reports/request-types
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

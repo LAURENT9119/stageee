@@ -13,7 +13,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { authService } from "@/lib/services/auth-service"
-import { stagiairesService } from "@/lib/services/stagiaires-service"
+import { stagiaireService } from "@/lib/services/stagiaires-service"
 import { evaluationsService } from "@/lib/services/evaluations-service"
 
 export default function EvaluationsPage() {

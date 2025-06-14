@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { stagiairesService } from '@/lib/services/stagiaires-service'
+import { stagiaireService } from '@/lib/services/stagiaires-service'
 import { demandesService } from '@/lib/services/demandes-service'
 import { documentsService } from '@/lib/services/documents-service'
 

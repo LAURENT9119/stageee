@@ -1,4 +1,3 @@
-
 import { NextRequest, NextResponse } from 'next/server'
 import { stagiaireService } from '@/lib/services/stagiaires-service'
 

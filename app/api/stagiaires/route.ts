@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const stagiaireData = await request.json()
-    const result = await stagiairesService.createStagiaire(stagiaireData)
+    const result = await stagiaireService.createStagiaire(stagiaireData)
     if (result.success) {
       return NextResponse.json(result.data, { status: 201 })
     } else {

@@ -130,5 +130,3 @@ class StagiairesService extends BaseService {
 // Export singleton instance
 export const stagiaireService = new StagiairesService()
 export default stagiaireService
-
-export const stagiairesService = new StagiairesService()

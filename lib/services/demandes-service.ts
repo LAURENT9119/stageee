@@ -1,4 +1,3 @@
-
 import { BaseService } from './base-service'
 import type { Demande, DemandeInsert, DemandeUpdate } from '@/lib/types'
 

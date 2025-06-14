@@ -54,8 +54,8 @@ export default function StagiairesPage() {
           search: searchTerm || undefined,
           department: departmentFilter !== "all" ? departmentFilter : undefined,
         })
-        const stagiairesData = stagiairesResult.success ? stagiairesResult.data : []
-        setStagiaires(stagiairesData || [])
+        const stagiairesData = stagiairesResult.data || []
+        setStagiaires(stagiairesData)
       } catch (error) {
         console.error("Erreur lors du chargement:", error)
       } finally {
@@ -78,8 +78,8 @@ export default function StagiairesPage() {
         search: searchTerm || undefined,
         department: departmentFilter !== "all" ? departmentFilter : undefined,
       })
-      const stagiairesData = stagiairesResult.success ? stagiairesResult.data : []
-      setStagiaires(stagiairesData || [])
+      const stagiairesData = stagiairesResult.data || []
+      setStagiaires(stagiairesData)
     } catch (error) {
       console.error("Erreur lors de la suppression:", error)
     }

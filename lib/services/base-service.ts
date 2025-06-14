@@ -1,4 +1,3 @@
-
 import { createClient } from '@/lib/supabase/client'
 import type { SupabaseClient } from '@supabase/supabase-js'
 
@@ -204,12 +203,21 @@ export abstract class BaseService {
     }
   }
 
-  protected handleError(error: any): ApiResponse<any> {
+  protected handleSuccess<T>(data: T, message?: string): ApiResponse<T> {
+    return {
+      success: true,
+      data,
+      message,
+      status: 200
+    }
+  }
+
+  protected handleError(error: any): ApiResponse {
     console.error('Service error:', error)
     return {
       success: false,
-      data: null,
-      error: error instanceof Error ? error.message : 'Unknown error occurred'
+      error: error.message || 'Une erreur est survenue',
+      status: error.status || 500
     }
   }
 }

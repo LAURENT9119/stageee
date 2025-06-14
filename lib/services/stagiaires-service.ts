@@ -1,5 +1,5 @@
 import { BaseService } from './base-service'
-import type { Stagiaire, ApiResponse, Statistics, SearchFilters } from '@/lib/types'
+import type { Stagiaire, SearchFilters, Statistics, ApiResponse } from '@/lib/types'
 
 class StagiairesService extends BaseService {
   constructor() {

@@ -104,5 +104,3 @@ class DemandesService extends BaseService {
 // Export singleton instance
 export const demandesService = new DemandesService()
 export default demandesService
-
-export const demandesService = new DemandesService()

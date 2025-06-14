@@ -1,3 +1,4 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Configuration pour la production
@@ -33,8 +34,6 @@ const nextConfig = {
     ]
   },
 
-  // Configuration pour Replit - utilisation des headers CORS
-
   // Configuration webpack pour supprimer les avertissements Supabase
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -53,12 +52,17 @@ const nextConfig = {
     return config
   },
 
-  // Éviter les erreurs de build
+  // Configuration pour éviter les erreurs en développement
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
+  },
+
+  // Configuration pour Replit
+  experimental: {
+    serverActions: true,
   },
 }
 

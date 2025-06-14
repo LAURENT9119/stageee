@@ -16,12 +16,7 @@ export async function middleware(request: NextRequest) {
   // Si les variables ne sont pas configurées, laisser passer sans authentification
   if (!supabaseUrl || !supabaseAnonKey) {
     console.warn('⚠️ Supabase environment variables not configured, skipping auth middleware')
-    // En développement, on peut continuer sans auth
-    if (process.env.NODE_ENV === 'development') {
-      return response
-    }
-    // En production, rediriger vers une page d'erreur
-    return NextResponse.redirect(new URL('/auth/login?error=config_error', request.url))
+    return response
   }
 
   try {
@@ -67,14 +62,19 @@ export async function middleware(request: NextRequest) {
       },
     })
 
-    // Rafraîchir la session si nécessaire
-    const { data: { user }, error } = await supabase.auth.getUser()
-
     // Routes publiques qui ne nécessitent pas d'authentification
     const publicRoutes = ['/auth/login', '/auth/register', '/api/auth', '/', '/api']
     const isPublicRoute = publicRoutes.some(route => 
       request.nextUrl.pathname === route || request.nextUrl.pathname.startsWith(route + '/')
     )
+
+    // Pour les routes API, on laisse passer
+    if (request.nextUrl.pathname.startsWith('/api/')) {
+      return response
+    }
+
+    // Rafraîchir la session si nécessaire
+    const { data: { user } } = await supabase.auth.getUser()
 
     // Si pas d'utilisateur et route privée, rediriger vers login
     if (!user && !isPublicRoute) {
@@ -95,20 +95,12 @@ export async function middleware(request: NextRequest) {
     return response
   } catch (error) {
     console.error('Middleware error:', error)
-    // En cas d'erreur, on laisse passer la requête sans authentification
-    return NextResponse.next()
+    return response
   }
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public folder
-     */
     '/((?!_next/static|_next/image|favicon.ico|public|images).*)',
   ],
 }

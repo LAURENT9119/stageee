@@ -1,16 +1,13 @@
-import type React from "react"
-import type { Metadata } from "next"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { NotificationCenter } from "@/components/ui/notifications"
 
-// Removed Google Fonts import due to network issues in build
-// Using system fonts instead
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Bridge Technologies Solutions - Gestion des Stagiaires",
-  description: "Plateforme de gestion des stagiaires avec demandes en ligne",
-  generator: "v0.dev",
+  title: 'Gestion des Stages',
+  description: 'Application de gestion des stages et stagiaires',
 }
 
 export default function RootLayout({
@@ -19,12 +16,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning>
-      <body className="">
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-          <NotificationCenter />
-        </ThemeProvider>
+    <html lang="fr">
+      <body className={inter.className}>
+        {children}
       </body>
     </html>
   )

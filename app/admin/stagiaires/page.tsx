@@ -1,6 +1,6 @@
 "use client"
 
-import { stagiairesService } from "@/lib/services/stagiaires-service"
+import { stagiaireService } from "@/lib/services/stagiaires-service"
 import { authService } from "@/lib/services/auth-service"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -49,7 +49,7 @@ export default function StagiairesPage() {
         setUser(profileResult.profile)
 
         // Load all stagiaires
-        const stagiairesResult = await stagiairesService.getStagiaires({
+        const stagiairesResult = await stagiaireService.getStagiaires({
           status: statusFilter !== "all" ? statusFilter : undefined,
           search: searchTerm || undefined,
           department: departmentFilter !== "all" ? departmentFilter : undefined,
@@ -70,10 +70,10 @@ export default function StagiairesPage() {
     if (!confirm("Êtes-vous sûr de vouloir supprimer ce stagiaire ?")) return
 
     try {
-      await stagiairesService.delete(stagiaireId)
+      await stagiaireService.delete(stagiaireId)
 
       // Reload stagiaires
-      const stagiairesResult = await stagiairesService.getStagiaires({
+      const stagiairesResult = await stagiaireService.getStagiaires({
         status: statusFilter !== "all" ? statusFilter : undefined,
         search: searchTerm || undefined,
         department: departmentFilter !== "all" ? departmentFilter : undefined,

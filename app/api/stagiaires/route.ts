@@ -1,6 +1,6 @@
 
 import { NextRequest, NextResponse } from 'next/server'
-import { stagiairesService } from '@/lib/services/stagiaires-service'
+import { stagiaireService } from '@/lib/services/stagiaires-service'
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const departement = searchParams.get('departement')
 
     if (search) {
-      const result = await stagiairesService.searchStagiaires(search, {
+      const result = await stagiaireService.searchStagiaires(search, {
         statut: statut || undefined,
         departement: departement || undefined,
         tuteurId: tuteurId || undefined
@@ -21,11 +21,11 @@ export async function GET(request: NextRequest) {
     }
 
     if (tuteurId) {
-      const stagiaires = await stagiairesService.getStagiairesByTuteur(tuteurId)
+      const stagiaires = await stagiaireService.getStagiairesByTuteur(tuteurId)
       return NextResponse.json(stagiaires)
     }
 
-    const stagiaires = await stagiairesService.getAllStagiaires()
+    const stagiaires = await stagiaireService.getAllStagiaires()
     return NextResponse.json(stagiaires)
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })

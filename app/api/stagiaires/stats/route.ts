@@ -1,10 +1,10 @@
 
 import { NextResponse } from 'next/server'
-import { stagiairesService } from '@/lib/services/stagiaires-service'
+import { stagiaireService } from '@/lib/services/stagiaires-service'
 
 export async function GET() {
   try {
-    const result = await stagiairesService.getStagiairesStats()
+    const result = await stagiaireService.getStagiairesStats()
     if (result.success) {
       return NextResponse.json(result.data)
     } else {

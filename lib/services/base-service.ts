@@ -119,8 +119,10 @@ export abstract class BaseService {
     }
   }
 
+  private baseUrl: string = '/api'
+
   // Méthodes pour les services API (alternative à Supabase direct)
-  protected async get<T>(endpoint: string): Promise<ApiResponse<T>> {
+  protected async getApi<T>(endpoint: string): Promise<ApiResponse<T>> {
     try {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
         method: 'GET',
@@ -182,7 +184,7 @@ export abstract class BaseService {
     }
   }
 
-  protected async delete<T>(endpoint: string): Promise<ApiResponse<T>> {
+  protected async deleteApi<T>(endpoint: string): Promise<ApiResponse<T>> {
     try {
       const response = await fetch(`${this.baseUrl}${endpoint}`, {
         method: 'DELETE',
@@ -210,8 +212,6 @@ export abstract class BaseService {
       error: error instanceof Error ? error.message : 'Unknown error occurred'
     }
   }
-
-  private baseUrl: string = '/api'
 }
 
 // Types nécessaires

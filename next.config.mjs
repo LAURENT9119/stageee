@@ -60,9 +60,17 @@ const nextConfig = {
     ignoreDuringBuilds: false,
   },
 
-  // Configuration pour Replit
+  // Configuration pour Replit - gestion des origines cross-origin
+  allowedDevOrigins: [
+    '*.replit.dev',
+    '*.repl.co',
+    'localhost:3000',
+    '0.0.0.0:3000'
+  ],
+
+  // Configuration pour Replit - Server Actions sont activées par défaut
   experimental: {
-    serverActions: true,
+    // Autres options expérimentales si nécessaire
   },
 }
 
